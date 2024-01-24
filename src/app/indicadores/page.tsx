@@ -1,6 +1,6 @@
 
 
-export default function IndicadorPage() {
+export default function IndicadoresPage() {
     return (
       <main>
         <h1>Indicadores</h1>
