@@ -30,7 +30,7 @@ export const RegisterForm = () => {
                 <FormInput type="text" register={register("passaporte")} error={errors.passaporte}>Digite seu Passaporte</FormInput>
                 <FormInput type="text" register={register("discord_id")} error={errors.discord_id}>Digite o ID do seu Discord</FormInput>
                 <FormInput type="password" register={register("senha")} error={errors.senha}>Digite sua senha</FormInput>
-                <FormInput type="text" register={register("confirmPassword")} error={errors.confirmPassword}>Confirme sua Senha</FormInput>
+                <FormInput type="password" register={register("confirmPassword")} error={errors.confirmPassword}>Confirme sua Senha</FormInput>
                 <button type="submit">CADASTRAR</button>
             </form>
         </section>       

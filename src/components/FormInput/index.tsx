@@ -10,6 +10,7 @@ interface IFormInputProps {
 export const FormInput = ({children, type, register, error}: IFormInputProps) => {
     return (
         <div>
+            <label htmlFor={register.name}>{register.name}</label>
             <input
             placeholder={String(children)} type={type} {...register}></input>
             {error && <p>{error.message}</p>}

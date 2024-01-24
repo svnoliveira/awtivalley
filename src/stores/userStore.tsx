@@ -29,8 +29,8 @@ export const userStore = create<IUserState>()((set, get) => ({
         username: username,
         password: password,
       });
-      const userList = await api.get<IUser[]>('/users/'); //comentar se usar autologin
-      set({ userList: userList.data }); // comentar se usar autologin
+      // const userList = await api.get<IUser[]>('/users/'); //comentar se usar autologin
+      // set({ userList: userList.data }); // comentar se usar autologin
       const token = data.access;
       const decoded: any = jwtDecode(token)
       const userID: number = decoded.user_id
@@ -70,15 +70,14 @@ export const userStore = create<IUserState>()((set, get) => ({
     if (typeof window !== "undefined") {
       try {
         set({ loading: true });
-        const userList = await api.get<IUser[]>('/users/');
-        set({ userList: userList.data });
+        const userList = (await api.get<IUser[]>('/users/')).data;
+        set({ userList: userList });
         let token = localStorage.getItem("@awti:token");
         if (token) {
           token = JSON.parse(token) as string
           const decoded: any = jwtDecode(token)
           const userID: number = decoded.user_id
-          const user = get().userList.find((userInfo) => userInfo.id === userID);
-          if (user) {
+          const user = get().userList.find((userInfo) => userInfo.id === userID);          if (user) {
             if (!user.ativo) {
               throw new Error("Usuário desativado");
             }

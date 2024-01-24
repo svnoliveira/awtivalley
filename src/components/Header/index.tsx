@@ -6,14 +6,14 @@ import { useEffect } from "react";
 export const Header = () => {
     const user = userStore((state) => state.userData?.user);
     const logout = userStore((state) => state.logoutUser);
-    // const loadUser = userStore((state) => state.loadUser);
+    const loadUser = userStore((state) => state.loadUser);
 
-    // useEffect(() => {
-    //     const initiate = async () => {
-    //         await loadUser();
-    //     };
-    //     initiate();
-    // }, []);
+    useEffect(() => {
+        const initiate = async () => {
+            await loadUser();
+        };
+        initiate();
+    }, []);
 
     return (
         <header>
