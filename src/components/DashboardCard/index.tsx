@@ -30,13 +30,13 @@ export const DashboardCard = () => {
             <h1>Especialidades:</h1>
             <ul>
                 {user?.especialidades.map((especialidade => 
-                <li>{especialidade.nome}</li>
+                <li key={especialidade.id}>{especialidade.nome}</li>
                 ))}
             </ul>
             <h1>Cursos:</h1>
             <ul>
                 {user?.cursos.map((curso => 
-                <li>{curso.nome}</li>
+                <li key={curso.id}>{curso.nome}</li>
                 ))}
             </ul>
         </section>
