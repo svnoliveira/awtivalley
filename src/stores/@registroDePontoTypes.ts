@@ -1,3 +1,5 @@
+import { IUser } from "./@userTypes";
+
 export interface IRegistroDePonto{
     id: number;
     entrada: string;
@@ -5,4 +7,20 @@ export interface IRegistroDePonto{
     horas: string;
     justificativa: string;
     user: number; // user_id
+}
+
+export interface IRegistroDePontoCreate{
+    entrada: string;
+    saida: string;
+}
+
+export interface IRegistroDePontoState{
+    pontoList: IRegistroDePonto[];
+    loading: boolean;
+    loadPontos: () => Promise<void>;
+    setLoading: (boolean: boolean) => void;
+    addPonto: (
+        pontoData: IRegistroDePontoCreate,
+        userId: number
+        ) => Promise<boolean | undefined>
 }

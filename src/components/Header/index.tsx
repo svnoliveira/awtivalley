@@ -23,7 +23,7 @@ export const Header = () => {
                     {user && <li><Link href={"/dashboard"}>Área do colaborador</Link></li>}
                     {user && <li><Link href={"/indicadores"}>Indicadores</Link></li>}
                     {user && <li><Link href={"/registro-de-ponto"}>Registro de Ponto</Link></li>}
-                    {user && <li onClick={() => logout()}>Logout</li>}
+                    {user && <li><button onClick={() => logout()}>Logout</button></li>}
                     {!user && <li><Link href={"/login"}>Login</Link></li>}
                     {!user && <li><Link href={"/register"}>Cadastrar</Link></li>}
                 </ul>
