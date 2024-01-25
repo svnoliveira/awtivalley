@@ -17,7 +17,7 @@ export const registroStore = create<IRegistroDePontoState>()((set) => ({
     loadPontos: async () => {
         try {
             set({ loading: true });
-            const { data } = await api.post<IRegistroDePonto[]>("/registro-de-ponto/");
+            const { data } = await api.get<IRegistroDePonto[]>("/registro-de-ponto/");
             set({ pontoList: data });
         } catch (error) {
             console.log(error)
@@ -38,7 +38,7 @@ export const registroStore = create<IRegistroDePontoState>()((set) => ({
                 throw new Error("Entrada maior que a saida");
             }
             const { data } = await api.post<IRegistroDePonto>(`/registro-de-ponto/user/${userId}/`, {
-                pontoData
+                ...pontoData
             });
             set((state) => {
                 const pontoList = state.pontoList
