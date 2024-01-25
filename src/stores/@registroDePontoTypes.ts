@@ -19,8 +19,6 @@ export interface IRegistroDePontoState{
     loading: boolean;
     loadPontos: () => Promise<void>;
     setLoading: (boolean: boolean) => void;
-    addPonto: (
-        pontoData: IRegistroDePontoCreate,
-        userId: number
-        ) => Promise<boolean | undefined>
+    addPonto: (pontoData: IRegistroDePontoCreate, userId: number) => 
+    Promise<boolean | IRegistroDePonto>
 }

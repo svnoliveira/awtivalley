@@ -32,6 +32,11 @@ export const registroStore = create<IRegistroDePontoState>()((set) => ({
     addPonto: async (pontoData, userId) => {
         try {
             set({loading: true});
+            const entrada = new Date(pontoData.entrada);
+            const saida = new Date(pontoData.saida);
+            if (entrada > saida){
+                throw new Error("Entrada maior que a saida");
+            }
             const { data } = await api.post<IRegistroDePonto>(`/registro-de-ponto/user/${userId}/`, {
                 pontoData
             });
@@ -42,7 +47,7 @@ export const registroStore = create<IRegistroDePontoState>()((set) => ({
                 }
             })
             setMessage("Ponto Registrado com sucesso!");
-            return true;
+            return data;
         } catch (error) {
             console.log(error)
             setError("Falha no registro do ponto");
