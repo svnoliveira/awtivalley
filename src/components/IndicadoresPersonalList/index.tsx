@@ -65,7 +65,7 @@ export const IndicadoresPersonalList = () => {
             <ul>
                 <h1>Pontos Registrados</h1>
                 {dateList.map((ponto) =>
-                    <IndicadoresPontoCard ponto={ponto} />
+                    <IndicadoresPontoCard key={ponto.id} ponto={ponto} />
                 )}
             </ul>
             <h3>Filtrar por data:</h3>
