@@ -1,4 +1,5 @@
 'use client'
+import { PontoForm } from "@/components/PontoForm";
 import { userStore } from "@/stores/userStore";
 import { redirect } from "next/navigation";
 
@@ -13,6 +14,7 @@ export default function PontoPage() {
   return (
     <main>
       <h1>Registro de Ponto</h1>
+      <PontoForm />
     </main>
   );
 }
