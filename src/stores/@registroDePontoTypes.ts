@@ -1,5 +1,3 @@
-import { IUser } from "./@userTypes";
-
 export interface IRegistroDePonto{
     id: number;
     entrada: string;

@@ -40,9 +40,9 @@ export const PontoForm = () => {
         const dateParts = informacoes.data.split("/");
         const formattedDate = dateParts[2] + "-" + dateParts[1] + "-" + dateParts[0];
         if (informacoes.entrada) {
-            return `${formattedDate} ${informacoes.entrada}`;
+            return `${formattedDate} ${informacoes.entrada}-03:00`;
         } else if (informacoes.saida) {
-            return `${formattedDate} ${informacoes.saida}`;
+            return `${formattedDate} ${informacoes.saida}-03:00`;
         }
     }
 
