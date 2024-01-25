@@ -1,6 +1,7 @@
 'use client'
 
 import { IndicadoresPersonalList } from "@/components/IndicadoresPersonalList";
+import { IndicadoresSemanais } from "@/components/IndicadoresSemanais";
 import { userStore } from "@/stores/userStore";
 import { redirect } from "next/navigation";
 
@@ -15,6 +16,7 @@ export default function IndicadoresPage() {
     return (
       <main>
         <IndicadoresPersonalList />
+        <IndicadoresSemanais />
       </main>
     );
 }
