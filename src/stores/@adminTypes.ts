@@ -3,6 +3,7 @@ export interface IAdminState {
     adminAddModal: boolean
     adminEditModal: boolean
     adminDeleteModal: boolean
+    sideMenuToggle: boolean
     message: string
     error: any
 
@@ -10,6 +11,7 @@ export interface IAdminState {
     setAdminAddModal: (boolean: boolean) => void
     setAdminEditModal: (boolean: boolean) => void
     setAdminDeleteModal: (boolean: boolean) => void
+    setSideMenuToggle: (boolean: boolean) => void
     setError: (string: string) => void
     setMessage: (string: any) => void
 }

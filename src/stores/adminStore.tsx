@@ -6,6 +6,7 @@ export const adminStore = create<IAdminState>()((set) => ({
     adminAddModal: false,
     adminEditModal:false,
     adminDeleteModal: false,
+    sideMenuToggle: false,
     message: "",
     error: "",
 
@@ -13,6 +14,7 @@ export const adminStore = create<IAdminState>()((set) => ({
     setAdminAddModal: (boolean) => { set({ adminAddModal: boolean })},
     setAdminEditModal: (boolean) => { set({ adminEditModal: boolean })},
     setAdminDeleteModal: (boolean) => { set({ adminDeleteModal: boolean })},
+    setSideMenuToggle: (boolean) => { set({ sideMenuToggle: boolean })},
     setError: (string) => { set({ message: string })},
     setMessage: (string) => { set({ message: string })},
 }));

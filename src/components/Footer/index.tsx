@@ -1,8 +1,18 @@
 'use client'
+import { userStore } from "@/stores/userStore";
 import { useEffect, useState } from "react";
 
 export const Footer = () => {
     const [index, setIndex] = useState(0);
+    const loadUser = userStore((state) => state.loadUser);
+
+    useEffect(() => {
+        const initiate = async () => {
+            await loadUser();
+        };
+        initiate();
+    }, []);
+
     const mensagens =
         ["'Existem duas palavras que abrem muitas portas: Puxe e Empurre' - Cooper, Astrid.",
             "'Irritantemente adorável, apaixonante complicado... Desculpe, eu sou de Gêmeos.' - Santos, Edson",

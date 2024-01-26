@@ -1,32 +1,34 @@
 'use client'
+import { UserCard } from "@/fragments/UserCard";
+import { adminStore } from "@/stores/adminStore";
 import { userStore } from "@/stores/userStore"
-import Link from "next/link"
-import { useEffect } from "react";
+import Image from "next/image"
+import Link from "next/link";
 
 export const Header = () => {
     const user = userStore((state) => state.userData?.user);
     const logout = userStore((state) => state.logoutUser);
-    const loadUser = userStore((state) => state.loadUser);
+    const { sideMenuToggle, setSideMenuToggle } = adminStore((state) => state);
 
-    useEffect(() => {
-        const initiate = async () => {
-            await loadUser();
-        };
-        initiate();
-    }, []);
+    const handleSideMenuClick = () => {
+        sideMenuToggle ? setSideMenuToggle(false) : setSideMenuToggle(true);
+    };
 
     return (
         <header>
+            <Image
+                src="https://media.discordapp.net/attachments/1182108710965870744/1192518457904865331/CMALogoDiscord2.png"
+                alt="Logo"
+                width={50}
+                height={50}
+            />
+            <div></div>
             <nav>
-                <ul>
-                    {user?.is_superuser && <li><Link href={"/admin"}>Admin</Link></li>}
-                    {user && <li><Link href={"/dashboard"}>Área do colaborador</Link></li>}
-                    {user && <li><Link href={"/indicadores"}>Indicadores</Link></li>}
-                    {user && <li><Link href={"/registro-de-ponto"}>Registro de Ponto</Link></li>}
-                    {user && <li><button onClick={() => logout()}>Logout</button></li>}
-                    {!user && <li><Link href={"/login"}>Login</Link></li>}
-                    {!user && <li><Link href={"/register"}>Cadastrar</Link></li>}
-                </ul>
+                {user && <UserCard />}
+                {user && <button onClick={() => logout()}>Logout</button>}
+                {!user && <Link href={"/login"}>Login</Link>}
+                {!user && <Link href={"/register"}>Cadastrar</Link>}
+                <button onClick={() => handleSideMenuClick()}>OPEN/CLOSE SIDE MENU</button>
             </nav>
         </header>
     )

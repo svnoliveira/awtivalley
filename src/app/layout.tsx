@@ -4,6 +4,7 @@ import "./globals.css";
 import StyledComponentsRegistry from "@/lib/registry";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { SideMenu } from "@/components/SideMenu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <StyledComponentsRegistry>
           <Header />
+          <SideMenu />
           {children}
           <Footer />
         </StyledComponentsRegistry>
