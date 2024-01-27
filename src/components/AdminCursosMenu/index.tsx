@@ -39,25 +39,35 @@ export const AdminCursosMenu = () => {
       </h3>
       <AdminCursosVincular />
       <table>
-        <tr>
-          <th>Nome</th>
-          <th>Passaporte</th>
-          <th>Cargo</th>
-          <th>Setor</th>
-        </tr>
-        {adminActiveCurso && adminActiveCurso.users.map((userID) => {
-          const user = userList.find((entry) => entry.id === userID)
-          return <tr onClick={() => setAdminActiveUser(user!)}>
-            <td>{user?.nome}</td>
-            <td>{user?.passaporte}</td>
-            <td>{user?.cargo}</td>
-            <td>{user?.setor}</td>
-            <td><button onClick={() => removeCurso(adminActiveCurso, user!)}>
-              Desvincular
-            </button></td>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Passaporte</th>
+            <th>Cargo</th>
+            <th>Setor</th>
+            <th>Actions</th>
           </tr>
-        })}
+        </thead>
+        <tbody>
+          {adminActiveCurso && adminActiveCurso.users.map((userID) => {
+            const user = userList.find((entry) => entry.id === userID);
+            return (
+              <tr key={userID} onClick={() => setAdminActiveUser(user!)}>
+                <td>{user?.nome}</td>
+                <td>{user?.passaporte}</td>
+                <td>{user?.cargo}</td>
+                <td>{user?.setor}</td>
+                <td>
+                  <button onClick={() => removeCurso(adminActiveCurso, user!)}>
+                    Desvincular
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
+
     </section>
   )
 }

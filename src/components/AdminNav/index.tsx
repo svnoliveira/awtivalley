@@ -6,6 +6,7 @@ import { adminStore } from "@/stores/adminStore"
 import { AdminCursosMenu } from "../AdminCursosMenu"
 import { AdminSelectedPeriodCard } from "@/fragments/AdminSelectedPeriodCard"
 import { AdminPontosMenu } from "../AdminPontosMenu"
+import { AdminBonusMenu } from "../AdminBonusMenu"
 
 export const AdminNav = () => {
   const {
@@ -32,6 +33,7 @@ export const AdminNav = () => {
       </div>
       {activeAdminScreen === "funcionarios" && <AdminFuncionariosMenu />}
       {activeAdminScreen === "pontos" && <AdminPontosMenu />}
+      {activeAdminScreen === "bonus" && <AdminBonusMenu />}
       {activeAdminScreen === "especialidades" && <AdminEspecialidadesMenu />}
       {activeAdminScreen === "cursos" && <AdminCursosMenu />}
     </>
