@@ -39,7 +39,7 @@ export const userStore = create<IUserState>()((set, get) => ({
         if (!user.ativo) {
           throw new Error("Usuário desativado");
         }
-        localStorage.setItem("@awti:token", JSON.stringify(token));
+        localStorage.setItem("@awti:token", token);
         const new_userData = {
           accessToken: token,
           user: user
@@ -74,7 +74,7 @@ export const userStore = create<IUserState>()((set, get) => ({
         set({ userList: userList });
         let token = localStorage.getItem("@awti:token");
         if (token) {
-          token = JSON.parse(token) as string
+          token = token as string
           const decoded: any = jwtDecode(token)
           const userID: number = decoded.user_id
           const user = get().userList.find((userInfo) => userInfo.id === userID);          if (user) {

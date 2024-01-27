@@ -1,16 +1,15 @@
 'use client'
 
 import { IUser } from "@/stores/@userTypes"
-import { UserCard } from "../UserCard"
 import { adminStore } from "@/stores/adminStore"
 
 export const AdminUserCard = ({user}:{user:IUser}) => {
     const setActiveUser = adminStore((state) => state.setAdminActiveUser)
     return (
         <li onClick={() => setActiveUser(user)}>
-            <UserCard />
             <h1>Status: {user.ativo ? "Ativo" : "Desligado"}</h1>
             <ul>
+                <li>Nome: {user.nome}</li>
                 <li>Passaporte: {user.passaporte}</li>
                 <li>Cargo: {user.cargo}</li>
                 <li>Discord ID: {user.discord_id}</li>
