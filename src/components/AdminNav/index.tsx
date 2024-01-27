@@ -4,6 +4,8 @@ import { AdminFuncionariosMenu } from "../AdminFuncionariosMenu"
 import { AdminEspecialidadesMenu } from "../AdminEspecialidadesMenu"
 import { adminStore } from "@/stores/adminStore"
 import { AdminCursosMenu } from "../AdminCursosMenu"
+import { AdminSelectedPeriodCard } from "@/fragments/AdminSelectedPeriodCard"
+import { AdminPontosMenu } from "../AdminPontosMenu"
 
 export const AdminNav = () => {
   const {
@@ -24,8 +26,12 @@ export const AdminNav = () => {
           </ul>
         </nav>
       </section>
-      <AdminSelectedUserCard />
+      <div>
+        <AdminSelectedUserCard />
+        <AdminSelectedPeriodCard />
+      </div>
       {activeAdminScreen === "funcionarios" && <AdminFuncionariosMenu />}
+      {activeAdminScreen === "pontos" && <AdminPontosMenu />}
       {activeAdminScreen === "especialidades" && <AdminEspecialidadesMenu />}
       {activeAdminScreen === "cursos" && <AdminCursosMenu />}
     </>

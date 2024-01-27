@@ -47,7 +47,8 @@ export const AdminEspecialidadesMenu = () => {
         </tr>
         {adminActiveEspecialidade && adminActiveEspecialidade.users.map((userID) => {
           const user = userList.find((entry) => entry.id === userID)
-          return <tr onClick={() => setAdminActiveUser(user!)}>
+          return <tr key={userID}
+          onClick={() => setAdminActiveUser(user!)}>
             <td>{user?.nome}</td>
             <td>{user?.passaporte}</td>
             <td>{user?.cargo}</td>

@@ -2,6 +2,11 @@ import { ICurso } from "./@cursoTypes"
 import { IEspecialidade } from "./@especialidadeTypes"
 import { IUser } from "./@userTypes"
 
+export type IPeriod = {
+    start: Date
+    end: Date
+}
+
 export interface IAdminState {
     activeAdminScreen: string | null
     adminAddModal: boolean
@@ -11,6 +16,7 @@ export interface IAdminState {
     adminActiveUser: IUser | null
     adminActiveEspecialidade: IEspecialidade| null
     adminActiveCurso: ICurso| null
+    adminActivePeriod: IPeriod | null
     message: string
     error: any
 
@@ -22,6 +28,7 @@ export interface IAdminState {
     setAdminActiveUser: (user: IUser | null) => void
     setAdminActiveEspecialidade: (especialidade: IEspecialidade | null) => void
     setAdminActiveCurso: (curso: ICurso | null) => void
+    setAdminActivePeriod: (period: IPeriod | null) => void
     setError: (string: string) => void
     setMessage: (string: string) => void
 }
