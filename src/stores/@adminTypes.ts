@@ -1,3 +1,4 @@
+import { ICurso } from "./@cursoTypes"
 import { IEspecialidade } from "./@especialidadeTypes"
 import { IUser } from "./@userTypes"
 
@@ -9,6 +10,7 @@ export interface IAdminState {
     sideMenuToggle: boolean
     adminActiveUser: IUser | null
     adminActiveEspecialidade: IEspecialidade| null
+    adminActiveCurso: ICurso| null
     message: string
     error: any
 
@@ -19,6 +21,7 @@ export interface IAdminState {
     setSideMenuToggle: (boolean: boolean) => void
     setAdminActiveUser: (user: IUser | null) => void
     setAdminActiveEspecialidade: (especialidade: IEspecialidade | null) => void
+    setAdminActiveCurso: (curso: ICurso | null) => void
     setError: (string: string) => void
     setMessage: (string: string) => void
 }

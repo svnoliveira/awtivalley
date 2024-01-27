@@ -9,6 +9,7 @@ export const adminStore = create<IAdminState>()((set) => ({
     sideMenuToggle: false,
     adminActiveUser: null,
     adminActiveEspecialidade: null,
+    adminActiveCurso: null,
     message: "",
     error: "",
 
@@ -19,6 +20,7 @@ export const adminStore = create<IAdminState>()((set) => ({
     setSideMenuToggle: (boolean) => { set({ sideMenuToggle: boolean })},
     setAdminActiveUser: (user) => { set({ adminActiveUser: user })},
     setAdminActiveEspecialidade: (especialidade) => { set({ adminActiveEspecialidade: especialidade })},
+    setAdminActiveCurso: (curso) => { set({ adminActiveCurso: curso })},
     setError: (string) => { set({ message: string })},
     setMessage: (string) => { set({ message: string })},
 }));

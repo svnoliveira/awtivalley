@@ -3,6 +3,7 @@ import { AdminSelectedUserCard } from "@/fragments/AdminSelectedUserCard"
 import { AdminFuncionariosMenu } from "../AdminFuncionariosMenu"
 import { AdminEspecialidadesMenu } from "../AdminEspecialidadesMenu"
 import { adminStore } from "@/stores/adminStore"
+import { AdminCursosMenu } from "../AdminCursosMenu"
 
 export const AdminNav = () => {
   const {
@@ -26,6 +27,7 @@ export const AdminNav = () => {
       <AdminSelectedUserCard />
       {activeAdminScreen === "funcionarios" && <AdminFuncionariosMenu />}
       {activeAdminScreen === "especialidades" && <AdminEspecialidadesMenu />}
+      {activeAdminScreen === "cursos" && <AdminCursosMenu />}
     </>
   )
 }

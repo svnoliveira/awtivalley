@@ -5,6 +5,7 @@ import { adminStore } from "./adminStore";
 
 const setError = adminStore.getState().setError
 const setMessage = adminStore.getState().setMessage
+const setAdminActiveCurso = adminStore.getState().setAdminActiveCurso
 
 export const cursoStore = create<ICursoState>()((set) => ({
   cursoList: [],
@@ -19,7 +20,7 @@ export const cursoStore = create<ICursoState>()((set) => ({
       try {
         set({ loading: true });
         const token = localStorage.getItem("@awti:token");
-        const { data } = await api.get<ICurso[]>('/cursos/',{
+        const { data } = await api.get<ICurso[]>('/cursos/', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -36,20 +37,9 @@ export const cursoStore = create<ICursoState>()((set) => ({
     try {
       set({ loading: true });
       const { data } = await api.patch<ICurso>(
-        `/curso/vincular/${curso.id}/${user.id}/`
+        `/cursos/vincular/${curso.id}/${user.id}/`
       );
-      set((state) => {
-        const cursoList = state.cursoList
-        return {
-          cursoList: cursoList.map((entry) => {
-            if (data.id === entry.id) {
-              return data;
-            } else {
-              return entry;
-            }
-          })
-        }
-      });
+      setAdminActiveCurso(data)
       setMessage('Curso Vinculada com sucesso');
     } catch (error) {
       setError("Falha ao vincular curso");
@@ -64,24 +54,22 @@ export const cursoStore = create<ICursoState>()((set) => ({
   removeCurso: async (curso, user) => {
     try {
       set({ loading: true });
-      const { data } = await api.patch<ICurso>(
-        `/users/cursos/desvincular/${user.id}/${curso.id}/`
-      );
-      set((state) => {
-        const cursoList = state.cursoList
-        return {
-          cursoList: cursoList.map((entry) => {
-            if (data.id === entry.id) {
-              return data;
-            } else {
-              return entry;
-            }
-          })
+      const token = localStorage.getItem("@awti:token");
+      await api.patch<ICurso>(
+        `/users/cursos/desvincular/${user.id}/${curso.id}/`, {}, {
+        headers: {
+          Authorization: `Bearer ${token}`
         }
-      });
-      setMessage('Curso Vinculada com sucesso');
+      }
+      );
+      const updatedCurso:ICurso = {
+        ...curso,
+        users: curso.users.filter((id) => user.id !== id)}
+      setAdminActiveCurso(updatedCurso);
+      setMessage('Curso Removida com sucesso');
     } catch (error) {
-      setError("Falha ao vincular curso");
+      setError("Falha ao remover curso");
+      console.log(error)
     } finally {
       set({ loading: false });
       setTimeout(() => {
