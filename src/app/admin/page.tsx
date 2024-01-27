@@ -1,25 +1,34 @@
 'use client'
-import { AdminFuncionariosMenu } from "@/components/AdminFuncionariosMenu";
+
 import { AdminHeader } from "@/components/AdminHeader";
 import { AdminNav } from "@/components/AdminNav";
-import { AdminSelectedUserCard } from "@/fragments/AdminSelectedUserCard";
+import { cursoStore } from "@/stores/cursoStore";
+import { especialidadeStore } from "@/stores/especialidadeStore";
+import { registroStore } from "@/stores/registroDePonto";
 import { userStore } from "@/stores/userStore";
 import { redirect } from "next/navigation";
+import { useEffect } from "react";
 
 
 export default function AdminPage() {
-  const { loading, userData } = userStore((state) => state)
-
+  const { loading, userData } = userStore((state) => state);
+  const { loadEspecialidades } = especialidadeStore((state) => state);
+  const { loadCursos } = cursoStore((state) => state);
+  const { loadPontos } = registroStore((state) => state);
   if (!userData?.user.is_superuser) {
     redirect('/login');
   }
+  useEffect(() => {
+    const loadData = async () => {
+      await Promise.all([loadEspecialidades(), loadCursos(), loadPontos()]);
+    };
+    loadData();
+  }, []);
+  
   return (
     <main>
       <AdminHeader />
       <AdminNav />
-      <AdminSelectedUserCard />
-      <AdminFuncionariosMenu />
-      <AdminSelectedUserCard />
     </main>
   );
 }
