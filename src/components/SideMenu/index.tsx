@@ -1,5 +1,6 @@
 'use client'
 import { UserIcon } from "@/fragments/UserIcon";
+import { GlobalStyle } from "@/globalStyles/globalstyle";
 import { adminStore } from "@/stores/adminStore";
 import { userStore } from "@/stores/userStore"
 import Image from "next/image"
@@ -12,6 +13,7 @@ export const SideMenu = () => {
 
     return (
         <>
+        <GlobalStyle />
         {sideMenuToggle && (
           <section>
             <Image

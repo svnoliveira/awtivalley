@@ -4,32 +4,61 @@ import { adminStore } from "@/stores/adminStore";
 import { userStore } from "@/stores/userStore"
 import Image from "next/image"
 import Link from "next/link";
+import { StyledHeader, StyledImageContainer, StyledMenuButton, StyledNav } from "./style";
+import { useState } from "react";
 
 export const Header = () => {
-    const user = userStore((state) => state.userData?.user);
-    const logout = userStore((state) => state.logoutUser);
-    const { sideMenuToggle, setSideMenuToggle } = adminStore((state) => state);
+  const user = userStore((state) => state.userData?.user);
+  const logout = userStore((state) => state.logoutUser);
+  const { sideMenuToggle, setSideMenuToggle } = adminStore((state) => state);
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
 
-    const handleSideMenuClick = () => {
-        sideMenuToggle ? setSideMenuToggle(false) : setSideMenuToggle(true);
-    };
+  const toggleDropdown = () => {
+    setDropdownVisible(!isDropdownVisible);
+  };
 
-    return (
-        <header>
-            <Image
-                src="https://media.discordapp.net/attachments/1182108710965870744/1192518457904865331/CMALogoDiscord2.png"
-                alt="Logo"
-                width={50}
-                height={50}
-            />
-            <div></div>
-            <nav>
-                {user && <UserCard />}
-                {user && <button onClick={() => logout()}>Logout</button>}
-                {!user && <Link href={"/login"}>Login</Link>}
-                {!user && <Link href={"/register"}>Cadastrar</Link>}
-                <button onClick={() => handleSideMenuClick()}>OPEN/CLOSE SIDE MENU</button>
-            </nav>
-        </header>
-    )
+  const handleSideMenuClick = () => {
+    sideMenuToggle ? setSideMenuToggle(false) : setSideMenuToggle(true);
+  };
+
+  return (
+    <StyledHeader>
+      <StyledImageContainer>
+        <Image
+          src="/cma-logo-white.png"
+          alt="Logo"
+          width={300}
+          height={100}
+        />
+      </StyledImageContainer>
+      <StyledNav>
+        <div>
+          {user && (
+            <div className="user-card" onClick={toggleDropdown}>
+              <UserCard />
+              <Image
+                src={`/icons/arrow-${isDropdownVisible ? "up" : "down"}.svg`}
+                alt="arrow icon"
+                width={10}
+                height={10}
+              />
+              {isDropdownVisible && (
+                <div className="dropdown">
+                  <button className="logout-btn" onClick={logout}>Logout</button>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+        <StyledMenuButton onClick={() => handleSideMenuClick()}>
+          <Image
+            src="/icons/menu.svg"
+            alt="menu icon"
+            width={40}
+            height={40}
+          />
+        </StyledMenuButton>
+      </StyledNav>
+    </StyledHeader>
+  )
 }
