@@ -1,20 +1,21 @@
-'use client'
+"use client";
 import { PontoForm } from "@/components/PontoForm";
+import { Loading } from "@/fragments/Loading";
+import { GlobalStyle } from "@/globalStyles/globalstyle";
 import { userStore } from "@/stores/userStore";
 import { redirect } from "next/navigation";
 
-
 export default function PontoPage() {
-  const { loading, userData } = userStore((state) => state)
+  const { loading, userData } = userStore((state) => state);
 
   if (!userData) {
-    redirect('/login');
+    redirect("/login");
   }
 
   return (
     <main>
-      <h1>Registro de Ponto</h1>
-      <PontoForm />
+      <GlobalStyle />
+      {loading ? <Loading /> : <PontoForm />}
     </main>
   );
 }

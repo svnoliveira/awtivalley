@@ -1,18 +1,21 @@
-'use client'
+"use client";
 import { DashboardCard } from "@/components/DashboardCard";
+import { Loading } from "@/fragments/Loading";
+import { GlobalStyle } from "@/globalStyles/globalstyle";
 import { userStore } from "@/stores/userStore";
 import { redirect } from "next/navigation";
 
 export default function DashboardPage() {
-  const { loading, userData } = userStore((state) => state)
+  const { loading, userData } = userStore((state) => state);
 
   if (!userData) {
-    redirect('/login');
+    redirect("/login");
   }
 
   return (
     <main>
-      <DashboardCard />
+      <GlobalStyle />
+      {loading ? <Loading /> : <DashboardCard />}
     </main>
   );
 }

@@ -7,7 +7,7 @@ export const StyledDiv = styled.div`
     text-align: center;
     align-items: center;
     justify-content: center;
-    background-color: #eee;
+    background-color: #EEEEEE;
     border-radius: 12px;
     gap: 15px;
     transition: 0.4s ease-in-out;
