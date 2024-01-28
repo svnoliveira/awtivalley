@@ -1,4 +1,3 @@
-import { error } from "console";
 import styled, { css } from "styled-components";
 
 export const StyledSubmitButton = styled.button<{$error: boolean}>`

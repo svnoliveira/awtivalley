@@ -9,6 +9,7 @@ import { FormInput } from "../FormInput";
 import { StyledForm, StyledSection } from "./style";
 import Image from "next/image";
 import { StyledSubmitButton } from "@/globalStyles/SubmitButton";
+import Link from "next/link";
 
 export const LoginForm = () => {
   const { loginUser } = userStore((store) => store);
@@ -31,6 +32,7 @@ export const LoginForm = () => {
       <StyledForm
         onSubmit={handleSubmit((formData) => parseLoginData(formData))}
       >
+        <Link href={"/"}>{"<"} Home</Link>
         <Image
           src="/cma-logo-black.png"
           alt="Logo awti valley"
