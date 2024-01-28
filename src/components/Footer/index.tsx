@@ -1,6 +1,8 @@
 'use client'
+import { GlobalStyle } from "@/globalStyles/globalstyle";
 import { userStore } from "@/stores/userStore";
 import { useEffect, useState } from "react";
+import { StyledFooter } from "./style";
 
 export const Footer = () => {
     const [index, setIndex] = useState(0);
@@ -30,24 +32,29 @@ export const Footer = () => {
             "'Nunca cometer o mesmo erro duas vezes… Cometa umas cinco vezes, só pra ter certeza que é errado mesmo!' - Ripa, Otávio",
             "'Se você não perseguir o que deseja, nunca o terá. Se você não perguntar, a resposta é sempre não. Se você não der um passo à frente, estará sempre no mesmo lugar!!!!' - Ubal, Cyndi 👀"
         ];
-        useEffect(() => {
-            const interval = setInterval(() => {
-                if (index < mensagens.length - 1) {
-                    setIndex(index + 1);
-                } else {
-                    setIndex(0);
-                }
-            }, 3000); // Run the loop every 3 seconds
-        
-            return () => clearInterval(interval); // Clear the interval when the component unmounts
-        }, [index, mensagens]);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (index < mensagens.length - 1) {
+                setIndex(index + 1);
+            } else {
+                setIndex(0);
+            }
+        }, 3000); // Run the loop every 3 seconds
+
+        return () => clearInterval(interval); // Clear the interval when the component unmounts
+    }, [index, mensagens]);
 
     return (
-        <footer>
-            Todos os Direitos Reservados ao <b>Tiago SUCCI</b> e <b>Centro Médico Awti</b> ©2024
-            <div id="extra-messages-container">
-                <p>{mensagens[index]}</p>
-            </div>
-        </footer>
+        <>
+            <GlobalStyle />
+            <StyledFooter>
+                <div>
+                    Todos os Direitos Reservados ao <b>Tiago SUCCI</b> e <b>Centro Médico Awti</b> ©2024
+                </div>
+                <div id="extra-messages-container">
+                    <p>{mensagens[index]}</p>
+                </div>
+            </StyledFooter>
+        </>
     )
 }
