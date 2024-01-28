@@ -23,6 +23,6 @@ export const adminStore = create<IAdminState>()((set) => ({
     setAdminActiveEspecialidade: (especialidade) => { set({ adminActiveEspecialidade: especialidade })},
     setAdminActiveCurso: (curso) => { set({ adminActiveCurso: curso })},
     setAdminActivePeriod: (period) => {set ({adminActivePeriod: period})},
-    setError: (string) => { set({ message: string })},
+    setError: (string) => { set({ error: string })},
     setMessage: (string) => { set({ message: string })},
 }));
