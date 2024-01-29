@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { IEspecialidade, IEspecialidadeState } from "./@especialidadeTypes";
 import { api } from "@/app/api";
 import { adminStore } from "./adminStore";
+import { redirect } from 'next/navigation'
 
 const setError = adminStore.getState().setError
 const setMessage = adminStore.getState().setMessage
@@ -27,7 +28,8 @@ export const especialidadeStore = create<IEspecialidadeState>()((set) => ({
         });
         set({ especialidadeList: data });
       } catch (error) {
-        console.log(error);
+        localStorage.removeItem("@awti:token");
+        redirect("/login")
       } finally {
         set({ loading: false });
       }

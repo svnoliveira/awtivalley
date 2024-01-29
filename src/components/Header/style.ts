@@ -19,7 +19,7 @@ export const StyledHeader = styled.header`
 export const StyledImageContainer = styled.div`
   width: min(50%, 300px);
   height: 130px;
-  > img {
+  img {
     height: 100%;
     width: 100%;
     object-fit: contain;

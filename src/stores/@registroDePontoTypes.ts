@@ -14,7 +14,9 @@ export interface IRegistroDePontoCreate{
 
 export interface IRegistroDePontoState{
     pontoList: IRegistroDePonto[];
+    indicadorMenu: "semanal" | "ponto"
     loading: boolean;
+    setIndicadorMenu: (option: "semanal" | "ponto") => void
     loadPontos: () => Promise<void>;
     setLoading: (boolean: boolean) => void;
     addPonto: (pontoData: IRegistroDePontoCreate, userId: number) => 

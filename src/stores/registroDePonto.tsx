@@ -10,6 +10,8 @@ const setMessage = adminStore.getState().setMessage
 export const registroStore = create<IRegistroDePontoState>()((set) => ({
     pontoList: [],
     loading: false,
+    indicadorMenu: "semanal",
+    setIndicadorMenu: (option) => {set({indicadorMenu: option})},
     setLoading: (boolean) => {
         set({ loading: boolean })
     },
