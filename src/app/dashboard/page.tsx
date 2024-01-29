@@ -1,5 +1,6 @@
 "use client";
 import { DashboardCard } from "@/components/DashboardCard";
+import { Header } from "@/components/Header";
 import { Loading } from "@/fragments/Loading";
 import { GlobalStyle } from "@/globalStyles/globalstyle";
 import { userStore } from "@/stores/userStore";
@@ -13,9 +14,18 @@ export default function DashboardPage() {
   }
 
   return (
-    <main>
+    <>
       <GlobalStyle />
-      {loading ? <Loading /> : <DashboardCard />}
-    </main>
+      <Header />
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <main>
+            <DashboardCard />
+          </main>
+        </>
+      )}
+    </>
   );
 }

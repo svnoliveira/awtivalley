@@ -27,16 +27,16 @@ export default function AdminPage() {
   }, []);
 
   return (
-    <main>
+    <>
       <GlobalStyle />
       {loading ? (
         <Loading />
       ) : (
-        <>
+        <main>
           <AdminHeader />
           <AdminNav />
-        </>
+        </main>
       )}
-    </main>
+    </>
   );
 }

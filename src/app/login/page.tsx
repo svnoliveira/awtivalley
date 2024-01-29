@@ -13,9 +13,17 @@ export default function LoginPage() {
   }
 
   return (
-    <main>
+    <>
       <GlobalStyle />
-      {loading ? <Loading /> : <LoginForm />}
-    </main>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <main>
+            <LoginForm />
+          </main>
+        </>
+      )}
+    </>
   );
 }

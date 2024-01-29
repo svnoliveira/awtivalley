@@ -15,16 +15,18 @@ export default function IndicadoresPage() {
   }
 
   return (
-    <main>
+    <>
       <GlobalStyle />
       {loading ? (
         <Loading />
       ) : (
-        <>
-          <IndicadoresPersonalList />
-          <IndicadoresSemanais />
-        </>
+        <main>
+          <>
+            <IndicadoresPersonalList />
+            <IndicadoresSemanais />
+          </>
+        </main>
       )}
-    </main>
+    </>
   );
 }

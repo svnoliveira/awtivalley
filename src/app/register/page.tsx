@@ -13,9 +13,17 @@ export default function RegisterPage() {
   }
 
   return (
-    <main>
+    <>
       <GlobalStyle />
-      {loading ? <Loading /> : <RegisterForm />}
-    </main>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <main>
+            <RegisterForm />
+          </main>
+        </>
+      )}
+    </>
   );
 }

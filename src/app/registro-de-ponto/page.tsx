@@ -13,9 +13,17 @@ export default function PontoPage() {
   }
 
   return (
-    <main>
+    <>
       <GlobalStyle />
-      {loading ? <Loading /> : <PontoForm />}
-    </main>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <main>
+            <PontoForm />
+          </main>
+        </>
+      )}
+    </>
   );
 }

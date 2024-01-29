@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
         outline:0;
         box-sizing: border-box;
     }
-    html, body, main {
+    html, body {
         height: 100%;
         margin: 0;
     }
@@ -35,8 +35,4 @@ export const GlobalStyle = createGlobalStyle`
     ul, li {
         list-style: none;
     }
-
-    main, header, footer {
-        color: var(--black);
-    }
-`
+`;
