@@ -25,6 +25,18 @@ export const RegisterForm = () => {
     const success = await registerUser({ ...userData, licenca_medica: {} });
     success && push("/login");
   };
+  const checkError = () => {
+    if (
+      errors.confirmPassword ||
+      errors.discord_id ||
+      errors.nome ||
+      errors.passaporte ||
+      errors.senha
+    ) {
+      return true;
+    }
+    return false;
+  };
 
   return (
     <StyledSection>
@@ -76,7 +88,7 @@ export const RegisterForm = () => {
             Confirme sua Senha
           </FormInput>
         </div>
-        <StyledSubmitButton $error={errors ? true : false} type="submit">
+        <StyledSubmitButton $error={checkError()} type="submit">
           CADASTRAR
         </StyledSubmitButton>
       </StyledForm>

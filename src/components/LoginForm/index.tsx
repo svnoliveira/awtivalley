@@ -26,7 +26,13 @@ export const LoginForm = () => {
     const success = await loginUser(userData);
     success && push("/dashboard");
   };
-
+  const checkError = () => {
+    if(errors.password || errors.username){
+        return true;
+    }
+    return false;
+  }
+  
   return (
     <StyledSection>
       <StyledForm
@@ -57,7 +63,7 @@ export const LoginForm = () => {
           </FormInput>
         </div>
         <StyledSubmitButton
-          $error={errors.password ? true : errors.username ? true : false}
+          $error={checkError()}
           type="submit"
         >
           Entrar

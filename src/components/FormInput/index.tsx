@@ -31,6 +31,12 @@ export const FormInput = ({
         return "ID do Discord";
       case "confirmPassword":
         return "Confirmação de senha";
+      case "entrada":
+        return "Entrada";
+      case "saida":
+        return "Saída";
+      case "justificativa":
+        return "Justificativa";
       default:
         return "to be determined";
     }
@@ -52,7 +58,7 @@ export const FormInput = ({
       case "confirmPassword":
         return "/icons/key.svg";
       default:
-        return "to be determined";
+        return "/icons/ponto.svg";
     }
   };
   
