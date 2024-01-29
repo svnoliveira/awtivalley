@@ -7,4 +7,5 @@ export const StyledFooter = styled.footer`
     justify-content: center;
     text-align: center;
     gap: 5px;
+    margin: 15px 0;
 `

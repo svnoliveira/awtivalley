@@ -1,12 +1,11 @@
-import { create } from 'zustand'
-import { IUser, IUserState, TToken } from './@userTypes'
-import { api } from '@/app/api';
-import { jwtDecode } from 'jwt-decode';
-import { adminStore } from './adminStore';
+import { create } from "zustand";
+import { IUser, IUserState, TToken } from "./@userTypes";
+import { api } from "@/app/api";
+import { jwtDecode } from "jwt-decode";
+import { adminStore } from "./adminStore";
 
-
-const setError = adminStore.getState().setError
-const setMessage = adminStore.getState().setMessage
+const setError = adminStore.getState().setError;
+const setMessage = adminStore.getState().setMessage;
 
 export const userStore = create<IUserState>()((set, get) => ({
   userData: null,
@@ -14,7 +13,7 @@ export const userStore = create<IUserState>()((set, get) => ({
   loading: false,
 
   setLoading: (boolean) => {
-    set({ loading: boolean })
+    set({ loading: boolean });
   },
 
   logoutUser: () => {
@@ -32,8 +31,8 @@ export const userStore = create<IUserState>()((set, get) => ({
       // const userList = await api.get<IUser[]>('/users/'); //comentar se usar autologin
       // set({ userList: userList.data }); // comentar se usar autologin
       const token = data.access;
-      const decoded: any = jwtDecode(token)
-      const userID: number = decoded.user_id
+      const decoded: any = jwtDecode(token);
+      const userID: number = decoded.user_id;
       const user = get().userList.find((userInfo) => userInfo.id === userID);
       if (user) {
         if (!user.ativo) {
@@ -42,20 +41,20 @@ export const userStore = create<IUserState>()((set, get) => ({
         localStorage.setItem("@awti:token", token);
         const new_userData = {
           accessToken: token,
-          user: user
-        }
+          user: user,
+        };
         set({ userData: new_userData });
         setMessage("Login feito com sucesso!");
-        return true
+        return true;
       } else {
         throw new Error();
       }
     } catch (error: any) {
       console.log(error);
       setError(
-        error.message === "Usuário desativado" ?
-          "Usuário desativado" :
-          "Tentativa de login falhou"
+        error.message === "Usuário desativado"
+          ? "Usuário desativado"
+          : "Tentativa de login falhou"
       );
     } finally {
       set({ loading: false });
@@ -63,35 +62,38 @@ export const userStore = create<IUserState>()((set, get) => ({
         setError("");
         setMessage("");
       }, 2000);
-    };
+    }
   },
 
   loadUser: async () => {
     if (typeof window !== "undefined") {
       try {
         set({ loading: true });
-        const userList = (await api.get<IUser[]>('/users/')).data;
+        const userList = (await api.get<IUser[]>("/users/")).data;
         set({ userList: userList });
         let token = localStorage.getItem("@awti:token");
         if (token) {
-          token = token as string
-          const decoded: any = jwtDecode(token)
-          const userID: number = decoded.user_id
-          const user = get().userList.find((userInfo) => userInfo.id === userID);          if (user) {
+          token = token as string;
+          const decoded: any = jwtDecode(token);
+          const userID: number = decoded.user_id;
+          const user = get().userList.find(
+            (userInfo) => userInfo.id === userID
+          );
+          if (user) {
             if (!user.ativo) {
               throw new Error("Usuário desativado");
             }
             const new_userData = {
               accessToken: token,
-              user: user
-            }
+              user: user,
+            };
             set({ userData: new_userData });
           } else {
             throw new Error();
           }
-        };
+        }
       } catch (error) {
-        console.log(error)
+        console.log(error);
         localStorage.removeItem("@awti:token");
         set({ userData: null });
       } finally {
@@ -119,6 +121,6 @@ export const userStore = create<IUserState>()((set, get) => ({
         setError("");
         setMessage("");
       }, 2000);
-    };
+    }
   },
-}))
+}));

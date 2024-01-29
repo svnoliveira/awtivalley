@@ -7,6 +7,10 @@ export const GlobalStyle = createGlobalStyle`
         outline:0;
         box-sizing: border-box;
     }
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
 
     :root { 
         --grey: #9A9A9A;
@@ -14,6 +18,7 @@ export const GlobalStyle = createGlobalStyle`
         --background: #1A1A1A;
         --black: #1F1E1F;
         --red: #ff0000;
+        --dark-red: #9C0000;
         --foreground: 0, 0, 0;
         --background-start: #FF0000;
         --background-end: #D50000;
@@ -30,8 +35,4 @@ export const GlobalStyle = createGlobalStyle`
     ul, li {
         list-style: none;
     }
-
-    main, header, footer {
-        color: var(--black);
-    }
-`
+`;

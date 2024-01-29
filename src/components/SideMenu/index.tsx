@@ -15,7 +15,7 @@ export const SideMenu = () => {
         <>
         <GlobalStyle />
         {sideMenuToggle && (
-          <section>
+          <aside>
             <Image
               src="https://media.discordapp.net/attachments/1182108710965870744/1192518457904865331/CMALogoDiscord2.png"
               alt="Logo"
@@ -36,7 +36,7 @@ export const SideMenu = () => {
               {!user && <li><Link href={"/login"}>Login</Link></li>}
               {!user && <li><Link href={"/register"}>Cadastrar</Link></li>}
             </ul>
-          </section>
+          </aside>
         )}
       </>
     )
