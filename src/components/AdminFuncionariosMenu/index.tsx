@@ -4,6 +4,7 @@ import { AdminUserCard } from "@/fragments/AdminUserCard";
 import { IUser } from "@/stores/@userTypes";
 import { userStore } from "@/stores/userStore"
 import { ChangeEvent, useEffect, useState } from "react";
+import { StyledCardList, StyledSearch, StyledSection } from "./style";
 
 type TFilter = {
     search: string
@@ -40,21 +41,19 @@ export const AdminFuncionariosMenu = () => {
     },[userList])
 
     return (
-        <section>
-            <div>
-                <h1>Lista de usuários</h1>
-                <div>
+        <StyledSection>
+                <StyledSearch>
                     <h2>Pesquisa</h2>
                     <input type="text" name="filter-list" id="filterlist" 
-                    placeholder="Pesquise pelo nome do usuário"
+                    placeholder="Pesquise um funcionário"
                     onChange={(e) => handleFilterInput(e)}
-                />
-                </div>
-                <ul>
+                    />
+                    <h1>Lista de usuários</h1>
+                </StyledSearch>
+                <StyledCardList>
                     {filter?.list.map((user) => 
                     <AdminUserCard key={user.id} user={user}/>)}
-                </ul>
-            </div>
-        </section>
+                </StyledCardList>
+        </StyledSection>
     )
 }

@@ -2,12 +2,14 @@ import { create } from "zustand";
 import { IEspecialidade, IEspecialidadeState } from "./@especialidadeTypes";
 import { api } from "@/app/api";
 import { adminStore } from "./adminStore";
+import { userStore } from "./userStore";
 
 const setError = adminStore.getState().setError
 const setMessage = adminStore.getState().setMessage
 const setAdminActiveEspecialidade = adminStore.getState().setAdminActiveEspecialidade
+const logout = userStore.getState().logoutUser
 
-export const especialidadeStore = create<IEspecialidadeState>()((set) => ({
+export const especialidadeStore = create<IEspecialidadeState>()((set, get) => ({
   especialidadeList: [],
   loading: false,
 
@@ -27,7 +29,7 @@ export const especialidadeStore = create<IEspecialidadeState>()((set) => ({
         });
         set({ especialidadeList: data });
       } catch (error) {
-        console.log(error);
+        logout();
       } finally {
         set({ loading: false });
       }

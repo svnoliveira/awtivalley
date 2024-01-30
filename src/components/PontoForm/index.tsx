@@ -12,6 +12,7 @@ import { StyledSubmitButton } from "@/globalStyles/SubmitButton";
 import Image from "next/image";
 import { formatHorario } from "@/utils/operations";
 import { Loading } from "@/fragments/Loading";
+import Link from "next/link";
 
 export const PontoForm = () => {
   const { addPonto, loading } = registroStore((store) => store);
@@ -54,39 +55,42 @@ export const PontoForm = () => {
       <StyledForm
         onSubmit={handleSubmit((formData) => parsePontoData(formData))}
       >
+        <Link href={"/"}>{"<"} Home</Link>
         <Image
           src="/cma-logo-black.png"
           alt="Logo awti valley"
           width={300}
           height={500}
         ></Image>
+        <span>Registro de Ponto</span>
 
         {loading ? (
           <Loading />
         ) : (
           <>
-            <span>Registro de Ponto</span>
-            <FormInput
-              type="text"
-              register={register("entrada")}
-              error={errors.entrada}
-            >
-              Entrada
-            </FormInput>
-            <FormInput
-              type="text"
-              register={register("saida")}
-              error={errors.entrada}
-            >
-              Saída
-            </FormInput>
-            <FormInput
-              type="text"
-              register={register("justificativa")}
-              error={errors.justificativa}
-            >
-              Justificativa
-            </FormInput>
+            <div>
+              <FormInput
+                type="text"
+                register={register("entrada")}
+                error={errors.entrada}
+              >
+                Entrada
+              </FormInput>
+              <FormInput
+                type="text"
+                register={register("saida")}
+                error={errors.entrada}
+              >
+                Saída
+              </FormInput>
+              <FormInput
+                type="text"
+                register={register("justificativa")}
+                error={errors.justificativa}
+              >
+                Justificativa
+              </FormInput>
+            </div>
             <StyledSubmitButton $error={checkError()} type="submit">
               REGISTRAR PONTO
             </StyledSubmitButton>

@@ -5,6 +5,8 @@ import { registroStore } from "@/stores/registroDePonto"
 import { userStore } from "@/stores/userStore"
 import { getTimeFromSeconds, sortByEntrada, totalHoras } from "@/utils/operations"
 import { AdminDateSelector } from "../AdminDateSelector"
+import { StyledTable, ThTitleRow } from "@/globalStyles/StyledTable/style"
+import { StyledSection } from "./style"
 
 
 export const AdminPontosMenu = () => {
@@ -16,22 +18,22 @@ export const AdminPontosMenu = () => {
   } = adminStore((state) => state)
 
   return (
-    <section>
-      {!adminActiveUser && <h3>Selecione Um colaborador</h3>}
-      {!adminActivePeriod && <h3>Selecione Um período</h3>}
+    <StyledSection>
       <AdminDateSelector />
-      <table>
+      <StyledTable>
         <thead>
-          <th>Colaborador</th>
-          <th>Entrada</th>
-          <th>Saída</th>
-          <th>Horas</th>
+        {adminActiveUser && adminActivePeriod && <tr><td colSpan={3}><b>Total de Horas</b></td><td>{getTimeFromSeconds(totalHoras(adminActiveUser.registros_de_ponto, adminActivePeriod.start, adminActivePeriod.end))}</td></tr>}
+          <tr>
+          <ThTitleRow>Colaborador</ThTitleRow>
+          <ThTitleRow>Entrada</ThTitleRow>
+          <ThTitleRow>Saída</ThTitleRow>
+          <ThTitleRow>Horas</ThTitleRow>
+          </tr>
         </thead>
         <tbody>
           {adminActiveUser ?
             adminActivePeriod ?
-              <>
-                <tr><td>Total de Horas</td><td></td><td></td><td>{getTimeFromSeconds(totalHoras(adminActiveUser.registros_de_ponto, adminActivePeriod.start, adminActivePeriod.end))}</td></tr>
+              <>                
                 {adminActiveUser.registros_de_ponto
                   .filter((ponto) => {
                     const testingData = new Date(ponto.entrada);
@@ -86,7 +88,7 @@ export const AdminPontosMenu = () => {
                 ))}
               </>}
         </tbody>
-      </table>
-    </section>
+      </StyledTable>
+    </StyledSection>
   )
 }

@@ -8,10 +8,10 @@ export const AdminSelectedUserCard = () => {
 
     return (
         <>
-        {user && (<div onClick={() => clearUser(null)}>
+        <li onClick={() => clearUser(null)}>
             <p>Usuário Selecionado</p>
-            <p>{user?.nome}</p>
-        </div>)}
+            <p>{user && user.nome}</p>
+        </li>
         </>
     )
 }

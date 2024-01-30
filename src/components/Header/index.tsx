@@ -1,10 +1,15 @@
-'use client'
+"use client";
 import { UserCard } from "@/fragments/UserCard";
 import { adminStore } from "@/stores/adminStore";
-import { userStore } from "@/stores/userStore"
-import Image from "next/image"
+import { userStore } from "@/stores/userStore";
+import Image from "next/image";
 import Link from "next/link";
-import { StyledHeader, StyledImageContainer, StyledMenuButton, StyledNav } from "./style";
+import {
+  StyledHeader,
+  StyledImageContainer,
+  StyledMenuButton,
+  StyledNav,
+} from "./style";
 import { useState } from "react";
 
 export const Header = () => {
@@ -24,12 +29,14 @@ export const Header = () => {
   return (
     <StyledHeader>
       <StyledImageContainer>
-        <Image
-          src="/cma-logo-white.png"
-          alt="Logo"
-          width={300}
-          height={100}
-        />
+        <Link href={"/"}>
+          <Image
+            src="/cma-logo-white.png"
+            alt="Logo"
+            width={300}
+            height={100}
+          />
+        </Link>
       </StyledImageContainer>
       <StyledNav>
         <div>
@@ -44,21 +51,18 @@ export const Header = () => {
               />
               {isDropdownVisible && (
                 <div className="dropdown">
-                  <button className="logout-btn" onClick={logout}>Logout</button>
+                  <button className="logout-btn" onClick={logout}>
+                    Logout
+                  </button>
                 </div>
               )}
             </div>
           )}
         </div>
         <StyledMenuButton onClick={() => handleSideMenuClick()}>
-          <Image
-            src="/icons/menu.svg"
-            alt="menu icon"
-            width={40}
-            height={40}
-          />
+          <Image src="/icons/menu.svg" alt="menu icon" width={40} height={40} />
         </StyledMenuButton>
       </StyledNav>
     </StyledHeader>
-  )
-}
+  );
+};
