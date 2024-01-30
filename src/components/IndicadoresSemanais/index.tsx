@@ -8,9 +8,11 @@ import {
 } from "@/utils/operations";
 import { useEffect, useState } from "react";
 import { StyledBonusCard, StyledInfo, StyledTitle } from "./style";
+import { userStore } from "@/stores/userStore";
 
 export const IndicadoresSemanais = () => {
-  const { pontoList, indicadorMenu } = registroStore((state) => state);
+  const { indicadorMenu } = registroStore((state) => state);
+  const userPontoList = userStore((state) => state.userData?.user.registros_de_ponto);
   const data = new Date();
   const hoje = data.getDay();
   const inicioDaSemana = new Date(
@@ -26,7 +28,7 @@ export const IndicadoresSemanais = () => {
     const maxData = new Date(formatDate(fimDaSemana));
     const minData = new Date(formatDate(inicioDaSemana));
     pontoList.forEach((entry) => {
-      const testingData = new Date(formatDate(entry.entrada));
+      const testingData = new Date(entry.entrada);
       if (testingData >= minData && testingData <= maxData) {
         hours.push({ horas: entry.horas });
       }
@@ -36,10 +38,10 @@ export const IndicadoresSemanais = () => {
 
   useEffect(() => {
     const loadStatus = () => {
-      gerarStatusSemanal(pontoList);
+      userPontoList && gerarStatusSemanal(userPontoList);
     };
     loadStatus();
-  }, [pontoList]);
+  }, [userPontoList]);
 
   const getBonusStatus = () => {
     if (horasCumpridas >= 0) {

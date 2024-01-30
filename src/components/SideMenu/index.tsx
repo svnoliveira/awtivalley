@@ -1,43 +1,159 @@
-'use client'
+"use client";
 import { UserIcon } from "@/fragments/UserIcon";
 import { GlobalStyle } from "@/globalStyles/globalstyle";
 import { adminStore } from "@/stores/adminStore";
-import { userStore } from "@/stores/userStore"
-import Image from "next/image"
+import { userStore } from "@/stores/userStore";
+import Image from "next/image";
 import Link from "next/link";
+import { StyledAside, StyledContainer, StyledLi, StyledSideList } from "./style";
 
 export const SideMenu = () => {
-    const user = userStore((state) => state.userData?.user);
-    const logout = userStore((state) => state.logoutUser);
-    const sideMenuToggle = adminStore((state) => state.sideMenuToggle);
+  const user = userStore((state) => state.userData?.user);
+  const logout = userStore((state) => state.logoutUser);
+  const sideMenuToggle = adminStore((state) => state.sideMenuToggle);
+  const setSideMenuToggle = adminStore((state) => state.setSideMenuToggle);
 
-    return (
-        <>
-        <GlobalStyle />
-        {sideMenuToggle && (
-          <aside>
+  return (
+    <>
+      <GlobalStyle />
+      {sideMenuToggle && (
+        <StyledAside>
+          <StyledContainer onClick={() => setSideMenuToggle(false)}>
             <Image
-              src="https://media.discordapp.net/attachments/1182108710965870744/1192518457904865331/CMALogoDiscord2.png"
+              src="/cma-logo-white.png"
               alt="Logo"
-              width={100}
-              height={100}
+              width={500}
+              height={500}
             />
             <div>
               {user && <h3>{user.nome}</h3>}
               {user && <h3>{user.cargo}</h3>}
             </div>
             <UserIcon />
-            <ul>
-              {user?.is_superuser && <li><Link href={"/admin"}>Admin</Link></li>}
-              {user && <li><Link href={"/dashboard"}>Colaborador</Link></li>}
-              {user && <li><Link href={"/indicadores"}>Indicadores</Link></li>}
-              {user && <li><Link href={"/registro-de-ponto"}>Registro de Ponto</Link></li>}
-              {user && <li><button onClick={() => logout()}>Logout</button></li>}
-              {!user && <li><Link href={"/login"}>Login</Link></li>}
-              {!user && <li><Link href={"/register"}>Cadastrar</Link></li>}
-            </ul>
-          </aside>
-        )}
-      </>
-    )
-}
+          </StyledContainer>
+          <StyledSideList>
+            {user?.is_superuser && (
+              <StyledLi>
+                <Image
+              src="/icons/lock.svg"
+              alt="Logo"
+              width={20}
+              height={20}
+            />
+                <Link href={"/admin"}>Admin</Link>
+                <Image
+              src="/icons/arrow-right.svg"
+              alt="Logo"
+              width={15}
+              height={15}
+            />
+              </StyledLi>
+            )}
+            {user && (
+              <StyledLi>
+                  <Image
+              src="/icons/person.svg"
+              alt="Logo"
+              width={20}
+              height={20}
+            />
+                <Link href={"/dashboard"}>Colaborador</Link>
+                <Image
+              src="/icons/arrow-right.svg"
+              alt="Logo"
+              width={15}
+              height={15}
+            />
+              </StyledLi>
+            )}
+            {user && (
+              <StyledLi>
+                  <Image
+              src="/icons/indicadores.svg"
+              alt="Logo"
+              width={20}
+              height={20}
+            />
+                <Link href={"/indicadores"}>Indicadores</Link>
+                <Image
+              src="/icons/arrow-right.svg"
+              alt="Logo"
+              width={15}
+              height={15}
+            />
+              </StyledLi>
+            )}
+            {user && (
+              <StyledLi>
+                  <Image
+              src="/icons/ponto.svg"
+              alt="Logo"
+              width={20}
+              height={20}
+            />
+                <Link href={"/registro-de-ponto"}>Registro de Ponto</Link>
+                <Image
+              src="/icons/arrow-right.svg"
+              alt="Logo"
+              width={15}
+              height={15}
+            />
+              </StyledLi>
+            )}
+            {user && (
+              <StyledLi>
+                  <Image
+              src="/icons/login.svg"
+              alt="Logo"
+              width={20}
+              height={20}
+            />
+                <span onClick={() => logout()}>Logout</span>
+                <Image
+              src="/icons/arrow-right.svg"
+              alt="Logo"
+              width={15}
+              height={15}
+            />
+              </StyledLi>
+            )}
+            {!user && (
+              <StyledLi>
+                  <Image
+              src="/icons/login.svg"
+              alt="Logo"
+              width={20}
+              height={20}
+            />
+                <Link href={"/login"}>Login</Link>
+                <Image
+              src="/icons/arrow-right.svg"
+              alt="Logo"
+              width={15}
+              height={15}
+            />
+              </StyledLi>
+            )}
+            {!user && (
+              <StyledLi>
+                  <Image
+              src="/icons/register.svg"
+              alt="Logo"
+              width={20}
+              height={20}
+            />
+                <Link href={"/register"}>Cadastrar</Link>
+                <Image
+              src="/icons/arrow-right.svg"
+              alt="Logo"
+              width={15}
+              height={15}
+            />
+              </StyledLi>
+            )}
+          </StyledSideList>
+        </StyledAside>
+      )}
+    </>
+  );
+};

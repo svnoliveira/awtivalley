@@ -4,7 +4,6 @@ import { registroStore } from "@/stores/registroDePonto";
 import { useForm } from "react-hook-form";
 import { TPontoValues, pontoSchema } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormInput } from "../FormInput";
 import { userStore } from "@/stores/userStore";
 import { useEffect } from "react";
 import { StyledForm, StyledSection } from "./style";
@@ -13,6 +12,7 @@ import Image from "next/image";
 import { formatHorario } from "@/utils/operations";
 import { Loading } from "@/fragments/Loading";
 import Link from "next/link";
+import { FormTextArea } from "../FormTextArea";
 
 export const PontoForm = () => {
   const { addPonto, loading } = registroStore((store) => store);
@@ -69,27 +69,27 @@ export const PontoForm = () => {
         ) : (
           <>
             <div>
-              <FormInput
+              <FormTextArea
                 type="text"
                 register={register("entrada")}
                 error={errors.entrada}
               >
                 Entrada
-              </FormInput>
-              <FormInput
+              </FormTextArea>
+              <FormTextArea
                 type="text"
                 register={register("saida")}
                 error={errors.entrada}
               >
                 Saída
-              </FormInput>
-              <FormInput
+              </FormTextArea>
+              <FormTextArea
                 type="text"
                 register={register("justificativa")}
                 error={errors.justificativa}
               >
                 Justificativa
-              </FormInput>
+              </FormTextArea>
             </div>
             <StyledSubmitButton $error={checkError()} type="submit">
               REGISTRAR PONTO
