@@ -2,6 +2,7 @@
 
 import { AdminHeader } from "@/components/AdminHeader";
 import { AdminNav } from "@/components/AdminNav";
+import { Header } from "@/components/Header";
 import { Loading } from "@/fragments/Loading";
 import { GlobalStyle } from "@/globalStyles/globalstyle";
 import { cursoStore } from "@/stores/cursoStore";
@@ -29,6 +30,7 @@ export default function AdminPage() {
   return (
     <>
       <GlobalStyle />
+      <Header />
       {loading ? (
         <Loading />
       ) : (

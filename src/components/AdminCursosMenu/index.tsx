@@ -1,9 +1,14 @@
-'use client'
+"use client";
 
-import { adminStore } from "@/stores/adminStore"
-import { cursoStore } from "@/stores/cursoStore"
-import { userStore } from "@/stores/userStore"
-import { AdminCursosVincular } from "../AdminCursosVincular"
+import { adminStore } from "@/stores/adminStore";
+import { cursoStore } from "@/stores/cursoStore";
+import { userStore } from "@/stores/userStore";
+import { AdminCursosVincular } from "../AdminCursosVincular";
+import { AdminNav } from "@/globalStyles/AdminNav/style";
+import { AdminNavButton } from "@/globalStyles/AdminNavButton/style";
+import { StyledTable, ThCellHeader, ThTitleRow } from "@/globalStyles/StyledTable/style";
+import { StyledSubmitButton } from "@/globalStyles/SubmitButton";
+import { StyledSection } from "./style";
 
 export const AdminCursosMenu = () => {
   const userList = userStore((state) => state.userList);
@@ -11,45 +16,40 @@ export const AdminCursosMenu = () => {
     adminActiveCurso,
     setAdminActiveCurso,
     setAdminActiveUser,
-  } = adminStore((state) => state)
-  const {
-    cursoList,
-    removeCurso
-  } = cursoStore((state) => state)
+  } = adminStore((state) => state);
+  const { cursoList, removeCurso } = cursoStore(
+    (state) => state
+  );
   return (
-    <section>
-      <nav>
-        <ul>
-          {
-            cursoList &&
-            cursoList.map(
-              (curso) =>
-                <li key={curso.id}>
-                  <button onClick={() => setAdminActiveCurso(curso)}>
-                    {curso.nome}
-                  </button>
-                </li>
-            )
-          }
-        </ul>
-      </nav>
-      <h3>
-        {adminActiveCurso &&
-          `Funcionários da curso ${adminActiveCurso?.nome}`}
-      </h3>
+    <StyledSection>
+      <AdminNav>
+        {cursoList &&
+          cursoList.map((curso) => (
+            <AdminNavButton $selected={adminActiveCurso === curso ? true : false}
+              onClick={() => setAdminActiveCurso(curso)}
+              key={curso.id}
+            >
+              {curso.nome}
+            </AdminNavButton>
+          ))}
+      </AdminNav>
+      
       <AdminCursosVincular />
-      <table>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Passaporte</th>
-            <th>Cargo</th>
-            <th>Setor</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {adminActiveCurso && adminActiveCurso.users.map((userID) => {
+      <StyledTable>
+        <tr>
+        <ThCellHeader colSpan={5}>
+        {adminActiveCurso &&
+          `Funcionários no curso de ${adminActiveCurso?.nome}`}
+      </ThCellHeader>
+        </tr>
+        <tr>
+          <ThTitleRow>Nome</ThTitleRow>
+          <ThTitleRow>Passaporte</ThTitleRow>
+          <ThTitleRow>Cargo</ThTitleRow>
+          <ThTitleRow>Setor</ThTitleRow>
+        </tr>
+        {adminActiveCurso &&
+          adminActiveCurso.users.map((userID) => {
             const user = userList.find((entry) => entry.id === userID);
             return (
               <tr key={userID} onClick={() => setAdminActiveUser(user!)}>
@@ -58,16 +58,18 @@ export const AdminCursosMenu = () => {
                 <td>{user?.cargo}</td>
                 <td>{user?.setor}</td>
                 <td>
-                  <button onClick={() => removeCurso(adminActiveCurso, user!)}>
+                  <StyledSubmitButton $error={false}
+                    onClick={() =>
+                      removeCurso(adminActiveCurso, user!)
+                    }
+                  >
                     Desvincular
-                  </button>
+                  </StyledSubmitButton>
                 </td>
               </tr>
             );
           })}
-        </tbody>
-      </table>
-
-    </section>
-  )
-}
+      </StyledTable>
+    </StyledSection>
+  );
+};

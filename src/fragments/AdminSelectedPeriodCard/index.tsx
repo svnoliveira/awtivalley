@@ -8,10 +8,11 @@ export const AdminSelectedPeriodCard = () => {
 
     return (
         <>
-        {period && (<div onClick={() => clearPeriod(null)}>
+        <li onClick={() => clearPeriod(null)}>
             <p>Período Selecionado:</p>
-            <p>De {period.start.toLocaleDateString('pt-br')} á {period.end.toLocaleDateString('pt-br')}</p>
-        </div>)}
+            <p>{period && `De ${period.start.toLocaleDateString('pt-br')} á ${period.end.toLocaleDateString('pt-br')}`}</p>
+        </li>
+        <li></li>
         </>
     )
 }

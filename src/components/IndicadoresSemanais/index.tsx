@@ -86,7 +86,7 @@ export const IndicadoresSemanais = () => {
               </StyledInfo>
               <StyledInfo>
                 {horasCumpridas > 36000 ? (
-                  <span>"Número de horas semanais alcançado."</span>
+                  <span>Número de horas semanais alcançado.</span>
                 ) : (
                   <>
                     <span>Horas restantes para finalizar na semana:</span>
