@@ -6,6 +6,7 @@ import { userStore } from "@/stores/userStore";
 import Image from "next/image";
 import Link from "next/link";
 import { StyledAside, StyledContainer, StyledLi, StyledSideList } from "./style";
+import { checkUserRole } from "@/utils/operations";
 
 export const SideMenu = () => {
   const user = userStore((state) => state.userData?.user);
@@ -134,7 +135,7 @@ export const SideMenu = () => {
             />
               </StyledLi>
             )}
-            {!user && (
+            {checkUserRole(user) && (
               <StyledLi>
                   <Image
               src="/icons/register.svg"

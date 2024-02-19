@@ -1,4 +1,5 @@
 import { IRegistroDePonto } from "@/stores/@registroDePontoTypes";
+import { IUser } from "@/stores/@userTypes";
 
 export const getTotalSeconds = (list: { horas: string }[]) => {
   const totalSeconds = list.reduce((a, c) => {
@@ -75,3 +76,15 @@ export const formatHorario = (texto: string) => {
     return `${formattedDate} ${informacoes.saida}-03:00`;
   }
 };
+
+export const checkUserRole = ( user:IUser | undefined ) => {
+  if(user){
+    if (user.is_superuser === true || user.setor === "Ingressos"){
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
