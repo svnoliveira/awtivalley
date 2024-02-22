@@ -25,6 +25,7 @@ export const AdminPontosMenu = () => {
         {adminActiveUser && adminActivePeriod && <tr><td colSpan={3}><b>Total de Horas</b></td><td>{getTimeFromSeconds(totalHoras(adminActiveUser.registros_de_ponto, adminActivePeriod.start, adminActivePeriod.end))}</td></tr>}
           <tr>
           <ThTitleRow>Colaborador</ThTitleRow>
+          <ThTitleRow>Passaporte</ThTitleRow>
           <ThTitleRow>Entrada</ThTitleRow>
           <ThTitleRow>Saída</ThTitleRow>
           <ThTitleRow>Horas</ThTitleRow>
@@ -43,6 +44,7 @@ export const AdminPontosMenu = () => {
                   .map((ponto) => (
                     <tr key={ponto.id}>
                       <td>{adminActiveUser.nome}</td>
+                      <td>{adminActiveUser.passaporte}</td>
                       <td>{new Date(ponto.entrada).toLocaleString('pt-br')}</td>
                       <td>{new Date(ponto.saida).toLocaleString('pt-br')}</td>
                       <td>{ponto.horas}</td>
@@ -53,6 +55,7 @@ export const AdminPontosMenu = () => {
                 {adminActiveUser.registros_de_ponto.sort(sortByEntrada).map((ponto) =>
                   <tr key={ponto.id}>
                     <td>{adminActiveUser.nome}</td>
+                    <td>{adminActiveUser.passaporte}</td>
                     <td>{new Date(ponto.entrada).toLocaleString('pt-br')}</td>
                     <td>{new Date(ponto.saida).toLocaleString('pt-br')}</td>
                     <td>{ponto.horas}</td>
@@ -68,6 +71,7 @@ export const AdminPontosMenu = () => {
                     testingData <= adminActivePeriod.end) {
                     return <tr key={ponto.id}>
                       <td>{userList.find((user) => user.id === ponto.user)?.nome}</td>
+                      <td>{userList.find((user) => user.id === ponto.user)?.passaporte}</td>
                       <td>{new Date(ponto.entrada).toLocaleString('pt-br')}</td>
                       <td>{new Date(ponto.saida).toLocaleString('pt-br')}</td>
                       <td>{ponto.horas}</td>
@@ -81,6 +85,7 @@ export const AdminPontosMenu = () => {
                 {pontoList.sort(sortByEntrada).map((ponto) => (
                   <tr key={ponto.id}>
                     <td>{userList.find((user) => user.id === ponto.user)?.nome}</td>
+                    <td>{userList.find((user) => user.id === ponto.user)?.passaporte}</td>
                     <td>{new Date(ponto.entrada).toLocaleString('pt-br')}</td>
                     <td>{new Date(ponto.saida).toLocaleString('pt-br')}</td>
                     <td>{ponto.horas}</td>

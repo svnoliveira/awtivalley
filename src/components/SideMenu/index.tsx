@@ -4,7 +4,6 @@ import { GlobalStyle } from "@/globalStyles/globalstyle";
 import { adminStore } from "@/stores/adminStore";
 import { userStore } from "@/stores/userStore";
 import Image from "next/image";
-import Link from "next/link";
 import {
   StyledAside,
   StyledBlankDiv,
