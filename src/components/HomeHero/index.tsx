@@ -2,10 +2,12 @@ import { HomeMenuCard } from "@/fragments/HomeMenuCards";
 import { StyledContainer, StyledList, StyledSection } from "./style"
 import { userStore } from "@/stores/userStore";
 import Link from "next/link";
+import { checkUserRole } from "@/utils/operations";
 
 
 export const HomeHero = () => {
   const user = userStore((state) => state.userData?.user);
+
   return (
     <StyledSection>
       <StyledContainer>
@@ -25,7 +27,7 @@ export const HomeHero = () => {
           {!user && <li><Link href={"/login"}>
             <HomeMenuCard iconUrl="/icons/login.svg">Login</HomeMenuCard>
           </Link></li>}
-          {!user && <li><Link href={"/register"}>
+          {checkUserRole(user) && <li><Link href={"/register"}>
             <HomeMenuCard iconUrl="/icons/register.svg">Cadastrar</HomeMenuCard>
           </Link></li>}
         </StyledList>
