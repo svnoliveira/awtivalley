@@ -7,7 +7,7 @@ import { adminStore } from "./adminStore";
 const setError = adminStore.getState().setError
 const setMessage = adminStore.getState().setMessage
 
-export const registroStore = create<IRegistroDePontoState>()((set) => ({
+export const registroStore = create<IRegistroDePontoState>()((set, get) => ({
     pontoList: [],
     loading: false,
     indicadorMenu: "semanal",
@@ -39,6 +39,12 @@ export const registroStore = create<IRegistroDePontoState>()((set) => ({
             if (entrada > saida){
                 throw new Error("Entrada maior que a saida");
             }
+            if (get().pontoList.some((ponto) => 
+                new Date(ponto.entrada) === entrada ||
+                new Date(ponto.saida) === saida
+            )){
+                throw new Error("Ponto duplicado");
+            }
             const { data } = await api.post<IRegistroDePonto>(`/registro-de-ponto/user/${userId}/`, {
                 ...pontoData
             });
@@ -50,9 +56,10 @@ export const registroStore = create<IRegistroDePontoState>()((set) => ({
             })
             setMessage("Ponto Registrado com sucesso!");
             return data;
-        } catch (error) {
+        } catch (error:any) {
+            console.log(error.message)
             console.log(error)
-            setError("Falha no registro do ponto");
+            setError(`Falha no registro do ponto ${error.message}`);
             return false;
         } finally {
             set({ loading: false });
