@@ -40,8 +40,8 @@ export const registroStore = create<IRegistroDePontoState>()((set, get) => ({
                 throw new Error("Entrada maior que a saida");
             }
             if (get().pontoList.some((ponto) => 
-                new Date(ponto.entrada) === entrada ||
-                new Date(ponto.saida) === saida
+                new Date(ponto.entrada).getTime() === entrada.getTime() ||
+                new Date(ponto.saida).getTime() === saida.getTime()
             )){
                 throw new Error("Ponto duplicado");
             }
