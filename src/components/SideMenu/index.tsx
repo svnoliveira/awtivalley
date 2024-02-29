@@ -92,7 +92,7 @@ export const SideMenu = () => {
                     width={20}
                     height={20}
                   />
-                  <span>Indicadores</span>
+                  <span>Histórico de Registros</span>
                   <Image
                     src="/icons/arrow-right.svg"
                     alt="Logo"
