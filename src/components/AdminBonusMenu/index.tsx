@@ -37,7 +37,7 @@ export const AdminBonusMenu = () => {
       if (bonusLimit === 0){
         return horas > 0;
       } else if(bonusLimit === 18000){
-        return horas > 18000 && horas < 25200;
+        return horas > 18000 && horas < 25199;
       } else if(bonusLimit === 25200){
         return horas > 25200 && horas < 35999;
       } else {
