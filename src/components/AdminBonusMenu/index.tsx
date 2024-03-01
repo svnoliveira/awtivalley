@@ -54,10 +54,10 @@ export const AdminBonusMenu = () => {
       {adminActivePeriod && (
         <>
           <AdminNav>
-            <AdminNavButton $selected={bonusLimit == 0 ? true : false} onClick={() => setBonusLimit(0)}>TODOS</AdminNavButton>
-            <AdminNavButton $selected={bonusLimit == 36000 ? true : false} onClick={() => setBonusLimit(36000)}>100%</AdminNavButton>
-            <AdminNavButton $selected={bonusLimit == 25200 ? true : false} onClick={() => setBonusLimit(25200)}>75%</AdminNavButton>
-            <AdminNavButton $selected={bonusLimit == 18000 ? true : false} onClick={() => setBonusLimit(18000)}>50%</AdminNavButton>
+            <AdminNavButton $selected={bonusLimit == 0 ? true : false} onClick={() => setBonusLimit(0)}>TODOSs</AdminNavButton>
+            <AdminNavButton $selected={bonusLimit == 36000 ? true : false} onClick={() => setBonusLimit(36000)}>100%s</AdminNavButton>
+            <AdminNavButton $selected={bonusLimit == 25200 ? true : false} onClick={() => setBonusLimit(25200)}>75%s</AdminNavButton>
+            <AdminNavButton $selected={bonusLimit == 18000 ? true : false} onClick={() => setBonusLimit(18000)}>50%s</AdminNavButton>
           </AdminNav>
           <StyledTable>
             <thead>
