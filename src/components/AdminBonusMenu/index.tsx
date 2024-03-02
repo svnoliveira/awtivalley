@@ -45,6 +45,7 @@ export const AdminBonusMenu = () => {
       }
     });
   };
+  
 
   return (
     <StyledSection>
