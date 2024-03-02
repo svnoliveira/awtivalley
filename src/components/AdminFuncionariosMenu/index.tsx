@@ -18,19 +18,20 @@ export const AdminFuncionariosMenu = () => {
         list: []
     });
 
-    const handleFilterInput = (e:ChangeEvent<HTMLInputElement>) => {
+    const handleFilterInput = (e: ChangeEvent<HTMLInputElement>) => {
         const searchValue = e.target.value.toLowerCase();
-        const filteredList = userList.filter((user) => 
+        const filteredList = userList.filter((user) =>
             user.nome.toLowerCase().includes(searchValue) ||
             user.cargo.toLowerCase().includes(searchValue) ||
             user.setor.toLowerCase().includes(searchValue) ||
             user.passaporte.toLowerCase().includes(searchValue) ||
             user.discord_id.toLowerCase().includes(searchValue) ||
-            user.funcao.toLowerCase().includes(searchValue)
+            user.funcao.toLowerCase().includes(searchValue) ||
+            (user.licenca_medica && user.licenca_medica.crm && user.licenca_medica.crm.toLowerCase().includes(searchValue)) // Verificando se licenca_medica e crm não são undefined
         );
-        setFilter({list: filteredList, search: searchValue});
+        setFilter({ list: filteredList, search: searchValue });
     };
-
+       
     useEffect(() => {
         const loadList = () => {
             if (userList){
