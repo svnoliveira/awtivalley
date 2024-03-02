@@ -27,7 +27,7 @@ export const AdminBonusMenu = () => {
           testingData <= adminActivePeriod!.end
         );
       });
-
+  
       const horas = totalHoras(
         registros,
         adminActivePeriod!.start,
@@ -37,9 +37,9 @@ export const AdminBonusMenu = () => {
       if (bonusLimit === 0){
         return horas > 0;
       } else if(bonusLimit === 18000){
-        return horas > 18000 && horas < 25199;
+        return horas >= 18000 && horas <= 25199;
       } else if(bonusLimit === 25200){
-        return horas > 25200 && horas < 35999;
+        return horas >= 25200 && horas <= 35999;
       } else {
         return horas >= 36000;
       }
@@ -54,10 +54,10 @@ export const AdminBonusMenu = () => {
       {adminActivePeriod && (
         <>
           <AdminNav>
-            <AdminNavButton $selected={bonusLimit == 0 ? true : false} onClick={() => setBonusLimit(0)}>TODOSs</AdminNavButton>
-            <AdminNavButton $selected={bonusLimit == 36000 ? true : false} onClick={() => setBonusLimit(36000)}>100%s</AdminNavButton>
-            <AdminNavButton $selected={bonusLimit == 25200 ? true : false} onClick={() => setBonusLimit(25200)}>75%s</AdminNavButton>
-            <AdminNavButton $selected={bonusLimit == 18000 ? true : false} onClick={() => setBonusLimit(18000)}>50%s</AdminNavButton>
+            <AdminNavButton $selected={bonusLimit == 0 ? true : false} onClick={() => setBonusLimit(0)}>TODOS</AdminNavButton>
+            <AdminNavButton $selected={bonusLimit == 36000 ? true : false} onClick={() => setBonusLimit(36000)}>100%</AdminNavButton>
+            <AdminNavButton $selected={bonusLimit == 25200 ? true : false} onClick={() => setBonusLimit(25200)}>75%</AdminNavButton>
+            <AdminNavButton $selected={bonusLimit == 18000 ? true : false} onClick={() => setBonusLimit(18000)}>50%</AdminNavButton>
           </AdminNav>
           <StyledTable>
             <thead>
