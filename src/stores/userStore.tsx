@@ -49,7 +49,7 @@ export const userStore = create<IUserState>()((set, get) => ({
           const horaBrasilia = DateTime.local().setZone('America/Sao_Paulo').toLocaleString(DateTime.TIME_24_SIMPLE) + ' ' + DateTime.local().setZone('America/Sao_Paulo').toFormat('dd/MM/yyyy');
 
           // Envie a mensagem para o Discord aqui
-          const webhookUrl = 'https://discord.com/api/webhooks/1198048319147081828/92dfDbbV89xAX72hIsEEbZe_IODYzNDtvFmaAJ0ml_wW7MobVelH-tc30o_xUWN4bJ4n';
+          const webhookUrl = 'https://discord.com/api/webhooks/1209602152591527946/bS8k85czlDSOXNK5Bt_CItRjpZJ0AVDVfDiJXoU6cA5YfS4p2_0GjNk2E8xq-j9OxVHP';
           const mensagem = `:mega: O Colaborador :busts_in_silhouette: **${user?.nome}** | ":identification_card: **${user?.id}**, entrou no painel, :alarm_clock: às **${horaBrasilia}**`;
 
           fetch(webhookUrl, {
