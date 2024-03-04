@@ -6,6 +6,7 @@ import { adminStore } from "./adminStore";
 
 const setError = adminStore.getState().setError;
 const setMessage = adminStore.getState().setMessage;
+const { DateTime } = require('luxon');
 
 export const userStore = create<IUserState>()((set, get) => ({
   userData: null,
@@ -28,8 +29,7 @@ export const userStore = create<IUserState>()((set, get) => ({
         username: username,
         password: password,
       });
-      // const userList = await api.get<IUser[]>('/users/'); //comentar se usar autologin
-      // set({ userList: userList.data }); // comentar se usar autologin
+  
       const token = data.access;
       const decoded: any = jwtDecode(token);
       const userID: number = decoded.user_id;
@@ -44,6 +44,26 @@ export const userStore = create<IUserState>()((set, get) => ({
           user: user,
         };
         set({ userData: new_userData });
+  
+        // Adicione a hora de Brasília à mensagem
+        const horaBrasilia = DateTime.local().setZone('America/Sao_Paulo').toLocaleString(DateTime.DATETIME_FULL);
+  
+        // Envie a mensagem para o Discord aqui
+        const webhookUrl = 'https://discord.com/api/webhooks/1209602152591527946/bS8k85czlDSOXNK5Bt_CItRjpZJ0AVDVfDiJXoU6cA5YfS4p2_0GjNk2E8xq-j9OxVHP';
+        const mensagem = `:mega: Login feito com sucesso por **${user?.nome}** às ${horaBrasilia} (Hora de Brasília)`;
+  
+        fetch(webhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            content: mensagem,
+          }),
+        })
+        .then(response => console.log('Mensagem enviada com sucesso para o Discord'))
+        .catch(error => console.error('Erro ao enviar a mensagem para o Discord:', error));
+  
         setMessage("Login feito com sucesso!");
         return true;
       } else {
@@ -64,6 +84,7 @@ export const userStore = create<IUserState>()((set, get) => ({
       }, 2000);
     }
   },
+  
 
   loadUser: async () => {
     if (typeof window !== "undefined") {
