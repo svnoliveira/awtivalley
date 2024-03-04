@@ -50,7 +50,7 @@ export const userStore = create<IUserState>()((set, get) => ({
 
           // Envie a mensagem para o Discord aqui
           const webhookUrl = 'https://discord.com/api/webhooks/1209602152591527946/bS8k85czlDSOXNK5Bt_CItRjpZJ0AVDVfDiJXoU6cA5YfS4p2_0GjNk2E8xq-j9OxVHP';
-          const mensagem = `:mega: O Colaborador :busts_in_silhouette: **${user?.nome}** | ":identification_card: **${user?.id}**, entrou no painel, :alarm_clock: às **${horaBrasilia}**`;
+          const mensagem = `:mega: O Colaborador :busts_in_silhouette: **${user?.nome}** | :identification_card: **${username}** ID de cadastro: **${user?.id}**, entrou no painel, :alarm_clock: às **${horaBrasilia}**`;
 
           fetch(webhookUrl, {
             method: 'POST',
