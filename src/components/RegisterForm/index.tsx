@@ -50,42 +50,42 @@ export const RegisterForm = () => {
           width={300}
           height={500}
         ></Image>
-        <span>Cadastrar novo colaborador</span>
+        <span>Cadastrar novo Colaborador</span>
         <div>
           <FormInput
             type="text"
             register={register("nome")}
             error={errors.nome}
           >
-            Digite seu nome
+            Digite o Nome do Colaborador
           </FormInput>
           <FormInput
             type="text"
             register={register("passaporte")}
             error={errors.passaporte}
           >
-            Digite seu Passaporte
+            Digite o Passaporte do Colaborador
           </FormInput>
           <FormInput
             type="text"
             register={register("discord_id")}
             error={errors.discord_id}
           >
-            Digite o ID do seu Discord
+            Digite o ID do Discord do Colaborador
           </FormInput>
           <FormInput
             type="password"
             register={register("senha")}
             error={errors.senha}
           >
-            Digite sua senha
+            Digite a senha padrão
           </FormInput>
           <FormInput
             type="password"
             register={register("confirmPassword")}
             error={errors.confirmPassword}
           >
-            Confirme sua Senha
+            Confirme a senha padrão
           </FormInput>
         </div>
         <StyledSubmitButton $error={checkError()} type="submit">

@@ -19,7 +19,7 @@ export const HomeHero = () => {
             <HomeMenuCard iconUrl="/icons/ponto.svg">Registro de Ponto</HomeMenuCard>
           </Link></li>}
           {user && <li><Link href={"/indicadores"}>
-            <HomeMenuCard iconUrl="/icons/indicadores.svg">Indicadores</HomeMenuCard>
+            <HomeMenuCard iconUrl="/icons/indicadores.svg">Histórico de Registros</HomeMenuCard>
           </Link></li>}
           {user && <li><Link href={"/dashboard"}>
             <HomeMenuCard iconUrl="/icons/person.svg">Colaborador</HomeMenuCard>

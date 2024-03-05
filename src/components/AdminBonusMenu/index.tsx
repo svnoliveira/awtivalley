@@ -27,23 +27,26 @@ export const AdminBonusMenu = () => {
           testingData <= adminActivePeriod!.end
         );
       });
+
       const horas = totalHoras(
         registros,
         adminActivePeriod!.start,
         adminActivePeriod!.end
-        );
-        
-        if (bonusLimit === 0){
-          return horas > 0;
-        } else if(bonusLimit === 18000){
-          return horas > 18000 && horas < 25200;
-        } else if(bonusLimit === 25200){
-        return horas > 25200 && horas < 36000;
+      );
+      if (bonusLimit === 0){
+        return horas > 0; // Mostrar todos os usuários com horas registradas
+      } else if (bonusLimit === 18000) {
+        return horas >= 18000 && horas < 25200; // Mostrar usuários com 50% das horas (18000-25199)
+      } else if (bonusLimit === 25200) {
+        return horas >= 25200 && horas < 36000; // Mostrar usuários com 75% das horas (25200-35999)
+      } else if (bonusLimit === 36000) {
+        return horas >= 36000; // Mostrar usuários com 100% das horas (36000 ou mais)
       } else {
-        return horas >= 36000;
+        return false; // Retornar false para qualquer outro valor de bonusLimit
       }
     });
   };
+
   return (
     <StyledSection>
       {!adminActivePeriod && (
