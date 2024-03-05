@@ -27,13 +27,12 @@ export const AdminBonusMenu = () => {
           testingData <= adminActivePeriod!.end
         );
       });
-  
+
       const horas = totalHoras(
         registros,
         adminActivePeriod!.start,
         adminActivePeriod!.end
       );
-      
       if (bonusLimit === 0){
         return horas > 0; // Mostrar todos os usuários com horas registradas
       } else if (bonusLimit === 18000) {
@@ -47,7 +46,7 @@ export const AdminBonusMenu = () => {
       }
     });
   };
-  
+
   return (
     <StyledSection>
       {!adminActivePeriod && (
@@ -81,8 +80,15 @@ export const AdminBonusMenu = () => {
                     <td>{user.nome}</td>
                     <td>{user.passaporte}</td>
                     <td>
-                      {getTimeFromSeconds(
-                        getTotalSeconds(user.registros_de_ponto)
+                      {
+                      getTimeFromSeconds(
+                        getTotalSeconds(user.registros_de_ponto.filter((ponto) => {
+                          const testingData = new Date(ponto.entrada);
+                          return (
+                            testingData >= adminActivePeriod!.start &&
+                            testingData <= adminActivePeriod!.end
+                          );
+                       }))
                       )}
                     </td>
                   </tr>
