@@ -39,7 +39,7 @@ export const Footer = () => {
             } else {
                 setIndex(0);
             }
-        }, 3000); // Run the loop every 3 seconds
+        }, 7000); // Run the loop every 3 seconds
 
         return () => clearInterval(interval); // Clear the interval when the component unmounts
     }, [index, mensagens]);
