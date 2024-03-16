@@ -60,4 +60,5 @@ export interface IUserState {
     }) => Promise<true | undefined>
     loadUser: () => Promise<void>
     registerUser: (userData:IUserCreate) => Promise<boolean | undefined>
+    changePassword: (token:string, user:IUser, senha:string) => Promise<boolean | undefined>
 }

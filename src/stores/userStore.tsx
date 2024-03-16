@@ -144,4 +144,26 @@ export const userStore = create<IUserState>()((set, get) => ({
       }, 2000);
     }
   },
+
+  changePassword: async (token, user, senha) => {
+    try {
+      set({ loading: true});
+      await api.patch<IUser>(`/users/${user.id}/`, {senha}, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setMessage("Senha alterada com sucesso!");
+      return true;
+    } catch (error) {
+      console.log(error);
+      setError("Alteração falhou");
+    } finally {
+      set({ loading: false });
+      setTimeout(() => {
+        setError("");
+        setMessage("");
+      }, 2000);
+    }
+  }
 }));
