@@ -19,7 +19,8 @@ interface IAdminUserModalProps {
 
 export const AdminUserModal = ({user}:IAdminUserModalProps) => {
   const [modalOpen, setModalOpen] = useState<IUser | false>(false);
-  const { loading, editUser } = userStore((state) => state);
+  const [loading, setLoading] = useState(false);
+  const { editUser } = userStore((state) => state);
   const token = userStore((state) => state.userData?.accessToken);
 
   const {
@@ -32,7 +33,9 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
 
   const parseRegisterData = async (userData: TEditUserValues) => {
     userData = removeEmptyStringKeys(userData);
+    setLoading(true);
     const success = await editUser(token!, user.id, userData);
+    setLoading(false);
     success && setModalOpen(false);
   };
   return (

@@ -21,4 +21,5 @@ export interface IRegistroDePontoState{
     setLoading: (boolean: boolean) => void;
     addPonto: (pontoData: IRegistroDePontoCreate, userId: number) => 
     Promise<boolean | IRegistroDePonto>
+    deletePonto: (id:number, token: string) => Promise<boolean | void>
 }
