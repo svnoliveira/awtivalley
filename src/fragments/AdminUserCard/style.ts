@@ -7,22 +7,22 @@ export const StyledUserCard = styled.li`
     background-color: #f6f6f6;
     padding: 10px;
     border-radius: 15px;
-    transition: 0.8s ease-in-out;
+    transition: 0.2s ease-in-out;
     height: 560px;
     overflow-y: auto;
-    cursor: pointer;
     h3{
       font-size: 14px;
       color: var(--grey);
     }
-    &:hover{
-        background-color: var(--grey);
-        min-height: 560px;
-        height: auto;
-        overflow-y: none;
-        h1, h3{
-        color: white;
+    >div {
+      display: flex;
+      justify-content: space-between;
     }
+    &:hover{
+      min-height: 560px;
+      height: auto;
+      overflow-y: none;
+      transform: scale(1.02);
     }
 `
 

@@ -88,3 +88,13 @@ export const checkUserRole = ( user:IUser | undefined ) => {
     return false;
   }
 }
+
+export const removeEmptyStringKeys = (obj: Record<string, string>): Record<string, string> => {
+  const result: Record<string, string> = {};
+  for (const key in obj) {
+      if (obj.hasOwnProperty(key) && obj[key] !== "") {
+          result[key] = obj[key];
+      }
+  }
+  return result;
+}

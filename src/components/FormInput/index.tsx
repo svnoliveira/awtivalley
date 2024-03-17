@@ -37,6 +37,28 @@ export const FormInput = ({
         return "Saída";
       case "justificativa":
         return "Justificativa";
+      case "cargo":
+        return "Cargo";
+      case "setor":
+        return "Setor";
+      case "efetivacao":
+        return "Data de Efetivação";
+      case "funcao":
+        return "Função";
+      case "funcoes_extra":
+        return "Funções extra";
+      case "ultima_promocao":
+        return "Última promoção";
+      case "observacoes":
+        return "Observações";
+      case "ciclo":
+        return "Licença médica: ciclo";
+      case "data":
+        return "Licença médica: data de expedição";
+      case "responsavel":
+        return "Licença médica: responsável";
+      case "crm":
+        return "Licença médica: CRM";
       default:
         return "to be determined";
     }
