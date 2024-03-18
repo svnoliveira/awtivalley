@@ -5,7 +5,7 @@ export const StyledSection = styled.section`
   height: 100vh;
   width: 100vw;
   background: transparent;
-  z-index: 2;
+  z-index: 30;
   display: flex;
   align-items: flex-start;
   text-align: center;

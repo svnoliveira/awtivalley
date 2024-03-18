@@ -1,3 +1,4 @@
+import { TEditUserValues } from "@/components/AdminUserModal/schema";
 import { ICurso } from "./@cursoTypes";
 import { IEspecialidade } from "./@especialidadeTypes";
 import { IRegistroDePonto } from "./@registroDePontoTypes";
@@ -60,4 +61,6 @@ export interface IUserState {
     }) => Promise<true | undefined>
     loadUser: () => Promise<void>
     registerUser: (userData:IUserCreate) => Promise<boolean | undefined>
+    changePassword: (token:string, user:IUser, senha:string) => Promise<boolean | undefined>
+    editUser: (token:string, id:number, userData:TEditUserValues) => Promise<boolean | undefined>
 }

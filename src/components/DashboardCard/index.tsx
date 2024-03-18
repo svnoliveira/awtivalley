@@ -8,6 +8,7 @@ import {
 import { useState } from "react";
 import { MenuNav } from "@/globalStyles/MenuNav/style";
 import { MenuButton } from "@/globalStyles/MenuButton/style";
+import { DashboardPasswordRecovery } from "../DashboardPasswordRecovery";
 
 export const DashboardCard = () => {
   const user = userStore((state) => state.userData?.user);
@@ -48,6 +49,8 @@ export const DashboardCard = () => {
       </MenuNav>
       <StyledContainer>
         {menu == "pessoal" && (
+          <>
+          <DashboardPasswordRecovery />
           <InfoCard>
             <li>
               <span>Nome: </span>
@@ -90,6 +93,7 @@ export const DashboardCard = () => {
               <span>{user?.observacoes}</span>
             </li>
           </InfoCard>
+          </>
         )}
         {menu == "licença" && (
           <InfoCard>

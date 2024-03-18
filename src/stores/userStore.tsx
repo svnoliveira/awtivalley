@@ -1,8 +1,9 @@
 import { create } from "zustand";
-import { IUser, IUserState, TToken } from "./@userTypes";
+import { ILicencaMedica, IUser, IUserState, TToken } from "./@userTypes";
 import { api } from "@/app/api";
 import { jwtDecode } from "jwt-decode";
 import { adminStore } from "./adminStore";
+import { AxiosError } from "axios";
 
 const setError = adminStore.getState().setError;
 const setMessage = adminStore.getState().setMessage;
@@ -45,24 +46,24 @@ export const userStore = create<IUserState>()((set, get) => ({
         };
         set({ userData: new_userData });
   
-          // Adicione a hora de Brasília à mensagem
-          const horaBrasilia = DateTime.local().setZone('America/Sao_Paulo').toLocaleString(DateTime.TIME_24_SIMPLE) + ' ' + DateTime.local().setZone('America/Sao_Paulo').toFormat('dd/MM/yyyy');
+          // // Adicione a hora de Brasília à mensagem
+          // const horaBrasilia = DateTime.local().setZone('America/Sao_Paulo').toLocaleString(DateTime.TIME_24_SIMPLE) + ' ' + DateTime.local().setZone('America/Sao_Paulo').toFormat('dd/MM/yyyy');
 
-          // Envie a mensagem para o Discord aqui
-          const webhookUrl = 'https://discord.com/api/webhooks/1209602152591527946/bS8k85czlDSOXNK5Bt_CItRjpZJ0AVDVfDiJXoU6cA5YfS4p2_0GjNk2E8xq-j9OxVHP';
-          const mensagem = `:mega: O Colaborador :busts_in_silhouette: **${user?.nome}** | :identification_card: **${username}** ID de cadastro: **${user?.id}**, entrou no painel, :alarm_clock: às **${horaBrasilia}**`;
+          // // Envie a mensagem para o Discord aqui
+          // const webhookUrl = 'https://discord.com/api/webhooks/1209602152591527946/bS8k85czlDSOXNK5Bt_CItRjpZJ0AVDVfDiJXoU6cA5YfS4p2_0GjNk2E8xq-j9OxVHP';
+          // const mensagem = `:mega: O Colaborador :busts_in_silhouette: **${user?.nome}** | :identification_card: **${username}** ID de cadastro: **${user?.id}**, entrou no painel, :alarm_clock: às **${horaBrasilia}**`;
 
-          fetch(webhookUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              content: mensagem,
-            }),
-          })
-          .then(response => console.log('Mensagem enviada com sucesso para o Discord'))
-          .catch(error => console.error('Erro ao enviar a mensagem para o Discord:', error));
+          // fetch(webhookUrl, {
+          //   method: 'POST',
+          //   headers: {
+          //     'Content-Type': 'application/json',
+          //   },
+          //   body: JSON.stringify({
+          //     content: mensagem,
+          //   }),
+          // })
+          // .then(response => console.log('Mensagem enviada com sucesso para o Discord'))
+          // .catch(error => console.error('Erro ao enviar a mensagem para o Discord:', error));
             
         setMessage("Login feito com sucesso!");
         return true;
@@ -144,4 +145,78 @@ export const userStore = create<IUserState>()((set, get) => ({
       }, 2000);
     }
   },
+
+  changePassword: async (token, user, senha) => {
+    try {
+      set({ loading: true});
+      await api.patch<IUser>(`/users/${user.id}/`, {senha}, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setMessage("Senha alterada com sucesso!");
+      return true;
+    } catch (error) {
+      console.log(error);
+      setError("Alteração falhou");
+      return false;
+    } finally {
+      set({ loading: false });
+      setTimeout(() => {
+        setError("");
+        setMessage("");
+      }, 2000);
+    }
+  },
+
+  editUser: async (token, id, userData) => {
+    try {
+      const licenca_medica: ILicencaMedica = {};
+      if ("ciclo" in userData) {
+        licenca_medica.ciclo = userData.ciclo;
+        delete userData.ciclo;
+      }
+      if ("data" in userData) {
+        licenca_medica.data = userData.data;
+        delete userData.data;
+      }
+      if ("responsavel" in userData) {
+        licenca_medica.responsavel = userData.responsavel;
+        delete userData.responsavel;
+      }
+      if ("crm" in userData) {
+        licenca_medica.crm = userData.crm;
+        delete userData.crm;
+      }
+
+      const { data } = await api.patch<IUser>(`/users/${id}/`, {
+        ...userData, ativo: userData.ativo === "true" ? true : false,
+        licenca_medica: {...licenca_medica}
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      if (data) {
+        set((state) => ({userList : state.userList.map((user) => {
+          if (user.id === id){
+            return data;
+          } else {
+            return user;
+          }
+        })}) );
+        setMessage("Usuário alterado com sucesso!");
+        return true;
+      };
+    } catch (error) {
+      console.log(error);
+      setError("Alteração falhou");
+      return false;
+    } finally {
+      setTimeout(() => {
+        setError("");
+        setMessage("");
+      }, 2000);
+    }
+  }
 }));

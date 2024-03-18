@@ -7,6 +7,7 @@ import { getTimeFromSeconds, sortByEntrada, totalHoras } from "@/utils/operation
 import { AdminDateSelector } from "../AdminDateSelector"
 import { StyledTable, ThTitleRow } from "@/globalStyles/StyledTable/style"
 import { StyledSection } from "./style"
+import { AdminPontosModal } from "../AdminPontosModal"
 
 
 export const AdminPontosMenu = () => {
@@ -19,6 +20,7 @@ export const AdminPontosMenu = () => {
 
   return (
     <StyledSection>
+
       <AdminDateSelector />
       <StyledTable>
         <thead>
@@ -29,6 +31,7 @@ export const AdminPontosMenu = () => {
           <ThTitleRow>Entrada</ThTitleRow>
           <ThTitleRow>Saída</ThTitleRow>
           <ThTitleRow>Horas</ThTitleRow>
+          <ThTitleRow>Ação</ThTitleRow>
           </tr>
         </thead>
         <tbody>
@@ -48,6 +51,7 @@ export const AdminPontosMenu = () => {
                       <td>{new Date(ponto.entrada).toLocaleString('pt-br')}</td>
                       <td>{new Date(ponto.saida).toLocaleString('pt-br')}</td>
                       <td>{ponto.horas}</td>
+                      <td><AdminPontosModal ponto={ponto}/></td>
                     </tr>
                   ))}
               </> :
@@ -59,6 +63,7 @@ export const AdminPontosMenu = () => {
                     <td>{new Date(ponto.entrada).toLocaleString('pt-br')}</td>
                     <td>{new Date(ponto.saida).toLocaleString('pt-br')}</td>
                     <td>{ponto.horas}</td>
+                    <td><AdminPontosModal ponto={ponto}/></td>
                   </tr>
                 )}
               </>
@@ -75,6 +80,7 @@ export const AdminPontosMenu = () => {
                       <td>{new Date(ponto.entrada).toLocaleString('pt-br')}</td>
                       <td>{new Date(ponto.saida).toLocaleString('pt-br')}</td>
                       <td>{ponto.horas}</td>
+                      <td><AdminPontosModal ponto={ponto}/></td>
                     </tr>
                   }
                 }
@@ -89,6 +95,7 @@ export const AdminPontosMenu = () => {
                     <td>{new Date(ponto.entrada).toLocaleString('pt-br')}</td>
                     <td>{new Date(ponto.saida).toLocaleString('pt-br')}</td>
                     <td>{ponto.horas}</td>
+                    <td><AdminPontosModal ponto={ponto}/></td>
                   </tr>
                 ))}
               </>}

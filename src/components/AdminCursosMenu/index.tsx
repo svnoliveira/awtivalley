@@ -9,6 +9,7 @@ import { AdminNavButton } from "@/globalStyles/AdminNavButton/style";
 import { StyledTable, ThCellHeader, ThTitleRow } from "@/globalStyles/StyledTable/style";
 import { StyledSubmitButton } from "@/globalStyles/SubmitButton";
 import { StyledSection } from "./style";
+import { AdminCursosModal } from "../AdminCursosModal";
 
 export const AdminCursosMenu = () => {
   const userList = userStore((state) => state.userList);
@@ -22,6 +23,7 @@ export const AdminCursosMenu = () => {
   );
   return (
     <StyledSection>
+      <AdminCursosModal />
       <AdminNav>
         {cursoList &&
           cursoList.map((curso) => (
