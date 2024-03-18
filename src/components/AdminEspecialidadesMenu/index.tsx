@@ -9,6 +9,7 @@ import { AdminNavButton } from "@/globalStyles/AdminNavButton/style";
 import { StyledTable, ThCellHeader, ThTitleRow } from "@/globalStyles/StyledTable/style";
 import { StyledSubmitButton } from "@/globalStyles/SubmitButton";
 import { StyledSection } from "./style";
+import { AdminEspecialidadesModal } from "../AdminEspecialidadesModal";
 
 export const AdminEspecialidadesMenu = () => {
   const userList = userStore((state) => state.userList);
@@ -22,6 +23,7 @@ export const AdminEspecialidadesMenu = () => {
   );
   return (
     <StyledSection>
+      <AdminEspecialidadesModal />
       <AdminNav>
         {especialidadeList &&
           especialidadeList.map((especialidade) => (
