@@ -46,24 +46,24 @@ export const userStore = create<IUserState>()((set, get) => ({
         };
         set({ userData: new_userData });
   
-          // // Adicione a hora de Brasília à mensagem
-          // const horaBrasilia = DateTime.local().setZone('America/Sao_Paulo').toLocaleString(DateTime.TIME_24_SIMPLE) + ' ' + DateTime.local().setZone('America/Sao_Paulo').toFormat('dd/MM/yyyy');
+          // Adicione a hora de Brasília à mensagem
+          const horaBrasilia = DateTime.local().setZone('America/Sao_Paulo').toLocaleString(DateTime.TIME_24_SIMPLE) + ' ' + DateTime.local().setZone('America/Sao_Paulo').toFormat('dd/MM/yyyy');
 
-          // // Envie a mensagem para o Discord aqui
-          // const webhookUrl = 'https://discord.com/api/webhooks/1209602152591527946/bS8k85czlDSOXNK5Bt_CItRjpZJ0AVDVfDiJXoU6cA5YfS4p2_0GjNk2E8xq-j9OxVHP';
-          // const mensagem = `:mega: O Colaborador :busts_in_silhouette: **${user?.nome}** | :identification_card: **${username}** ID de cadastro: **${user?.id}**, entrou no painel, :alarm_clock: às **${horaBrasilia}**`;
+          // Envie a mensagem para o Discord aqui
+          const webhookUrl = 'https://discord.com/api/webhooks/1209602152591527946/bS8k85czlDSOXNK5Bt_CItRjpZJ0AVDVfDiJXoU6cA5YfS4p2_0GjNk2E8xq-j9OxVHP';
+          const mensagem = `:mega: O Colaborador :busts_in_silhouette: **${user?.nome}** | :identification_card: **${username}** ID de cadastro: **${user?.id}**, entrou no painel, :alarm_clock: às **${horaBrasilia}**`;
 
-          // fetch(webhookUrl, {
-          //   method: 'POST',
-          //   headers: {
-          //     'Content-Type': 'application/json',
-          //   },
-          //   body: JSON.stringify({
-          //     content: mensagem,
-          //   }),
-          // })
-          // .then(response => console.log('Mensagem enviada com sucesso para o Discord'))
-          // .catch(error => console.error('Erro ao enviar a mensagem para o Discord:', error));
+          fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              content: mensagem,
+            }),
+          })
+          .then(response => console.log('Mensagem enviada com sucesso para o Discord'))
+          .catch(error => console.error('Erro ao enviar a mensagem para o Discord:', error));
             
         setMessage("Login feito com sucesso!");
         return true;
