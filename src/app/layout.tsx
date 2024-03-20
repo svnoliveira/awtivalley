@@ -3,9 +3,9 @@ import { Footer } from "@/components/Footer";
 import { SideMenu } from "@/components/SideMenu";
 import StyledComponentsRegistry from "@/lib/registry";
 import { Message } from "@/fragments/Message";
-import { Raleway } from "next/font/google"
+// import { Raleway } from "next/font/google"
 
-const raleway = Raleway({subsets: ['latin']});
+// const raleway = Raleway({subsets: ['latin']});
 
 export const metadata: Metadata = {
   title: "AWTI VALEY",
@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className={raleway.className}>
+      <body>
         <StyledComponentsRegistry>
           <Message />
           <SideMenu />
