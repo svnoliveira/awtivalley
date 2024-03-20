@@ -8,8 +8,8 @@ import { Message } from "@/fragments/Message";
 // const raleway = Raleway({subsets: ['latin']});
 
 export const metadata: Metadata = {
-  title: "AWTI VALEY",
-  description: "Página de gerenciamento de funcionários AWTI Valley",
+  title: "CMA - CDA",
+  description: "Página de gerenciamento de funcionários Centro Médico AWTI - Capital",
 };
 
 export default function RootLayout({
