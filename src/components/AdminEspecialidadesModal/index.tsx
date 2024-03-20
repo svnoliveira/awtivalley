@@ -1,6 +1,6 @@
 import { Loading } from "@/fragments/Loading";
 import { adminStore } from "@/stores/adminStore";
-import { cursoStore } from "@/stores/cursoStore";
+import { especialidadeStore } from "@/stores/especialidadeStore";
 import { userStore } from "@/stores/userStore";
 import { useState } from "react";
 import { StyledButton, StyledButtonsContainer, StyledModal, StyledX } from "./style";
@@ -9,20 +9,20 @@ type TModal = {
   mode: "closed" | "create" | "edit" | "delete";
 };
 
-export const AdminCursosModal = () => {
+export const AdminEspecialidadesModal = () => {
   const [modal, setModal] = useState<TModal>({ mode: "closed" });
   const [input, setInput] = useState<string>('');
   const [select, setSelect] = useState<string>('');
   const error = adminStore((state) => state.setError);
   const token = userStore((state) => state.userData?.accessToken);
-  const { loading, cursoList, registerCurso, editCurso, deleteCurso } = cursoStore((state) => state);
+  const { loading, especialidadeList, registerEspecialidade, editEspecialidade, deleteEspecialidade } = especialidadeStore((state) => state);
 
   const handleCreateClick = async () => {
     if (input.length < 3) {
       error('Precisa conter ao menos 3 caracteres');
       return;
     }
-    const success = await registerCurso(token!, input);
+    const success = await registerEspecialidade(token!, input);
     if (success) {
       setInput('');
       setModal({ mode: "closed" });
@@ -34,10 +34,10 @@ export const AdminCursosModal = () => {
       return;
     }
     if (select.length === 0) {
-      error('Escolha um curso');
+      error('Escolha um especialidade');
       return;
     }
-    const success = await editCurso(token!, input, Number(select));
+    const success = await editEspecialidade(token!, input, Number(select));
     if (success){
       setInput('');
       setSelect('');
@@ -46,10 +46,10 @@ export const AdminCursosModal = () => {
   };
   const handleDeleteClick = async () => {
     if (select.length === 0) {
-      error('Escolha um curso');
+      error('Escolha um especialidade');
       return;
     }
-    const success = await deleteCurso(token!, Number(select));
+    const success = await deleteEspecialidade(token!, Number(select));
     if (success) {
       setSelect('');
       setModal({ mode: "closed" });
@@ -60,13 +60,13 @@ export const AdminCursosModal = () => {
     <>
       <StyledButtonsContainer>
         <button onClick={() => setModal({ mode: "create" })}>
-          Criar Curso
+          Criar Especialidade
         </button>
         <button onClick={() => setModal({ mode: "edit" })}>
-          Renomear Curso
+          Renomear Especialidade
         </button>
         <button onClick={() => setModal({ mode: "delete" })}>
-          Excluir Curso
+          Excluir Especialidade
         </button>
       </StyledButtonsContainer>
       {modal.mode !== 'closed' && 
@@ -84,8 +84,8 @@ export const AdminCursosModal = () => {
                   >
                     X
                   </StyledX>
-                  <h1>Criar novo curso</h1>
-                  <input type="text" placeholder="Digite o nome do curso" 
+                  <h1>Criar novo especialidade</h1>
+                  <input type="text" placeholder="Digite o nome do especialidade" 
                   value={input} onChange={(e) => setInput(e.target.value)}/>
                   <StyledButton type="submit">Criar</StyledButton>
                 </form>
@@ -98,13 +98,13 @@ export const AdminCursosModal = () => {
                   >
                     X
                   </StyledX>
-                  <h1>Renomear Curso</h1>
-                  <select name="curso-select" id="curso-select"
+                  <h1>Renomear Especialidade</h1>
+                  <select name="especialidade-select" id="especialidade-select"
                   value={select} onChange={(e) => setSelect(e.target.value)}>
-                    <option value="">Escolha um curso</option>
-                    {cursoList.map((curso) => <option key={curso.id} value={curso.id}>{curso.nome}</option>)}
+                    <option value="">Escolha um especialidade</option>
+                    {especialidadeList.map((especialidade) => <option key={especialidade.id} value={especialidade.id}>{especialidade.nome}</option>)}
                   </select>
-                  <input type="text" placeholder="Digite o novo nome do curso" 
+                  <input type="text" placeholder="Digite o novo nome do especialidade" 
                   value={input} onChange={(e) => setInput(e.target.value)}/>
                   <StyledButton type="submit">Editar</StyledButton>
                 </form>
@@ -117,11 +117,11 @@ export const AdminCursosModal = () => {
                   >
                     X
                   </StyledX>
-                  <h1>Deletar curso</h1>
-                  <select name="curso-select" id="curso-select"
+                  <h1>Deletar especialidade</h1>
+                  <select name="especialidade-select" id="especialidade-select"
                   value={select} onChange={(e) => setSelect(e.target.value)}>
-                    <option value="">Escolha um curso</option>
-                    {cursoList.map((curso) => <option key={curso.id} value={curso.id}>{curso.nome}</option>)}
+                    <option value="">Escolha um especialidade</option>
+                    {especialidadeList.map((especialidade) => <option key={especialidade.id} value={especialidade.id}>{especialidade.nome}</option>)}
                   </select>
                   <StyledButton type="submit">Deletar</StyledButton>
                 </form>

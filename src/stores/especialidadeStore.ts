@@ -80,4 +80,91 @@ export const especialidadeStore = create<IEspecialidadeState>()((set, get) => ({
       }, 2000);
     };
   },
+
+  registerEspecialidade: async (token, especialidade) => {
+    try {
+      set({ loading: true });
+      const { data } = await api.post<IEspecialidade>(
+        "/especialidades/",
+        { nome: especialidade },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      set((state) => ({ especialidadeList: [...state.especialidadeList, data] }));
+      setMessage("Especialidade criado com sucesso");
+      return true;
+    } catch (error) {
+      setError("Falha ao criar especialidade");
+      console.log(error);
+      return false;
+    } finally {
+      set({ loading: false });
+      setTimeout(() => {
+        setError("");
+        setMessage("");
+      }, 2000);
+    }
+  },
+  editEspecialidade: async (token, especialidade, id) => {
+    try {
+      set({ loading: true });
+      const { data } = await api.patch<IEspecialidade>(
+        `/especialidades/${id}/`,
+        { nome: especialidade },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      set((state) => ({
+        especialidadeList: state.especialidadeList.map((oldEspecialidade) => {
+          if (oldEspecialidade.id === id) {
+            return data;
+          }
+          return oldEspecialidade;
+        }),
+      }));
+      setMessage("Especialidade renomeado com sucesso");
+      return true;
+    } catch (error) {
+      setError("Falha ao renomear especialidade");
+      console.log(error);
+      return false;
+    } finally {
+      set({ loading: false });
+      setTimeout(() => {
+        setError("");
+        setMessage("");
+      }, 2000);
+    }
+  },
+  deleteEspecialidade: async (token, id) => {
+    try {
+      set({ loading: true });
+      await api.delete<IEspecialidade>(`/especialidades/${id}/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      set((state) => ({
+        especialidadeList: state.especialidadeList.filter((oldEspecialidade) => oldEspecialidade.id !== id),
+      }));
+      setMessage("Especialidade deletado com sucesso");
+      return true;
+    } catch (error) {
+      setError("Falha ao deletar especialidade");
+      console.log(error);
+      return false;
+    } finally {
+      set({ loading: false });
+      setTimeout(() => {
+        setError("");
+        setMessage("");
+      }, 2000);
+    }
+  },
 }))

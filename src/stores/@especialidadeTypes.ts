@@ -21,4 +21,11 @@ export interface IEspecialidadeState{
         especialidade: IEspecialidade,
         user: IUser
     ) => Promise<void>
+    registerEspecialidade: (token: string, especialidade: string) => Promise<boolean | void>;
+  editEspecialidade: (
+    token: string,
+    especialidade: string,
+    id: number
+  ) => Promise<boolean | void>;
+    deleteEspecialidade: (token: string, id: number) => Promise<boolean | void>;
 }
