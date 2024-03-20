@@ -5,6 +5,7 @@ import {
 } from "./@registroDePontoTypes";
 import { api } from "@/app/api";
 import { adminStore } from "./adminStore";
+import { isSameDay, setTimeTo } from "@/utils/operations";
 
 const setError = adminStore.getState().setError;
 const setMessage = adminStore.getState().setMessage;
@@ -14,7 +15,7 @@ const setAdminActiveUser = adminStore.getState().setAdminActiveUser;
 export const registroStore = create<IRegistroDePontoState>()((set, get) => ({
   pontoList: [],
   loading: false,
-  indicadorMenu: "semanal",
+  indicadorMenu: 'semanal',
   setIndicadorMenu: (option) => {
     set({ indicadorMenu: option });
   },
@@ -54,20 +55,59 @@ export const registroStore = create<IRegistroDePontoState>()((set, get) => ({
       ) {
         throw new Error("Ponto duplicado");
       }
-      const { data } = await api.post<IRegistroDePonto>(
-        `/registro-de-ponto/user/${userId}/`,
-        {
-          ...pontoData,
-        }
-      );
-      set((state) => {
-        const pontoList = state.pontoList;
-        return {
-          pontoList: [...pontoList, data],
-        };
-      });
-      setMessage("Ponto Registrado com sucesso!");
-      return data;
+
+      if (isSameDay(pontoData.entrada, pontoData.saida)) {
+        const { data } = await api.post<IRegistroDePonto>(
+          `/registro-de-ponto/user/${userId}/`,
+          {
+            ...pontoData,
+          }
+        );
+        set((state) => {
+          const pontoList = state.pontoList;
+          return {
+            pontoList: [...pontoList, data],
+          };
+        });
+        setMessage("Ponto Registrado com sucesso!");
+        return data;
+      } else {
+        const firstEntrada = pontoData.entrada;
+        const firstSaida = setTimeTo(pontoData.entrada, '23:59:59');
+        const secondEntrada = setTimeTo(pontoData.saida, '00:00:00');
+        const secondSaida = pontoData.saida;
+        //primeira requisição
+        const firstPonto = await api.post<IRegistroDePonto>(
+          `/registro-de-ponto/user/${userId}/`,
+          {
+            entrada: firstEntrada,
+            saida: firstSaida
+          }
+        );
+        set((state) => {
+          const pontoList = state.pontoList;
+          return {
+            pontoList: [...pontoList, firstPonto.data],
+          };
+        });
+        //segunda requisição
+        const secondPonto = await api.post<IRegistroDePonto>(
+          `/registro-de-ponto/user/${userId}/`,
+          {
+            entrada: secondEntrada,
+            saida: secondSaida
+          }
+        );
+        set((state) => {
+          const pontoList = state.pontoList;
+          return {
+            pontoList: [...pontoList, secondPonto.data],
+          };
+        });
+        setMessage("Ponto Registrado com sucesso!");
+        return true;
+      }
+      
     } catch (error: any) {
       console.log(error.message);
       console.log(error);

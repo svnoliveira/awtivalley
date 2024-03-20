@@ -98,3 +98,22 @@ export const removeEmptyStringKeys = (obj: Record<string, string>): Record<strin
   }
   return result;
 }
+
+export type TTimeType = '23:59:59' | '00:00:00';
+
+export const setTimeTo =(dateString:string, time:TTimeType) => {
+  // Split the date and time parts
+  const parts = dateString.split(' ');
+  // Replace the time part with "23:59:59" or "00:00:00"
+  const resultString = parts[0] + ` ${time}` + dateString.slice(-6);
+  return resultString;
+}
+
+export const isSameDay = (startDateString:string, endDateString:string) => {
+  const startParts = startDateString.split(' ');
+  const start = parseInt(startParts[0].split('-')[2], 10);
+  const endParts = endDateString.split(' ');
+  const end = parseInt(endParts[0].split('-')[2], 10);
+
+  return start === end;
+}
