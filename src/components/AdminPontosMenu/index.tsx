@@ -1,5 +1,3 @@
-'use client'
-
 import { adminStore } from "@/stores/adminStore"
 import { registroStore } from "@/stores/registroDePonto"
 import { userStore } from "@/stores/userStore"
@@ -9,29 +7,25 @@ import { StyledTable, ThTitleRow } from "@/globalStyles/StyledTable/style"
 import { StyledSection } from "./style"
 import { AdminPontosModal } from "../AdminPontosModal"
 
-
 export const AdminPontosMenu = () => {
   const userList = userStore((state) => state.userList);
   const { pontoList } = registroStore((state) => state);
-  const {
-    adminActiveUser,
-    adminActivePeriod
-  } = adminStore((state) => state)
+  const { adminActiveUser, adminActivePeriod } = adminStore((state) => state);
 
   return (
     <StyledSection>
-
       <AdminDateSelector />
       <StyledTable>
         <thead>
-        {adminActiveUser && adminActivePeriod && <tr><td colSpan={3}><b>Total de Horas</b></td><td>{getTimeFromSeconds(totalHoras(adminActiveUser.registros_de_ponto, adminActivePeriod.start, adminActivePeriod.end))}</td></tr>}
+          {adminActiveUser && adminActivePeriod && <tr><td colSpan={4}><b>Total de Horas</b></td><td>{getTimeFromSeconds(totalHoras(adminActiveUser.registros_de_ponto, adminActivePeriod.start, adminActivePeriod.end))}</td></tr>}
           <tr>
-          <ThTitleRow>Colaborador</ThTitleRow>
-          <ThTitleRow>Passaporte</ThTitleRow>
-          <ThTitleRow>Entrada</ThTitleRow>
-          <ThTitleRow>Saída</ThTitleRow>
-          <ThTitleRow>Horas</ThTitleRow>
-          <ThTitleRow>Ação</ThTitleRow>
+            <ThTitleRow>Colaborador</ThTitleRow>
+            <ThTitleRow>Passaporte</ThTitleRow>
+            <ThTitleRow>Entrada</ThTitleRow>
+            <ThTitleRow>Saída</ThTitleRow>
+            <ThTitleRow>Justificativa</ThTitleRow> {/* Nova coluna */}
+            <ThTitleRow>Horas</ThTitleRow>
+            <ThTitleRow>Ação</ThTitleRow>
           </tr>
         </thead>
         <tbody>
@@ -50,6 +44,7 @@ export const AdminPontosMenu = () => {
                       <td>{adminActiveUser.passaporte}</td>
                       <td>{new Date(ponto.entrada).toLocaleString('pt-br')}</td>
                       <td>{new Date(ponto.saida).toLocaleString('pt-br')}</td>
+                      <td>{ponto.justificativa || '-'}</td> {/* Exibir justificativa ou '-' se não houver */}
                       <td>{ponto.horas}</td>
                       <td><AdminPontosModal ponto={ponto}/></td>
                     </tr>
@@ -62,6 +57,7 @@ export const AdminPontosMenu = () => {
                     <td>{adminActiveUser.passaporte}</td>
                     <td>{new Date(ponto.entrada).toLocaleString('pt-br')}</td>
                     <td>{new Date(ponto.saida).toLocaleString('pt-br')}</td>
+                    <td>{ponto.justificativa || '-'}</td> {/* Exibir justificativa ou '-' se não houver */}
                     <td>{ponto.horas}</td>
                     <td><AdminPontosModal ponto={ponto}/></td>
                   </tr>
@@ -79,6 +75,7 @@ export const AdminPontosMenu = () => {
                       <td>{userList.find((user) => user.id === ponto.user)?.passaporte}</td>
                       <td>{new Date(ponto.entrada).toLocaleString('pt-br')}</td>
                       <td>{new Date(ponto.saida).toLocaleString('pt-br')}</td>
+                      <td>{ponto.justificativa || '-'}</td> {/* Exibir justificativa ou '-' se não houver */}
                       <td>{ponto.horas}</td>
                       <td><AdminPontosModal ponto={ponto}/></td>
                     </tr>
@@ -94,6 +91,7 @@ export const AdminPontosMenu = () => {
                     <td>{userList.find((user) => user.id === ponto.user)?.passaporte}</td>
                     <td>{new Date(ponto.entrada).toLocaleString('pt-br')}</td>
                     <td>{new Date(ponto.saida).toLocaleString('pt-br')}</td>
+                    <td>{ponto.justificativa || '-'}</td> 
                     <td>{ponto.horas}</td>
                     <td><AdminPontosModal ponto={ponto}/></td>
                   </tr>
