@@ -1,3 +1,5 @@
+"use client";
+
 import { userStore } from "@/stores/userStore";
 import { useEffect, useState } from "react";
 import { IndicadoresPontoCard } from "../IndicadoresPontoCard";
@@ -93,36 +95,41 @@ export const IndicadoresPersonalList = () => {
       <IndicadoresSemanais />
       {indicadorMenu === "ponto" && (
         <StyledContainer>
-          <StyledTable>
-            <thead>
-              <tr>
-                <ThTitleRow>Entrada</ThTitleRow>
-                <ThTitleRow>Saída</ThTitleRow>
-                <ThTitleRow>Justificativa</ThTitleRow>
-                <ThTitleRow>Horas Trabalhadas</ThTitleRow>
+        <StyledTable>
+          <thead>
+            <tr>
+              <ThTitleRow>Entrada</ThTitleRow>
+              <ThTitleRow>Saída</ThTitleRow>
+              <ThTitleRow>Horas Trabalhadas</ThTitleRow>
+              <ThTitleRow>Justificativa</ThTitleRow> {/* Adicione esta linha */}
+            </tr>
+          </thead>
+          <tbody>
+            {dateList.sort(sortByEntrada).map((ponto) => (
+              <tr key={ponto.id}>
+                <td>{ponto.entrada}</td>
+                <td>{ponto.saida}</td>
+                <td>{ponto.horas}</td>
+                <td>{ponto.justificativa}</td> {/* Adicione esta linha */}
               </tr>
-            </thead>
-            <tbody>
-              {dateList.sort(sortByEntrada).map((ponto) => (
-                <IndicadoresPontoCard key={ponto.id} ponto={ponto} />
-              ))}
-            </tbody>
-          </StyledTable>
+            ))}
+          </tbody>
+        </StyledTable>
           <StyledForm
             onSubmit={handleSubmit((formData) => parseData(formData))}
-          >
+            >
             <h3>Filtrar por data:</h3>
-            <div>
-              <span>Início:</span>
-              <input type="date" {...register("entrada")} />
-            </div>
-            {errors && <p>{errors.entrada?.message}</p>}
-            <div>
-              <span>Fim:</span>
-              <input type="date" {...register("saida")} />
-            </div>
-            {errors && <p>{errors.saida?.message}</p>}
-            {totalHours && <h3>Total de horas: {totalHours}</h3>}
+              <div>
+                <span>Início:</span>
+                <input type="date" {...register("entrada")} />
+              </div>
+                {errors && <p>{errors.entrada?.message}</p>}
+              <div>
+                <span>Fim:</span>
+                <input type="date" {...register("saida")} />
+              </div> 
+                {errors && <p>{errors.saida?.message}</p>}
+                {totalHours && <h3>Total de horas: {totalHours}</h3>}
             <StyledSubmitButton
               $error={errors.entrada ? true : errors.saida ? true : false}
               type="submit"
