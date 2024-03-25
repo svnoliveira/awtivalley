@@ -75,7 +75,7 @@ export const AdminPontosMenu = () => {
                       <td>{userList.find((user) => user.id === ponto.user)?.passaporte}</td>
                       <td>{new Date(ponto.entrada).toLocaleString('pt-br')}</td>
                       <td>{new Date(ponto.saida).toLocaleString('pt-br')}</td>
-                      <td>{ponto.justificativa || '-'}</td> {/* Exibir justificativa ou '-' se não houver */}
+                      <td>{ponto.justificativa || '-'}</td> 
                       <td>{ponto.horas}</td>
                       <td><AdminPontosModal ponto={ponto}/></td>
                     </tr>

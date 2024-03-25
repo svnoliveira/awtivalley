@@ -107,10 +107,11 @@ export const IndicadoresPersonalList = () => {
           <tbody>
             {dateList.sort(sortByEntrada).map((ponto) => (
               <tr key={ponto.id}>
-                <td>{ponto.entrada}</td>
-                <td>{ponto.saida}</td>
+                <td>{new Date(ponto.entrada).toLocaleString('pt-br')}</td>
+                <td>{new Date(ponto.saida).toLocaleString('pt-br')}</td>
+                <td>{ponto.justificativa || '-'}</td>
                 <td>{ponto.horas}</td>
-                <td>{ponto.justificativa}</td> {/* Adicione esta linha */}
+                <td>{ponto.horas}</td>
               </tr>
             ))}
           </tbody>
