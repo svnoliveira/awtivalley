@@ -1,5 +1,3 @@
-"use client";
-
 import { userStore } from "@/stores/userStore";
 import { useEffect, useState } from "react";
 import { IndicadoresPontoCard } from "../IndicadoresPontoCard";
@@ -100,30 +98,31 @@ export const IndicadoresPersonalList = () => {
               <tr>
                 <ThTitleRow>Entrada</ThTitleRow>
                 <ThTitleRow>Saída</ThTitleRow>
+                <ThTitleRow>Justificativa</ThTitleRow>
                 <ThTitleRow>Horas Trabalhadas</ThTitleRow>
               </tr>
             </thead>
             <tbody>
-            {dateList.sort(sortByEntrada).map((ponto) => (
-              <IndicadoresPontoCard key={ponto.id} ponto={ponto} />
-            ))}
+              {dateList.sort(sortByEntrada).map((ponto) => (
+                <IndicadoresPontoCard key={ponto.id} ponto={ponto} />
+              ))}
             </tbody>
           </StyledTable>
           <StyledForm
             onSubmit={handleSubmit((formData) => parseData(formData))}
-            >
+          >
             <h3>Filtrar por data:</h3>
-              <div>
-                <span>Início:</span>
-                <input type="date" {...register("entrada")} />
-              </div>
-                {errors && <p>{errors.entrada?.message}</p>}
-              <div>
-                <span>Fim:</span>
-                <input type="date" {...register("saida")} />
-              </div> 
-                {errors && <p>{errors.saida?.message}</p>}
-                {totalHours && <h3>Total de horas: {totalHours}</h3>}
+            <div>
+              <span>Início:</span>
+              <input type="date" {...register("entrada")} />
+            </div>
+            {errors && <p>{errors.entrada?.message}</p>}
+            <div>
+              <span>Fim:</span>
+              <input type="date" {...register("saida")} />
+            </div>
+            {errors && <p>{errors.saida?.message}</p>}
+            {totalHours && <h3>Total de horas: {totalHours}</h3>}
             <StyledSubmitButton
               $error={errors.entrada ? true : errors.saida ? true : false}
               type="submit"
