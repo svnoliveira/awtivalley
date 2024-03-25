@@ -87,11 +87,11 @@ export const AdminPontosMenu = () => {
               <>
                 {pontoList.sort(sortByEntrada).map((ponto) => (
                   <tr key={ponto.id}>
-                    <td>{userList.find((user) => user.id === ponto.user)?.nome}</td>
+                  <td>{userList.find((user) => user.id === ponto.user)?.nome}</td>
                     <td>{userList.find((user) => user.id === ponto.user)?.passaporte}</td>
                     <td>{new Date(ponto.entrada).toLocaleString('pt-br')}</td>
                     <td>{new Date(ponto.saida).toLocaleString('pt-br')}</td>
-                    <td>{ponto.justificativa || '-'}</td> 
+                    <td>{ponto.justificativa || '-'}</td>
                     <td>{ponto.horas}</td>
                     <td><AdminPontosModal ponto={ponto}/></td>
                   </tr>
