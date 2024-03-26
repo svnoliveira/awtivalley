@@ -15,15 +15,12 @@ import { FormTextArea } from "../FormTextArea";
 
 export const PontoForm = () => {
   const { addPonto, loading } = registroStore((store) => store);
-  const userId = userStore((store) => store.userData?.user.id);
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitSuccessful },
-  } = useForm<TPontoValues>({
-    resolver: zodResolver(pontoSchema),
-  });
+  const { userData } = userStore((store) => store);
+  const userId = userData?.user.id;
+  const userName = userData?.user.nome;
+  const userPassaporte = userData?.user.passaporte;
+
+  // Restante do código
 
   const parsePontoData = async (formData: TPontoValues) => {
     const pontoData = {
@@ -36,15 +33,17 @@ export const PontoForm = () => {
 
     // Enviar webhook para o Discord
     const webhookUrl = 'https://discord.com/api/webhooks/1209602152591527946/bS8k85czlDSOXNK5Bt_CItRjpZJ0AVDVfDiJXoU6cA5YfS4p2_0GjNk2E8xq-j9OxVHP';
-      // URL da imagem que você deseja adicionar
+    // URL da imagem que você deseja adicionar
     var imageUrl = "https://media.discordapp.net/attachments/842486097368055868/1190037415813971988/alta_linhas_2.png?ex=65bc0735&is=65a99235&hm=8fbef0f34063389dcd7ea427d38ad4bd12501a5bddbc31381744cc18edd3acd1&format=webp&quality=lossless&";
-             
-        var mensagemWebhook = `## :alarm_clock: **Novo registro de ponto:** :alarm_clock:\n\n` +
-                              `# :identification_card: **Passaporte:** ${userId}\n` +
-                              `**:alarm_clock: Ponto de Entrada:** ${pontoData.entrada}}\n` +
-                              `**:alarm_clock: Ponto de Saída:** ${pontoData.saida}\n` +
-                              `**:notepad_spiral: Justificativa:** ${pontoData.justificativa}\n` +
-                              `( ${imageUrl} )`;  // Adiciona a imagem à mensagem
+
+    var mensagemWebhook = `## :alarm_clock: **Novo registro de ponto:** :alarm_clock:\n\n` +
+      `# :card_index: **CAD:** ${userId}\n` +
+      `# :busts_in_silhouette: **NOME:** ${userName}\n` +
+      `# :identification_card: **PASSAPORTE:** ${userPassaporte}\n` +
+      `**:alarm_clock: Ponto de Entrada:** ${pontoData.entrada}}\n` +
+      `**:alarm_clock: Ponto de Saída:** ${pontoData.saida}\n` +
+      `**:notepad_spiral: Justificativa:** ${pontoData.justificativa}\n` +
+      `( ${imageUrl} )`;  // Adiciona a imagem à mensagem
 
     try {
       await axios.post(webhookUrl, { content: mensagemWebhook });

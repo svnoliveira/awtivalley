@@ -75,7 +75,7 @@ export const IndicadoresPersonalList = () => {
     <StyledSection>
       <StyledUserBanner>
         <h1>
-          Bem Vindo{"(a)"} {user?.nome}
+          Bem Vindo{"(a)"} {user?.nome} {"|"} {user?.passaporte}
         </h1>
       </StyledUserBanner>
       <MenuNav>
@@ -101,7 +101,7 @@ export const IndicadoresPersonalList = () => {
               <ThTitleRow>Entrada</ThTitleRow>
               <ThTitleRow>Saída</ThTitleRow>
               <ThTitleRow>Horas Trabalhadas</ThTitleRow>
-              <ThTitleRow>Justificativa</ThTitleRow> {/* Adicione esta linha */}
+              <ThTitleRow>Justificativa</ThTitleRow>
             </tr>
           </thead>
           <tbody>
