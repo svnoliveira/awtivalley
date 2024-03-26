@@ -18,7 +18,7 @@ export const DashboardCard = () => {
     <StyledSection>
       <StyledUserBanner>
         <h1>
-          Bem Vindo{"(a)"} {user?.nome}
+        Bem Vindo{"(a)"} {user?.nome} {"|"} {user?.passaporte}
         </h1>
       </StyledUserBanner>
       <MenuNav>

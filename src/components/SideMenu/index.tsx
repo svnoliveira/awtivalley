@@ -44,8 +44,8 @@ export const SideMenu = () => {
                 height={500}
               />
               <div>
-                {user && <h3>{user.nome}</h3>}
-                {user && <h3>{user.cargo}</h3>}
+                {user && <h3><center>{user.nome}</center></h3>}
+                {user && <h3><center>{user.cargo}</center></h3>}
               </div>
               <UserIcon />
             </StyledContainer>
