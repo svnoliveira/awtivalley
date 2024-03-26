@@ -46,8 +46,6 @@ export const SideMenu = () => {
               <div>
                 {user && <h3><center>{user.nome}</center></h3>}
                 {user && <h3><center>{user.cargo}</center></h3>}
-                <hr></hr>
-                <hr></hr>
               </div>
               <UserIcon />
             </StyledContainer>
