@@ -45,7 +45,7 @@ export const AdminPontosModal = ({ ponto }: IAdminPontosModalProps) => {
     `:alarm_clock: Ponto Entrada: ${new Date(ponto.entrada).toLocaleString('pt-br')}\n` +
     `:alarm_clock: Ponto Saída: ${new Date(ponto.saida).toLocaleString('pt-br')}\n` +
     `:clipboard: Justificativa: ${justificativa}\n\n` +
-    `:alarm_clock: às **${horaBrasilia}**`;
+    `:alarm_clock: às **${horaBrasilia}**` +
     `( ${imageUrl} )`;
 
     try {
