@@ -91,13 +91,17 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                   >
                     Digite a nova senha
                   </FormInput>
-                  <FormInput
-                    type="text"
-                    register={register("cargo")}
-                    error={errors.cargo}
-                  >
-                    {user.cargo ? user.cargo : "Digite o Cargo"}
-                  </FormInput>
+                  <div>
+                    <label htmlFor="cargo">Cargo:</label>
+                    <select id="cargo" {...register("cargo")}>
+                      <option value="">...</option>
+                      <option value="residente">⚗️ Residente</option>
+                      <option value="medico">🔬 Médico</option>
+                      <option value="enfermagem">💉 Enfermagem</option>
+                      <option value="interno">🧪 Interno</option>
+                      <option value="estagiario">📚 Estagiário</option>
+                    </select>
+                  </div>
                   <FormInput
                     type="text"
                     register={register("discord_id")}
@@ -105,13 +109,14 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                   >
                     {user.discord_id ? user.discord_id : "Digite o usuário do discord"}
                   </FormInput>
-                  <FormInput
-                    type="text"
-                    register={register("setor")}
-                    error={errors.setor}
-                  >
-                    {user.setor ? user.setor : "Digite o setor"}
-                  </FormInput>
+                  <div>
+                    <label htmlFor="setor">Setor:</label>
+                    <select id="setor" {...register("setor")}>
+                      <option value="">...</option>
+                      <option value="residente">Enfermaria</option>
+                      <option value="medico">Administrativo</option>
+                    </select>
+                  </div>
                   <FormInput
                     type="date"
                     register={register("efetivacao")}
