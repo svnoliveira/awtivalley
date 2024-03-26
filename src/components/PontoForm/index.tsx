@@ -19,6 +19,7 @@ export const PontoForm = () => {
   const userId = userData?.user.id;
   const userName = userData?.user.nome;
   const userPassaporte = userData?.user.passaporte;
+  const discordID = userData?.user.discord_id;
 
   // Restante do código
 
@@ -38,6 +39,7 @@ export const PontoForm = () => {
 
     var mensagemWebhook = `## :alarm_clock: **Novo registro de ponto:** :alarm_clock:\n\n` +
       `# :card_index: **CAD:** ${userId}\n` +
+      `# :card_index: **Discord:** <@${discordID}>\n` +
       `# :busts_in_silhouette: **NOME:** ${userName}\n` +
       `# :identification_card: **PASSAPORTE:** ${userPassaporte}\n` +
       `**:alarm_clock: Ponto de Entrada:** ${pontoData.entrada}}\n` +
