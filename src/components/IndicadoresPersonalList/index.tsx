@@ -100,8 +100,8 @@ export const IndicadoresPersonalList = () => {
             <tr>
               <ThTitleRow>Entrada</ThTitleRow>
               <ThTitleRow>Saída</ThTitleRow>
-              <ThTitleRow>Horas Trabalhadas</ThTitleRow>
               <ThTitleRow>Justificativa</ThTitleRow>
+              <ThTitleRow>Horas Trabalhadas</ThTitleRow>
             </tr>
           </thead>
           <tbody>
@@ -110,7 +110,6 @@ export const IndicadoresPersonalList = () => {
                 <td>{new Date(ponto.entrada).toLocaleString('pt-br')}</td>
                 <td>{new Date(ponto.saida).toLocaleString('pt-br')}</td>
                 <td>{ponto.justificativa || '-'}</td>
-                <td>{ponto.horas}</td>
                 <td>{ponto.horas}</td>
               </tr>
             ))}
