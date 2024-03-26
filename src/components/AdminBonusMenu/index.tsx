@@ -36,7 +36,7 @@ export const AdminBonusMenu = () => {
       if (bonusLimit === 0){
         return horas > 0; // Mostrar todos os usuários com horas registradas
       } else if (bonusLimit === 18000) {
-        return horas >= 18000 && horas < 25200; // Mostrar usuários com 50% das horas (18000-25199)
+        return horas >= 18000 && horas < 26279; // Mostrar usuários com 50% das horas (18000-26279)
       } else if (bonusLimit === 26280) {
         return horas >= 26280 && horas < 36000; // Mostrar usuários com 75% das horas (26280-35999)
       } else if (bonusLimit === 36000) {

@@ -49,7 +49,7 @@ export const IndicadoresSemanais = () => {
         return "Bonificação alcançada 100%.";
       } else if (horasCumpridas >= 26280 && horasCumpridas <= 35999) {
         return "Bonificação alcançada 75%.";
-      } else if (horasCumpridas >= 18000 && horasCumpridas <= 25199) {
+      } else if (horasCumpridas >= 18000 && horasCumpridas <= 26279) {
         return "Bonificação alcançada 50%.";
       } else {
         return "Bonificação não alcançada.";
@@ -62,7 +62,7 @@ export const IndicadoresSemanais = () => {
         return "100%";
       } else if (horasCumpridas >= 26280 && horasCumpridas <= 35999) {
         return "75%";
-      } else if (horasCumpridas >= 18000 && horasCumpridas <= 25199) {
+      } else if (horasCumpridas >= 18000 && horasCumpridas <= 26279) {
         return "50%";
       } else {
         return "0%";
