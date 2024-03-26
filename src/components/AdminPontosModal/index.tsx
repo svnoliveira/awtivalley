@@ -5,6 +5,7 @@ import { registroStore } from "@/stores/registroDePonto";
 import { userStore } from "@/stores/userStore";
 import { useState } from "react";
 import { StyledButtonContainer, StyledModal, StyledX } from "./style";
+const { DateTime } = require('luxon');
 
 interface IAdminPontosModalProps {
   ponto: IRegistroDePonto;
@@ -17,6 +18,12 @@ export const AdminPontosModal = ({ ponto }: IAdminPontosModalProps) => {
   const deletePonto = registroStore((state) => state.deletePonto);
   const token = userStore((state) => state.userData?.accessToken);
   const userList = userStore((state) => state.userList);
+  const { userData } = userStore((store) => store);
+  const userId = userData?.user.id;
+  const userName = userData?.user.nome;
+  const userPassaporte = userData?.user.passaporte;
+  const discordID = userData?.user.discord_id;
+  
 
   const handleDeleteClick = async () => {
     setLoading(true);
@@ -24,11 +31,20 @@ export const AdminPontosModal = ({ ponto }: IAdminPontosModalProps) => {
     setLoading(false);
     setModalOpen(false);
 
+    const horaBrasilia = DateTime.local().setZone('America/Sao_Paulo').toLocaleString(DateTime.TIME_24_SIMPLE) + ' ' + DateTime.local().setZone('America/Sao_Paulo').toFormat('dd/MM/yyyy');
+
     // Enviar o webhook para o Discord após a exclusão do ponto
     const webhookUrl = 'https://discord.com/api/webhooks/1209602152591527946/bS8k85czlDSOXNK5Bt_CItRjpZJ0AVDVfDiJXoU6cA5YfS4p2_0GjNk2E8xq-j9OxVHP';
     const imageUrl = "https://media.discordapp.net/attachments/842486097368055868/1190037415813971988/alta_linhas_2.png?ex=65bc0735&is=65a99235&hm=8fbef0f34063389dcd7ea427d38ad4bd12501a5bddbc31381744cc18edd3acd1&format=webp&quality=lossless&";
 
-    const mensagemWebhook = `## teste delete\n` +
+    const mensagemWebhook = 
+    `:mega: O Colaborador :busts_in_silhouette: **${userName}** | :identification_card: **${userPassaporte}** ID de cadastro: **${userId}**\n\n` +
+    `Removeu o ponto do ${userList.find((user) => user.id === ponto.user)?.nome}\n` +
+    `Ponto Entrada: ${new Date(ponto.entrada).toLocaleString('pt-br')}\n` +
+    `Ponto Saída: ${new Date(ponto.saida).toLocaleString('pt-br')}\n` +
+    `Justificativa: ${justificativa}` +
+    `:alarm_clock: às **${horaBrasilia}**`;
+
       `( ${imageUrl} )`;
 
     try {
