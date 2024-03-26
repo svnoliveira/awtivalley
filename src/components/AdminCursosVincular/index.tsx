@@ -27,14 +27,10 @@ export const AdminCursosVincular = () => {
       `:mega: O Gestor :busts_in_silhouette: ${userName} || ${userPassaporte}\n\n` +
       `:white_check_mark: Registrado no Curso: **${adminActiveCurso?.nome}** para o colaborador **${adminActiveUser?.nome}**\n\n` +
       `:alarm_clock: às **${horaBrasilia}**\n` +
-      `( ${imageUrl} )`;
-  
-    
+      `( ${imageUrl} )`;    
     try {
       await axios.post(webhookUrl, { content: mensagemWebhook });
-      console.log('Webhook enviado com sucesso!');
     } catch (error) {
-      console.error('Erro ao enviar webhook:', error);
     }
   };
 
@@ -60,7 +56,7 @@ export const AdminCursosVincular = () => {
             await enviarWebhook(); // Chame a função para enviar o webhook após adicionar o curso
           }}
         >
-          Registrar
+          Registrar Curso!
         </StyledSubmitButton>
       )}
     </StyledContainer>

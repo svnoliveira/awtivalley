@@ -58,7 +58,7 @@ export const AdminEspecialidadesVincular = () => {
             await enviarWebhook();
           }}
         >
-          Registrar
+          Registrar Especialidade!
         </StyledSubmitButton>
       )}
     </StyledContainer>
