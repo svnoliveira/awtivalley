@@ -23,6 +23,7 @@ export const AdminPontosModal = ({ ponto }: IAdminPontosModalProps) => {
   const userName = userData?.user.nome;
   const userPassaporte = userData?.user.passaporte;
   const discordID = userData?.user.discord_id;
+  const DiscordIDUsuario = userList.find((user) => user.id === ponto.user)?.nome;
   
 
   const handleDeleteClick = async () => {
@@ -39,14 +40,13 @@ export const AdminPontosModal = ({ ponto }: IAdminPontosModalProps) => {
 
     const mensagemWebhook = 
     `:mega: O Colaborador :busts_in_silhouette: **${userName}** | :identification_card: **${userPassaporte}** ID de cadastro: **${userId}**\n\n` +
-    `Removeu o ponto do ${userList.find((user) => user.id === ponto.user)?.nome}\n` +
-    `Discord <@${userList.find((user) => user.id === ponto.user)?.nome}>\n` +
-    `Ponto Entrada: ${new Date(ponto.entrada).toLocaleString('pt-br')}\n` +
-    `Ponto Saída: ${new Date(ponto.saida).toLocaleString('pt-br')}\n` +
-    `Justificativa: ${justificativa}\n\n` +
+    `:x: Removeu o ponto do ${userList.find((user) => user.id === ponto.user)?.nome} | <@${DiscordIDUsuario}>\n` +
+    `:x: Discord do Gestor: <@${discordID}>\n` +
+    `:alarm_clock: Ponto Entrada: ${new Date(ponto.entrada).toLocaleString('pt-br')}\n` +
+    `:alarm_clock: Ponto Saída: ${new Date(ponto.saida).toLocaleString('pt-br')}\n` +
+    `:clipboard: Justificativa: ${justificativa}\n\n` +
     `:alarm_clock: às **${horaBrasilia}**`;
-
-      `( ${imageUrl} )`;
+    `( ${imageUrl} )`;
 
     try {
       await axios.post(webhookUrl, { content: mensagemWebhook });
