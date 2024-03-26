@@ -91,11 +91,12 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                   >
                     Digite a nova senha
                   </FormInput>
-                  <StyledInputContainer>
                   <div>
-                    <label htmlFor="cargo">Cargo:</label>
+                    <label htmlFor="cargo">
+                      Cargo:
+                    </label>
                     <select id="cargo" {...register("cargo")}>
-                      <option value="">...</option>
+                      <option value="cargo">...</option>
                       <option value="residente">⚗️ Residente</option>
                       <option value="medico">🔬 Médico</option>
                       <option value="enfermagem">💉 Enfermagem</option>
@@ -103,7 +104,6 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                       <option value="estagiario">📚 Estagiário</option>
                     </select>
                   </div>
-                  <StyledInputContainer>
                   <FormInput
                     type="text"
                     register={register("discord_id")}
@@ -111,16 +111,16 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                   >
                     {user.discord_id ? user.discord_id : "Digite o usuário do discord"}
                   </FormInput>
-                  <StyledInputContainer>
                   <div>
-                    <label htmlFor="setor">Setor:</label>
+                    <label htmlFor="setor">
+                      Setor:
+                    </label>
                     <select id="setor" {...register("setor")}>
                       <option value="">...</option>
                       <option value="enfermaria">Enfermaria</option>
                       <option value="administrativo">Administrativo</option>
                     </select>
                   </div>
-                  <StyledInputContainer>
                   <FormInput
                     type="date"
                     register={register("efetivacao")}
