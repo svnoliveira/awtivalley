@@ -40,9 +40,10 @@ export const AdminPontosModal = ({ ponto }: IAdminPontosModalProps) => {
     const mensagemWebhook = 
     `:mega: O Colaborador :busts_in_silhouette: **${userName}** | :identification_card: **${userPassaporte}** ID de cadastro: **${userId}**\n\n` +
     `Removeu o ponto do ${userList.find((user) => user.id === ponto.user)?.nome}\n` +
+    `Discord <@${userList.find((user) => user.id === ponto.user)?.nome}>\n` +
     `Ponto Entrada: ${new Date(ponto.entrada).toLocaleString('pt-br')}\n` +
     `Ponto Saída: ${new Date(ponto.saida).toLocaleString('pt-br')}\n` +
-    `Justificativa: ${justificativa}` +
+    `Justificativa: ${justificativa}\n\n` +
     `:alarm_clock: às **${horaBrasilia}**`;
 
       `( ${imageUrl} )`;
