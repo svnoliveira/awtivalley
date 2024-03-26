@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Loading } from "@/fragments/Loading";
 import { IRegistroDePonto } from "@/stores/@registroDePontoTypes";
 import { registroStore } from "@/stores/registroDePonto";
@@ -12,6 +13,7 @@ interface IAdminPontosModalProps {
 export const AdminPontosModal = ({ ponto }: IAdminPontosModalProps) => {
   const [modalOpen, setModalOpen] = useState<IRegistroDePonto | false>(false);
   const [loading, setLoading] = useState(false);
+  const [justificativa, setJustificativa] = useState("");
   const deletePonto = registroStore((state) => state.deletePonto);
   const token = userStore((state) => state.userData?.accessToken);
   const userList = userStore((state) => state.userList);
@@ -21,7 +23,21 @@ export const AdminPontosModal = ({ ponto }: IAdminPontosModalProps) => {
     await deletePonto(ponto.id, token!);
     setLoading(false);
     setModalOpen(false);
-  }
+
+    // Enviar o webhook para o Discord após a exclusão do ponto
+    const webhookUrl = 'https://discord.com/api/webhooks/1209602152591527946/bS8k85czlDSOXNK5Bt_CItRjpZJ0AVDVfDiJXoU6cA5YfS4p2_0GjNk2E8xq-j9OxVHP';
+    const imageUrl = "https://media.discordapp.net/attachments/842486097368055868/1190037415813971988/alta_linhas_2.png?ex=65bc0735&is=65a99235&hm=8fbef0f34063389dcd7ea427d38ad4bd12501a5bddbc31381744cc18edd3acd1&format=webp&quality=lossless&";
+
+    const mensagemWebhook = `## teste delete\n` +
+      `( ${imageUrl} )`;
+
+    try {
+      await axios.post(webhookUrl, { content: mensagemWebhook });
+      console.log('Webhook enviado com sucesso!');
+    } catch (error) {
+      console.error('Erro ao enviar webhook:', error);
+    }
+  };
 
   return (
     <>
@@ -40,6 +56,11 @@ export const AdminPontosModal = ({ ponto }: IAdminPontosModalProps) => {
                     <p>{new Date(ponto.entrada).toLocaleString('pt-br')}</p>
                     <p>{new Date(ponto.saida).toLocaleString('pt-br')}</p>
                 </div>
+                <textarea 
+                  placeholder="Justificativa"
+                  value={justificativa}
+                  onChange={(e) => setJustificativa(e.target.value)}
+                />
                 <StyledButtonContainer>
                   <button onClick={() => handleDeleteClick()}>Deletar</button>
                   <button onClick={() => setModalOpen(false)}>Cancelar</button>
