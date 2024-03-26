@@ -3,7 +3,7 @@ import { StyledSection } from "./style"
 export const AdminHeader = () => {
     return (
         <StyledSection>
-            <h1>Bem Vindo Administrador</h1>
+            <h1>Bem Vindo ao painel de Administrador</h1>
         </StyledSection>
     )
 }
