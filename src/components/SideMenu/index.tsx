@@ -176,7 +176,7 @@ export const SideMenu = () => {
                     width={20}
                     height={20}
                   />
-                  <span>Cadastrar curriculo</span>
+                  <span>Cadastrar currículos</span>
                   <Image
                     src="/icons/arrow-right.svg"
                     alt="Logo"
