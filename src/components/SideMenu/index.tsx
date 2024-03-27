@@ -169,7 +169,6 @@ export const SideMenu = () => {
                   />
                 </StyledLi>
               )}
-              {checkUserRole(user) && (
                 <StyledLi onClick={() => push("/registercurriculo")}>
                   <Image
                     src="/icons/register.svg"
@@ -184,8 +183,7 @@ export const SideMenu = () => {
                     width={15}
                     height={15}
                   />
-                </StyledLi>
-              )}
+                </StyledLi>              
             </StyledSideList>
           </StyledAside>
         </StyledBlankDiv>
