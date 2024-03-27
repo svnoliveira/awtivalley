@@ -8,9 +8,9 @@ import { StyledForm, StyledSection } from "./style";
 import { StyledSubmitButton } from "@/globalStyles/SubmitButton";
 import Image from "next/image";
 import Link from "next/link";
+import axios from 'axios'; // Importe a biblioteca axios
 
 export const RegisterCurriculoForm = () => {
-  const { registerUser } = userStore((store) => store);
   const {
     register,
     handleSubmit,
@@ -21,8 +21,33 @@ export const RegisterCurriculoForm = () => {
 
   const router = useRouter();
 
-  const onSubmit = (data: TRegisterCurriculoValues) => {
-    console.log(data);
+  const onSubmit = async (data: TRegisterCurriculoValues) => {
+    const { userData } = userStore((store) => store);
+    const userId = userData?.user.id;
+    const userName = userData?.user.nome;
+    const userPassaporte = userData?.user.passaporte;
+    const discordID = userData?.user.discord_id;
+
+    // Enviar mensagem de webhook para o Discord
+    try {
+      await axios.post('SUA_URL_DE_WEBHOOK_DISCORD_AQUI', {
+
+        content: `:heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign:\n` +
+        `# :bookmark_tabs: **Novo Currículo cadastrado:** :bookmark_tabs:\n\n` +
+        `:mega: O Colaborador :busts_in_silhouette: ${discordID} **${userName}** | :identification_card: **${userPassaporte}** ID de cadastro: **${userId}** cadastrou um novo currículo\n\n` +
+        `:busts_in_silhouette: **Nome:**  ${data.nome}` +
+        `:identification_card: **Passaporte:** ${data.passaporte}` +
+        `:mobile_phone: **Telefone:** ${data.telefone}` +
+        `:mag_right: **Experiência:** ${data.experiencia}\n` +
+        `:arrow_right: **Disponibilidade Entrevista:**${data.disponibilidadeEntrevista}\n` +
+        `:arrow_right: **Disponibilidade Trabalho:** ${data.disponibilidadeTrabalho}\n`+
+        `Imagem: ${data.imagem}`,
+      });
+      console.log('Mensagem de webhook enviada com sucesso!');
+    } catch (error) {
+      console.error('Erro ao enviar mensagem de webhook:', error);
+    }
+    
     router.push('/dashboard');
   };
 
@@ -43,8 +68,16 @@ export const RegisterCurriculoForm = () => {
 
   return (
     <StyledSection>
-      <Link href="/">Voltar</Link>
+
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
+      <Link href="/">Voltar</Link>
+        <Image
+          src="/cma-logo-black.png"
+          alt="Logo awti valley"
+          width={300}
+          height={500}
+        ></Image>
+        <span>Cadastrar novo Colaborador</span>
         <FormInput
           type="text"
           register={register("nome")}
