@@ -28,7 +28,6 @@ export const RegisterCurriculoForm = () => {
     const userPassaporte = userData?.user.passaporte;
     const discordID = userData?.user.discord_id;
     const imageUrl = data.imagem;
-
     // Enviar mensagem de webhook para o Discord
     try {
       await axios.post('https://discord.com/api/webhooks/1209602152591527946/bS8k85czlDSOXNK5Bt_CItRjpZJ0AVDVfDiJXoU6cA5YfS4p2_0GjNk2E8xq-j9OxVHP', {
@@ -41,16 +40,8 @@ export const RegisterCurriculoForm = () => {
         `:mobile_phone: **Telefone:** ${data.telefone}` +
         `:mag_right: **Experiência:** ${data.experiencia}\n` +
         `:arrow_right: **Disponibilidade Entrevista:**${data.disponibilidadeEntrevista}\n` +
-        `:arrow_right: **Disponibilidade Trabalho:** ${data.disponibilidadeTrabalho}\n`,
-
-        embeds: [
-          {
-            image: {
-              url: imageUrl
-            }
-          }
-        ]
-
+        `:arrow_right: **Disponibilidade Trabalho:** ${data.disponibilidadeTrabalho}\n`+
+        `Imagem: ${imageUrl}`,
       });
       console.log('Mensagem de webhook enviada com sucesso!');
     } catch (error) {
@@ -79,7 +70,7 @@ export const RegisterCurriculoForm = () => {
     <StyledSection>
 
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <Link href="/">Voltars</Link>
+      <Link href="/">Voltar</Link>
         <Image
           src="/cma-logo-black.png"
           alt="Logo awti valley"
