@@ -160,7 +160,24 @@ export const SideMenu = () => {
                     width={20}
                     height={20}
                   />
-                  <span>Cadastrar</span>
+                  <span>Cadastrar novos Colaboradores</span>
+                  <Image
+                    src="/icons/arrow-right.svg"
+                    alt="Logo"
+                    width={15}
+                    height={15}
+                  />
+                </StyledLi>
+              )}
+              {checkUserRole(user) && (
+                <StyledLi onClick={() => push("/registercurriculo")}>
+                  <Image
+                    src="/icons/register.svg"
+                    alt="Logo"
+                    width={20}
+                    height={20}
+                  />
+                  <span>Cadastrar curriculo</span>
                   <Image
                     src="/icons/arrow-right.svg"
                     alt="Logo"
