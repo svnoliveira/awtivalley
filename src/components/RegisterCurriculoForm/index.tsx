@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { userStore } from "@/stores/userStore";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,7 +8,8 @@ import { StyledForm, StyledSection } from "./style";
 import { StyledSubmitButton } from "@/globalStyles/SubmitButton";
 import Image from "next/image";
 import Link from "next/link";
-import axios from 'axios'; // Importe a biblioteca axios
+import axios from 'axios';
+import { FieldError } from 'react-hook-form';
 
 export const RegisterCurriculoForm = () => {
   const {
@@ -28,19 +29,19 @@ export const RegisterCurriculoForm = () => {
     const userPassaporte = userData?.user.passaporte;
     const discordID = userData?.user.discord_id;
     const imageUrl = data.imagem;
+
     // Enviar mensagem de webhook para o Discord
     try {
-      await axios.post('https://discord.com/api/webhooks/1209602152591527946/bS8k85czlDSOXNK5Bt_CItRjpZJ0AVDVfDiJXoU6cA5YfS4p2_0GjNk2E8xq-j9OxVHP', {
-
+      await axios.post('URL_DO_SEU_WEBHOOK_DO_DISCORD', {
         content: `:heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign:\n` +
         `# :bookmark_tabs: **Novo Currículo cadastrado:** :bookmark_tabs:\n\n` +
         `:mega: O Colaborador :busts_in_silhouette: ${discordID} **${userName}** | :identification_card: **${userPassaporte}** ID de cadastro: **${userId}** cadastrou um novo currículo\n\n` +
-        `:busts_in_silhouette: **Nome:**  ${data.nome}` +
-        `:identification_card: **Passaporte:** ${data.passaporte}` +
-        `:mobile_phone: **Telefone:** ${data.telefone}` +
+        `:busts_in_silhouette: **Nome:**  ${data.nome}\n` +
+        `:identification_card: **Passaporte:** ${data.passaporte}\n` +
+        `:mobile_phone: **Telefone:** ${data.telefone}\n` +
         `:mag_right: **Experiência:** ${data.experiencia}\n` +
-        `:arrow_right: **Disponibilidade Entrevista:**${data.disponibilidadeEntrevista}\n` +
-        `:arrow_right: **Disponibilidade Trabalho:** ${data.disponibilidadeTrabalho}\n`+
+        `:arrow_right: **Disponibilidade Entrevista:** ${data.disponibilidadeEntrevista}\n` +
+        `:arrow_right: **Disponibilidade Trabalho:** ${data.disponibilidadeTrabalho}\n` +
         `Imagem: ${imageUrl}`,
       });
       console.log('Mensagem de webhook enviada com sucesso!');
@@ -68,15 +69,14 @@ export const RegisterCurriculoForm = () => {
 
   return (
     <StyledSection>
-
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <Link href="/">Voltar</Link>
+        <Link href="/">Voltar</Link>
         <Image
           src="/cma-logo-black.png"
           alt="Logo awti valley"
           width={300}
           height={500}
-        ></Image>
+        />
         <span>Cadastrar novo Colaborador</span>
         <FormInput
           type="text"
@@ -110,7 +110,7 @@ export const RegisterCurriculoForm = () => {
           type="text"
           register={register("disponibilidadeEntrevista")}
           error={errors.disponibilidadeEntrevista}
-        >
+        >FieldError 
           Disponibilidade para entrevista
         </FormInput>
         <FormInput

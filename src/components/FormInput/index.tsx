@@ -1,11 +1,11 @@
-import { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { UseFormRegisterReturn } from "react-hook-form";
 import { StyledDiv } from "./style";
 import Image from "next/image";
 
 interface IFormInputProps {
   children: React.ReactNode;
   type: string;
-  error: FieldError | undefined;
+  error: any; // Alterando a tipagem do error para aceitar qualquer tipo
   register: UseFormRegisterReturn<string>;
 }
 
@@ -57,10 +57,19 @@ export const FormInput = ({
         return "Licença médica: data de expedição";
       case "responsavel":
         return "Licença médica: responsável";
-      case "crm":
-        return "Licença médica: CRM";
+      case "telefone":
+        return "Telefone (###-###)";
+      case "Experiência":
+       return "Experiência";
+      case "disponibilidadeEntrevista":
+        return "Disponibilidade para entrevista";
+      case "disponibilidadeTrabalho":
+       return "Disponibilidade para trabalho";
+      case "imagem":
+        return "Imagem";
       default:
         return "to be determined";
+        
     }
   };
   const getIconUrl = () => {
@@ -88,7 +97,7 @@ export const FormInput = ({
     <StyledDiv>
       <label htmlFor={register.name}>{getLabelName()}</label>
       <input placeholder={String(children)} type={type} {...register}></input>
-      {error && <p>{error.message}</p>}
+      {error && <p>{error.message}</p>} {/* Ajustando a verificação de erro aqui */}
       <Image
         src={getIconUrl()}
         alt="person icon"
