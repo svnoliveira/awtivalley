@@ -30,9 +30,6 @@ export const HomeHero = () => {
           {checkUserRole(user) && <li><Link href={"/register"}>
             <HomeMenuCard iconUrl="/icons/register.svg">Cadastrar</HomeMenuCard>
           </Link></li>}
-          {checkUserRole(user) && <li><Link href={"/registercurriculo"}>
-            <HomeMenuCard iconUrl="/icons/register.svg">Cadastrar curriculo</HomeMenuCard>
-          </Link></li>}
         </StyledList>
       </StyledContainer>
     </StyledSection>
