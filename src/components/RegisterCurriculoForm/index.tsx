@@ -23,7 +23,7 @@ export const RegisterCurriculoForm = () => {
 
   return (
     <StyledSection>
-          CADASTRAR
+          CADASTRARasdas
     </StyledSection>
   );
 };
