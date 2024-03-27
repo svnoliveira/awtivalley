@@ -7,24 +7,18 @@ import { checkUserRole } from "@/utils/operations";
 import { redirect } from "next/navigation";
 
 export default function RegisterPage() {
-  const { loading, userData } = userStore((state) => state);
 
-  if (userData) {
-    redirect("/dashboard");
-  }
 
   return (
     <>
       <GlobalStyle />
-      {loading ? (
-        <Loading />
-      ) : (
+      : (
         <>
           <main>
             <RegisterCurriculoForm />
           </main>
         </>
-      )}
+      )
     </>
   );
 }
