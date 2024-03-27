@@ -125,7 +125,7 @@ export const RegisterCurriculoForm = () => {
           register={register("imagem")}
           error={errors.imagem}
         >
-          Imagem
+          Imagemm
         </FormInput>
         <StyledSubmitButton $error={checkError()} type="submit">
           Cadastrar
