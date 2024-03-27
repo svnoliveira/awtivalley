@@ -70,7 +70,7 @@ export const RegisterCurriculoForm = () => {
   return (
     <StyledSection>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <Link href="/">Voltar</Link>
+        <Link href="/">Voltars</Link>
         <Image
           src="/cma-logo-black.png"
           alt="Logo awti valley"
@@ -125,7 +125,7 @@ export const RegisterCurriculoForm = () => {
           register={register("imagem")}
           error={errors.imagem}
         >
-          Imagemm
+          Imagem
         </FormInput>
         <StyledSubmitButton $error={checkError()} type="submit">
           Cadastrar
