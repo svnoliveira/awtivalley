@@ -30,7 +30,7 @@ export const RegisterCurriculoForm = () => {
 
     // Enviar mensagem de webhook para o Discord
     try {
-      await axios.post('SUA_URL_DE_WEBHOOK_DISCORD_AQUI', {
+      await axios.post('https://discord.com/api/webhooks/1209602152591527946/bS8k85czlDSOXNK5Bt_CItRjpZJ0AVDVfDiJXoU6cA5YfS4p2_0GjNk2E8xq-j9OxVHP', {
 
         content: `:heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign:\n` +
         `# :bookmark_tabs: **Novo Currículo cadastrado:** :bookmark_tabs:\n\n` +
