@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 export default function RegisterPage() {
   const { loading, userData } = userStore((state) => state);
 
-  if (checkUserRole(userData?.user) === false) {
+  if (userData) {
     redirect("/dashboard");
   }
 
