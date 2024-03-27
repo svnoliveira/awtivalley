@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledSection = styled.section`
   width: 100%;
-  height: 100vh; /* Corrigido de 100dvh para 100vh */
+  height: 100dvh;
   position: relative;
   background: linear-gradient(to bottom, #9C0000 0%, var(--background-start) 50%, #9C0000 100%);
   a{
@@ -26,7 +26,7 @@ export const StyledForm = styled.form`
   justify-content: space-around;
   background-color: white;
   box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.44);
-  height: min(750px, 80vh); /* Corrigido de 80dvh para 80vh */
+  height: min(750px, 80dvh);
   width: min(400px, 90vw);
   padding: 20px;
   >span{
