@@ -59,7 +59,7 @@ export const FormInput = ({
         return "Licença médica: responsável";
       case "telefone":
         return "Telefone (###-###)";
-      case "Experiência":
+      case "experiencia":
        return "Experiência";
       case "disponibilidadeEntrevista":
         return "Disponibilidade para entrevista";
