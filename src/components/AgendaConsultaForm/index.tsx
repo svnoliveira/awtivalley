@@ -47,7 +47,7 @@ export const AgendaConsultaForm = () => {
       console.error('Erro ao enviar mensagem de webhook:', error);
     }
     
-    router.push('/dashboard');
+    router.push('/login');
   };
 
   const checkError = () => {
