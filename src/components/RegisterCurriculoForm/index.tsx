@@ -5,11 +5,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { TRegisterCurriculoValues, registerCurriculoSchema } from "./schema";
 import { FormInput } from "../FormInput";
 import { StyledForm, StyledSection } from "./style";
-import { StyledSubmitButton } from "@/globalStyles/SubmitButton";
 import Image from "next/image";
 import Link from "next/link";
 import axios from 'axios';
-import { FieldError } from 'react-hook-form';
 
 export const RegisterCurriculoForm = () => {
   const {
