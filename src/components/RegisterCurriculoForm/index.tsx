@@ -1,3 +1,4 @@
+"use client";
 import { useRouter } from "next/router";
 import { userStore } from "@/stores/userStore";
 import { useForm } from "react-hook-form";
