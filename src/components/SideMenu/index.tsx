@@ -183,7 +183,22 @@ export const SideMenu = () => {
                     width={15}
                     height={15}
                   />
-                </StyledLi>              
+                </StyledLi>     
+                <StyledLi onClick={() => push("/agendamento-de-consultas")}>
+                  <Image
+                    src="/icons/register.svg"
+                    alt="Logo"
+                    width={20}
+                    height={20}
+                  />
+                  <span>Agendamento de Consultas</span>
+                  <Image
+                    src="/icons/arrow-right.svg"
+                    alt="Logo"
+                    width={15}
+                    height={15}
+                  />
+                </StyledLi>          
             </StyledSideList>
           </StyledAside>
         </StyledBlankDiv>
