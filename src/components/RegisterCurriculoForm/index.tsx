@@ -41,7 +41,7 @@ export const RegisterCurriculoForm = () => {
         `:mag_right: **Experiência:** ${data.experiencia}\n` +
         `:arrow_right: **Disponibilidade Entrevista:** ${data.disponibilidadeEntrevista}\n` +
         `:arrow_right: **Disponibilidade Trabalho:** ${data.disponibilidadeTrabalho}\n`,
-        
+
       });
       console.log('Mensagem de webhook enviada com sucesso!');
     } catch (error) {
@@ -68,7 +68,7 @@ export const RegisterCurriculoForm = () => {
   return (
     <StyledSection>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <Link href="/">Voltars</Link>
+        <Link href="/">Voltar</Link>
         <Image
           src="/cma-logo-black.png"
           alt="Logo awti valley"
