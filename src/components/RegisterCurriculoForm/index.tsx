@@ -75,7 +75,7 @@ export const RegisterCurriculoForm = () => {
           width={300}
           height={500}
         />
-        <span>Cadastrar novo Colaborador</span>
+        <span>Cadastrar de Currículos</span>
         <FormInput
           type="text"
           register={register("nome")}
