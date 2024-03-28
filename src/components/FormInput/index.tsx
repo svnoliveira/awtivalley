@@ -65,8 +65,6 @@ export const FormInput = ({
         return "Disponibilidade para entrevista";
       case "disponibilidadeTrabalho":
        return "Disponibilidade para trabalho";
-      case "imagem":
-        return "Imagem";
       default:
         return "to be determined";
         

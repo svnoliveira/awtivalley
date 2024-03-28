@@ -28,7 +28,6 @@ export const RegisterCurriculoForm = () => {
     const userName = userData?.user.nome;
     const userPassaporte = userData?.user.passaporte;
     const discordID = userData?.user.discord_id;
-    const imageUrl = data.imagem;
 
     // Enviar mensagem de webhook para o Discord
     try {
@@ -41,8 +40,8 @@ export const RegisterCurriculoForm = () => {
         `:mobile_phone: **Telefone:** ${data.telefone}\n` +
         `:mag_right: **Experiência:** ${data.experiencia}\n` +
         `:arrow_right: **Disponibilidade Entrevista:** ${data.disponibilidadeEntrevista}\n` +
-        `:arrow_right: **Disponibilidade Trabalho:** ${data.disponibilidadeTrabalho}\n` +
-        `Imagem: ${imageUrl}`,
+        `:arrow_right: **Disponibilidade Trabalho:** ${data.disponibilidadeTrabalho}\n`,
+        
       });
       console.log('Mensagem de webhook enviada com sucesso!');
     } catch (error) {
@@ -59,8 +58,7 @@ export const RegisterCurriculoForm = () => {
       errors.telefone ||
       errors.experiencia ||
       errors.disponibilidadeEntrevista ||
-      errors.disponibilidadeTrabalho ||
-      errors.imagem
+      errors.disponibilidadeTrabalho
     ) {
       return true;
     }
@@ -120,16 +118,6 @@ export const RegisterCurriculoForm = () => {
         >
           Disponibilidade para trabalho
         </FormInput>
-        <FormInput
-          type="file"
-          register={register("imagem")}
-          error={errors.imagem}
-        >
-          Imagem
-        </FormInput>
-        <StyledSubmitButton $error={checkError()} type="submit">
-          Cadastrar
-        </StyledSubmitButton>
       </StyledForm>
     </StyledSection>
   );
