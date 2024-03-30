@@ -57,6 +57,8 @@ export const FormInput = ({
         return "Licença médica: data de expedição";
       case "responsavel":
         return "Licença médica: responsável";
+      case "crm":
+        return "CRM (Registro Geral)"; 
       case "telefone":
         return "Telefone (###-###)";
       case "experiencia":

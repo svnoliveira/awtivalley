@@ -64,7 +64,7 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                     <label htmlFor="status">
                       Status atual: {user.ativo ? "ativo" : "desativado"}
                     </label>
-                    <select id="status" {...register("ativo")}>
+                    <select id="status" {...register("ativo")} defaultValue={user.ativo.toString()}>
                       <option value="">...</option>
                       <option value="true">Ativo</option>
                       <option value="false">Desativado</option>
@@ -95,8 +95,8 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                     <label htmlFor="cargo">
                       Cargo:
                     </label>
-                    <select id="cargo" {...register("cargo")}>
-                      <option value="cargo">...</option>
+                    <select id="cargo" {...register("cargo")} defaultValue={user.cargo}>
+                      <option value="">...</option>
                       <option value="⚗️ Residente">⚗️ Residente</option>
                       <option value="🔬 Médico">🔬 Médico</option>
                       <option value="💉 Enfermagem">💉 Enfermagem</option>
@@ -115,10 +115,10 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                     <label htmlFor="setor">
                       Setor:
                     </label>
-                    <select id="setor" {...register("setor")}>
+                    <select id="setor" {...register("setor")} defaultValue={user.setor}>
                       <option value="">...</option>
-                      <option value="enfermaria">Enfermaria</option>
-                      <option value="administrativo">Administrativo</option>
+                      <option value="💊 Enfermaria">💊Enfermaria</option>
+                      <option value="💻 Administrativo">💻 Administrativo</option>
                     </select>
                   </div>
                   <FormInput
@@ -126,63 +126,76 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                     register={register("efetivacao")}
                     error={errors.efetivacao}
                   >
-                    {user.efetivacao ? user.efetivacao : "Escolha a data de efetivacao"}
+                    {user.efetivacao}
                   </FormInput>
-                  <FormInput
-                    type="text"
-                    register={register("funcao")}
-                    error={errors.funcao}
-                  >
-                    {user.funcao ? user.funcao : "Digite a função"}
-                  </FormInput>
+                  <div>
+                    <label htmlFor="funcao">
+                      Função:
+                    </label>
+                    <select id="funcao" {...register("funcao")} defaultValue={user.funcao}>
+                      <option value="">...</option>
+                      <option value="💼 Diretoria Geral">💼 Diretoria Geral</option>
+                      <option value="📋 Diretor Administrativo">📋 Diretor Administrativo</option>
+                      <option value="🥼 Supervisor">🥼 Supervisor</option>
+                      <option value="📋 Coordenador Geral">📋 Coordenador Geral</option>
+                      <option value="🚁 Inst. Chef Aéreo">🚁 Inst. Chef Aéreo</option>
+                      <option value="🚁 Inst. Aereo">🚁 Inst. Aereo</option>
+                      <option value="🚁 Aux. Aéreo">🚁 Aux. Aéreo</option>
+                      <option value="🧾 Inst. Curso">🧾 Inst. Curso</option>
+                      <option value="🧾 Aux. Curso">🧾 Aux. Curso</option>
+                      <option value="🎉 Aux. Integração">🎉 Aux. Integração</option>
+                      <option value="✒️  Aux. Ingresso">✒️  Aux. Ingresso</option>
+                      <option value="👥 Aux. de Atendimento">👥 Aux. de Atendimento</option>
+                    </select>
+                  </div>
                   <FormInput
                     type="text"
                     register={register("funcoes_extra")}
                     error={errors.funcoes_extra}
                   >
-                    {user.funcoes_extra ? user.funcoes_extra : "Digite as funções extra"}
+                    {user.funcoes_extra}
                   </FormInput>
                   <FormInput
                     type="date"
                     register={register("ultima_promocao")}
                     error={errors.ultima_promocao}
                   >
-                    {user.ultima_promocao ? user.ultima_promocao : "Escolha a data da última promoção"}
+                    {user.ultima_promocao}
                   </FormInput>
                   <FormInput
                     type="text"
                     register={register("observacoes")}
                     error={errors.observacoes}
                   >
-                    {user.observacoes ? user.observacoes : "Digite as observações"}
+                    {user.observacoes}
                   </FormInput>
                   <FormInput
                     type="text"
                     register={register("ciclo")}
                     error={errors.ciclo}
                   >
-                    {user.licenca_medica.ciclo ? user.licenca_medica.ciclo : "Digite o ciclo da licença médica"}
+                    {user.licenca_medica.ciclo}
                   </FormInput>
                   <FormInput
                     type="date"
                     register={register("data")}
                     error={errors.data}
                   >
-                    {user.licenca_medica.data ? user.licenca_medica.data : "Digite a data da licença médica"}
+                    {user.licenca_medica.data}
                   </FormInput>
                   <FormInput
                     type="text"
                     register={register("responsavel")}
                     error={errors.responsavel}
                   >
-                    {user.licenca_medica.responsavel ? user.licenca_medica.responsavel : "Digite o nome do responsável pela licença médica"}
+                    {user.licenca_medica.responsavel}
                   </FormInput>
                   <FormInput
                     type="text"
                     register={register("crm")}
                     error={errors.crm}
                   >
-                    {user.licenca_medica.crm ? user.licenca_medica.crm : "Digite o crm da licença médica"}
+                   {user.licenca_medica.crm}
                   </FormInput>
                 </StyledInputContainer>
                 <StyledButton type="submit">
