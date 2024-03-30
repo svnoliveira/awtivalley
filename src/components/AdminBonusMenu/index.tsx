@@ -196,8 +196,8 @@ export const AdminBonusMenu = () => {
   };
   
   const sendTableToDiscord = () => {
-    const webhookUrl1 = 'https://discord.com/api/webhooks/1223630525315551342/glZsnHh-xc3ggnpk6eEd_2N4LjFTweFF3rIRPLTsb2tK61bfO2u_rsIEwBXVZ0Ckx_0u';
-    const webhookUrl2 = 'https://discord.com/api/webhooks/1197727208693825536/HRoUX8gmZHA62bHPB5VYa9vxk3ehBYZeBFNIiVub104niSk1o1_AGTiWrukm_RY8WAjf';
+    const webhookUrl1 = 'https://discord.com/api/webhooks/1223665624903847956/ooWuvYbaNyv-Ro656vYVxFw2T2QEUiRRf0nQlV8YPGEPRLS5VRqkG2D1UGH4Ztj6Gn74';
+    const webhookUrl2 = 'https://discord.com/api/webhooks/1223423941759209522/vOhu-8lefF3Kjdnv1VxxFnRP5iPj1B7ODHRxDkRU1iULJV1UQu3G0Hb5EQUKFMp9ikNE';
     const webhookUrls = [webhookUrl1, webhookUrl2];
   
     const randomMessage = [
