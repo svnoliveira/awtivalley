@@ -65,6 +65,12 @@ export const FormInput = ({
         return "Disponibilidade para entrevista";
       case "disponibilidadeTrabalho":
        return "Disponibilidade para trabalho";
+       case "especialista":
+        return "Consulta para o Especialista";
+       case "motivoConsulta":
+         return "Motivo da Consulta";
+       case "disponibilidadeConsulta":
+        return "Disponibilidade para se consultar";
       default:
         return "to be determined";
         

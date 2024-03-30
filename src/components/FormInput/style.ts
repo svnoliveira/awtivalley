@@ -14,7 +14,7 @@ export const StyledDiv = styled.div`
     >label{
         position: absolute;
         top: -8px;
-        left: 15px;
+        left: 1px;
         background-color: white;
         border-radius:25%;
         font-size: 10px;

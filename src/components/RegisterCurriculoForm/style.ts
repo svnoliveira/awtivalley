@@ -38,3 +38,41 @@ export const StyledForm = styled.form`
     height: auto;
   }
 `;
+
+export const StyledSelectWrapper = styled.div`
+  background-color: #EEEEEE;
+  color: var(--grey);
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  padding: 10px 5px 10px 30px;
+  border: 2px solid var(--grey);
+  border-radius: 5px;
+  margin-top: 20px;
+
+  >label{
+    position: absolute;
+    top: -8px;
+    left: 1px;
+    background-color: white;
+    border-radius:25%;
+    font-size: 10px;
+    padding: 0 5px;
+}
+
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  span {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    color: red;
+  }
+  
+`;

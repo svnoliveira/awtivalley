@@ -33,6 +33,12 @@ export const HomeHero = () => {
           {user && <li><Link href={"/registercurriculo"}>
            <HomeMenuCard iconUrl="/icons/register.svg">Cadastro de Currículos</HomeMenuCard>
           </Link></li>}
+          {!user && <li><Link href={"/registercurriculo"}>
+            <HomeMenuCard iconUrl="/icons/register.svg">Cadastro de Currículos</HomeMenuCard>
+          </Link></li>}
+          {!user && <li><Link href={"/agendamento-de-consultas"}>
+            <HomeMenuCard iconUrl="/icons/register.svg">Agendamento de Consultas</HomeMenuCard>
+          </Link></li>}
           {user && <li><Link href={"/agendamento-de-consultas"}>
            <HomeMenuCard iconUrl="/icons/register.svg">Agendamento de Consultas</HomeMenuCard>
           </Link></li>}

@@ -1,53 +1,88 @@
-"use client";
+import { useState, useEffect } from 'react'; // Importe o useEffect
 import { useRouter } from "next/navigation";
-import { userStore } from "@/stores/userStore";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TRegisterCurriculoValues, registerCurriculoSchema } from "./schema";
 import { FormInput } from "../FormInput";
-import { StyledForm, StyledSection } from "./style";
+import { StyledForm, StyledSection, StyledSelectWrapper } from "./style";
+import { StyledSubmitButton } from "@/globalStyles/SubmitButton";
 import Image from "next/image";
 import Link from "next/link";
 import axios from 'axios';
 
 export const RegisterCurriculoForm = () => {
+  const [image, setImage] = useState<File | null>(null); 
+  const [successMessage, setSuccessMessage] = useState<string>(""); // Estado para a mensagem de sucesso
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
+    reset, // Função para limpar o formulário
     formState: { errors },
   } = useForm<TRegisterCurriculoValues>({
     resolver: zodResolver(registerCurriculoSchema),
   });
 
-  const router = useRouter();
+  useEffect(() => {
+    // Função para fazer a mensagem de sucesso desaparecer após 3 segundos
+    const timer = setTimeout(() => {
+      setSuccessMessage("");
+    }, 3000);
+    
+    // Limpar o timer quando o componente for desmontado
+    return () => clearTimeout(timer);
+  }, [successMessage]);
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const selectedImage = event.target.files[0];
+      setImage(selectedImage);
+    }
+  };
 
   const onSubmit = async (data: TRegisterCurriculoValues) => {
-    const { userData } = userStore((store) => store);
-    const userId = userData?.user.id;
-    const userName = userData?.user.nome;
-    const userPassaporte = userData?.user.passaporte;
-    const discordID = userData?.user.discord_id;
-
-    // Enviar mensagem de webhook para o Discord
     try {
-      await axios.post('URL_DO_SEU_WEBHOOK_DO_DISCORD', {
-        content: `:heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign:\n` +
-        `# :bookmark_tabs: **Novo Currículo cadastrado:** :bookmark_tabs:\n\n` +
-        `:mega: O Colaborador :busts_in_silhouette: ${discordID} **${userName}** | :identification_card: **${userPassaporte}** ID de cadastro: **${userId}** cadastrou um novo currículo\n\n` +
-        `:busts_in_silhouette: **Nome:**  ${data.nome}\n` +
-        `:identification_card: **Passaporte:** ${data.passaporte}\n` +
-        `:mobile_phone: **Telefone:** ${data.telefone}\n` +
-        `:mag_right: **Experiência:** ${data.experiencia}\n` +
-        `:arrow_right: **Disponibilidade Entrevista:** ${data.disponibilidadeEntrevista}\n` +
-        `:arrow_right: **Disponibilidade Trabalho:** ${data.disponibilidadeTrabalho}\n`,
+      let message = `:heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign:\n` +
+      `# <a:alerta:1223357938912067675> <@&1192311823211442207> | <@&1127323287060496408> <a:alerta:1223357938912067675>\n\n` +
+      `# :bookmark_tabs: **Novo Currículo cadastrado: ** :bookmark_tabs:\n\n` +
+      `:busts_in_silhouette: **Nome:**  ${data.nome}\n` +
+      `:identification_card: **Passaporte:** ${data.passaporte}\n` +
+      `:mobile_phone: **Telefone:** ${data.telefone}\n` +
+      `:mag_right: **Experiência:** ${data.experiencia}\n` +
+      `:arrow_right: **Disponibilidade Entrevista:** ${data.disponibilidadeEntrevista}\n` +
+      `:arrow_right: **Disponibilidade Trabalho:** ${data.disponibilidadeTrabalho}\n`;
 
+      await axios.post('https://discord.com/api/webhooks/1223430514342367443/KzoSeJ-iMWeo1Cj0Vip8DLbDjbZ35_L73vB-gQdYWYFIKziZofYwNgftr4bdbs2ECytK', {
+        content: message,
       });
+
       console.log('Mensagem de webhook enviada com sucesso!');
+
+      if (image) {
+        const formData = new FormData();
+        formData.append('file', image);
+
+        await axios.post('https://discord.com/api/webhooks/1223430514342367443/KzoSeJ-iMWeo1Cj0Vip8DLbDjbZ35_L73vB-gQdYWYFIKziZofYwNgftr4bdbs2ECytK', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          params: {
+            file: image.name
+          }
+        });
+
+        console.log('Imagem enviada com sucesso!');
+      }
+      
+      // Limpar o formulário após o envio da mensagem
+      reset();
+
+      // Definir a mensagem de sucesso
+      setSuccessMessage("Currículo cadastrado com sucesso!");
     } catch (error) {
       console.error('Erro ao enviar mensagem de webhook:', error);
     }
-    
-    router.push('/login');
   };
 
   const checkError = () => {
@@ -66,6 +101,7 @@ export const RegisterCurriculoForm = () => {
 
   return (
     <StyledSection>
+      {successMessage && <div style={{ backgroundColor: 'lightgreen', padding: '10px', marginBottom: '10px' }}>{successMessage}</div>}
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <Link href="/">Voltar</Link>
         <Image
@@ -107,7 +143,7 @@ export const RegisterCurriculoForm = () => {
           type="text"
           register={register("disponibilidadeEntrevista")}
           error={errors.disponibilidadeEntrevista}
-        >FieldError 
+        >
           Disponibilidade para entrevista
         </FormInput>
         <FormInput
@@ -117,6 +153,13 @@ export const RegisterCurriculoForm = () => {
         >
           Disponibilidade para trabalho
         </FormInput>
+        <StyledSelectWrapper>
+        <input type="file" onChange={handleImageChange} accept="image/*" />
+        </StyledSelectWrapper>
+       <br></br>
+        <StyledSubmitButton $error={checkError()} type="submit">
+          CADASTRAR
+        </StyledSubmitButton>
       </StyledForm>
     </StyledSection>
   );

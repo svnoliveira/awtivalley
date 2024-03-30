@@ -26,7 +26,7 @@ export const StyledForm = styled.form`
   justify-content: space-around;
   background-color: white;
   box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.44);
-  height: min(750px, 80dvh);
+  height: min(780px, 100dvh);
   width: min(400px, 90vw);
   padding: 20px;
   >span{
@@ -37,4 +37,42 @@ export const StyledForm = styled.form`
     width: 300px;
     height: auto;
   }
+`;
+
+export const StyledSelectWrapper = styled.div`
+  background-color: #EEEEEE;
+  color: var(--grey);
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  padding: 10px 5px 10px 30px;
+  border: 2px solid var(--grey);
+  border-radius: 5px;
+  margin-top: 20px;
+
+  >label{
+    position: absolute;
+    top: -8px;
+    left: 1px;
+    background-color: white;
+    border-radius:25%;
+    font-size: 10px;
+    padding: 0 5px;
+}
+
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  span {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    color: red;
+  }
+  
 `;

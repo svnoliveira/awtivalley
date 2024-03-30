@@ -74,7 +74,7 @@ export const StyledInputContainer = styled.div`
     }
   }
   select {
-    padding: 10px 5px 10px 30px;
+    padding: 10px 5px 10px 400px;
     background-color: #eeeeee;
     border: 2px solid var(--grey);
     border-radius: 5px;
