@@ -17,7 +17,14 @@ export const AdminPontosMenu = () => {
       <AdminDateSelector />
       <StyledTable>
         <thead>
-          {adminActiveUser && adminActivePeriod && <tr><td colSpan={4}><b>Total de Horas</b></td><td>{getTimeFromSeconds(totalHoras(adminActiveUser.registros_de_ponto, adminActivePeriod.start, adminActivePeriod.end))}</td></tr>}
+          {adminActiveUser && adminActivePeriod && 
+          <tr>
+            <td colSpan={4}><b>Total de Horas</b>
+          </td>
+            <td>
+              {getTimeFromSeconds(totalHoras(adminActiveUser.registros_de_ponto, adminActivePeriod.start, adminActivePeriod.end))}
+            </td>
+          </tr>}
           <tr>
             <ThTitleRow>Colaborador</ThTitleRow>
             <ThTitleRow>Passaporte</ThTitleRow>

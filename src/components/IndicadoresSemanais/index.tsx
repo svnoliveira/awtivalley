@@ -41,7 +41,8 @@ export const IndicadoresSemanais = () => {
       userPontoList && gerarStatusSemanal(userPontoList);
     };
     loadStatus();
-  }, [userPontoList]);
+  }, [userPontoList, indicadorMenu]); // Adicionado indicadorMenu como dependência
+  
 
   const getBonusStatus = () => {
     if (horasCumpridas >= 0) {

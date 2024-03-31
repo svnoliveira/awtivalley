@@ -138,6 +138,7 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                       <option value="📋 Diretor Administrativo">📋 Diretor Administrativo</option>
                       <option value="🥼 Supervisor">🥼 Supervisor</option>
                       <option value="📋 Coordenador Geral">📋 Coordenador Geral</option>
+                      <option value="🔖 Coordenador">🔖 Coordenador</option>
                       <option value="🚁 Inst. Chef Aéreo">🚁 Inst. Chef Aéreo</option>
                       <option value="🚁 Inst. Aereo">🚁 Inst. Aereo</option>
                       <option value="🚁 Aux. Aéreo">🚁 Aux. Aéreo</option>

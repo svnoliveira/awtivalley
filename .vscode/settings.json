@@ -1,0 +1,9 @@
+{
+    "discord.largeImage": "Editando a {LANG} file",
+    "discord.lowerDetailsEditing": "Trabalhando no: Painel {workspace}",
+    "discord.lowerDetailsIdling": "Sem atividades",
+    "discord.removeDetails": false,
+    "discord.smallImage": "{app_name}",
+    "discord.detailsEditing": "Mexendo no {file_name}",
+    "discord.detailsIdling": "Inativo"
+}
