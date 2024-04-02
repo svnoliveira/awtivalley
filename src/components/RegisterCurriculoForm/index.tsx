@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'; // Importe o useEffect
+import { useState, useEffect } from 'react';
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,25 +12,23 @@ import axios from 'axios';
 
 export const RegisterCurriculoForm = () => {
   const [image, setImage] = useState<File | null>(null); 
-  const [successMessage, setSuccessMessage] = useState<string>(""); // Estado para a mensagem de sucesso
+  const [successMessage, setSuccessMessage] = useState<string>("");
   const router = useRouter();
 
   const {
     register,
     handleSubmit,
-    reset, // Função para limpar o formulário
+    reset,
     formState: { errors },
   } = useForm<TRegisterCurriculoValues>({
     resolver: zodResolver(registerCurriculoSchema),
   });
 
   useEffect(() => {
-    // Função para fazer a mensagem de sucesso desaparecer após 3 segundos
     const timer = setTimeout(() => {
       setSuccessMessage("");
     }, 3000);
     
-    // Limpar o timer quando o componente for desmontado
     return () => clearTimeout(timer);
   }, [successMessage]);
 
@@ -75,10 +73,8 @@ export const RegisterCurriculoForm = () => {
         console.log('Imagem enviada com sucesso!');
       }
       
-      // Limpar o formulário após o envio da mensagem
       reset();
 
-      // Definir a mensagem de sucesso
       setSuccessMessage("Currículo cadastrado com sucesso!");
     } catch (error) {
       console.error('Erro ao enviar mensagem de webhook:', error);
