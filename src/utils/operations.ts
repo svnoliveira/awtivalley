@@ -79,7 +79,7 @@ export const formatHorario = (texto: string) => {
 
 export const checkUserRole = ( user:IUser | undefined ) => {
   if(user){
-    if (user.is_superuser === true || user.setor === "Ingressos"){
+    if (user.is_superuser === true || user.setor === "✒️ Ingressos"){
       return true;
     } else {
       return false;
