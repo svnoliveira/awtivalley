@@ -16,9 +16,7 @@ export const AdminBonusMenu = () => {
   const userList = userStore((state) => state.userList);
   const { adminActivePeriod } = adminStore((state) => state);
   const [bonusLimit, setBonusLimit] = useState<number>(0);
-  const [bonusEnabled, setBonusEnabled] = useState<{ [key: string]: { [name: string]: boolean } }>(
-    {}
-  );
+  const [bonusEnabled, setBonusEnabled] = useState<{ [funcao: string]: { [nome: string]: boolean } }>({});
   const [totalHorasFormatted, setTotalHorasFormatted] = useState<string>('');
   const [totalValorFormatted, setTotalValorFormatted] = useState<string>('');
 
@@ -175,14 +173,22 @@ export const AdminBonusMenu = () => {
     });
   };
 
-  const toggleBonus = (funcao: string) => {
+  const toggleBonus = (funcao: string, nome: string) => {
+    console.log(`Toggling bonus for: ${funcao}, ${nome}`);
     setBonusEnabled((prevBonusEnabled) => {
+      const funcaoEnabled = prevBonusEnabled[funcao] || {}; // Obtém o objeto para a função especificada
+      const updatedFuncaoEnabled = {
+        ...funcaoEnabled,
+        [nome]: !funcaoEnabled[nome] || false, // Inverte o estado do nome específico
+      };
+  
       const newBonusEnabled = {
         ...prevBonusEnabled,
-        [funcao]: !prevBonusEnabled[funcao],
+        [funcao]: updatedFuncaoEnabled, // Atualiza o objeto da função com o novo estado
       };
-      localStorage.setItem("bonusEnabled", JSON.stringify(newBonusEnabled));
-      return newBonusEnabled;
+  
+      localStorage.setItem("bonusEnabled", JSON.stringify(newBonusEnabled)); // Salva no localStorage
+      return newBonusEnabled; // Retorna o novo estado atualizado
     });
   };
 
@@ -335,14 +341,14 @@ return (
                       )}
                     </td>
                     <td>
-                      <label className="switch">
-                        <input
-                          type="checkbox"
-                          checked={bonusEnabled[user.funcao]}
-                          onChange={() => toggleBonus(user.funcao)}
-                        />
-                        <span className="slider round"></span>
-                      </label>
+                    <label className="switch">
+                      <input
+                        type="checkbox"
+                        checked={bonusEnabled[user.funcao]?.[user.nome] || false}
+                        onChange={() => toggleBonus(user.funcao, user.nome)}
+                      />
+                      <span className="slider round"></span>
+                    </label>
                     </td>
                   </tr>
                 ))}
