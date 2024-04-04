@@ -62,12 +62,14 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                 <StyledInputContainer>
                   <div>
                     <label htmlFor="status">
-                      Status atual: {user.ativo ? "ativo" : "desativado"}
+                      Status atual: {user.ativo ? "ativo" : user.status === 'ferias' ? "de férias" : user.status === 'ausente' ? "ausente" : "desligado"}
                     </label>
-                    <select id="status" {...register("ativo")} defaultValue={user.ativo.toString()}>
+                    <select id="status" {...register("status")} defaultValue={user.ativo ? 'ativo' : user.status}>
                       <option value="">...</option>
-                      <option value="true">Ativo</option>
-                      <option value="false">Desativado</option>
+                      <option value="ativo">✅ Ativo</option>
+                      <option value="ferias">🏖️ Férias</option>
+                      <option value="ausente">🔒 Ausente</option>
+                      <option value="desligado">❎ Desligado</option>
                     </select>
                   </div>
                   <FormInput
