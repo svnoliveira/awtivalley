@@ -16,7 +16,7 @@ export const AdminBonusMenu = () => {
   const userList = userStore((state) => state.userList);
   const { adminActivePeriod } = adminStore((state) => state);
   const [bonusLimit, setBonusLimit] = useState<number>(0);
-  const [bonusEnabled, setBonusEnabled] = useState<{ [key: string]: boolean }>(
+  const [bonusEnabled, setBonusEnabled] = useState<{ [key: string]: { [name: string]: boolean } }>(
     {}
   );
   const [totalHorasFormatted, setTotalHorasFormatted] = useState<string>('');
@@ -175,11 +175,14 @@ export const AdminBonusMenu = () => {
     });
   };
 
-  const toggleBonus = (funcao: string) => {
+  const toggleBonus = (funcao: string, nome: string) => {
     setBonusEnabled((prevBonusEnabled) => {
       const newBonusEnabled = {
         ...prevBonusEnabled,
-        [funcao]: !prevBonusEnabled[funcao],
+        [funcao]: {
+          ...prevBonusEnabled[funcao],
+          [nome]: !prevBonusEnabled[funcao]?.[nome] || false,
+        },
       };
       localStorage.setItem("bonusEnabled", JSON.stringify(newBonusEnabled));
       return newBonusEnabled;
@@ -335,14 +338,14 @@ return (
                       )}
                     </td>
                     <td>
-                      <label className="switch">
-                        <input
-                          type="checkbox"
-                          checked={bonusEnabled[user.funcao]}
-                          onChange={() => toggleBonus(user.funcao)}
-                        />
-                        <span className="slider round"></span>
-                      </label>
+                    <label className="switch">
+                      <input
+                        type="checkbox"
+                        checked={bonusEnabled[user.funcao]?.[user.nome] || false}
+                        onChange={() => toggleBonus(user.funcao, user.nome)}
+                      />
+                      <span className="slider round"></span>
+                    </label>
                     </td>
                   </tr>
                 ))}
