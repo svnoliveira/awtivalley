@@ -339,7 +339,7 @@ return (
                         <input
                           type="checkbox"
                           checked={bonusEnabled[user.funcao]}
-                          onChange={() => toggleBonus(user.nome)}
+                          onChange={() => toggleBonus(user.funcao)}
                         />
                         <span className="slider round"></span>
                       </label>
