@@ -62,14 +62,12 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                 <StyledInputContainer>
                   <div>
                     <label htmlFor="status">
-                      Status atual: {user.ativo ? "ativo" : user.status === 'ferias' ? "de férias" : user.status === 'ausente' ? "ausente" : "desligado"}
+                      Status atual: {user.ativo ? "ativo" : "desativado"}
                     </label>
-                    <select id="status" {...register("status")} defaultValue={user.ativo ? 'ativo' : user.status}>
+                    <select id="status" {...register("ativo")} defaultValue={user.ativo.toString()}>
                       <option value="">...</option>
-                      <option value="ativo">✅ Ativo</option>
-                      <option value="ferias">🏖️ Férias</option>
-                      <option value="ausente">🔒 Ausente</option>
-                      <option value="desligado">❎ Desligado</option>
+                      <option value="true">Ativo</option>
+                      <option value="false">Desativado</option>
                     </select>
                   </div>
                   <FormInput
@@ -99,11 +97,11 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                     </label>
                     <select id="cargo" {...register("cargo")} defaultValue={user.cargo}>
                       <option value="">...</option>
-                      <option value="⚗️ Residente">⚗️ Residente</option>
-                      <option value="🔬 Médico">🔬 Médico</option>
-                      <option value="💉 Enfermagem">💉 Enfermagem</option>
+                      <option value="🔬 Residente">🔬 Residente</option>
+                      <option value="🩺 Médico">🩺 Médico</option>
+                      <option value="💉 Paramédico">💉 Paramédico</option>
                       <option value="🧪 Interno">🧪 Interno</option>
-                      <option value="📚 Estagiário">📚 Estagiário</option>
+                      <option value="💊 Estagiário">💊 Estagiário</option>
                     </select>
                   </div>
                   <FormInput
@@ -139,17 +137,29 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                       <option value="">...</option>
                       <option value="💼 Diretoria Geral">💼 Diretoria Geral</option>
                       <option value="📋 Diretor Administrativo">📋 Diretor Administrativo</option>
+                      <option value="💰 Diretor Financeiro">💰 Diretor Financeiro</option>
+                      <option value="📝 Diretor Supervisor">📝 Diretor Supervisor</option>
                       <option value="🥼 Supervisor">🥼 Supervisor</option>
                       <option value="📋 Coordenador Geral">📋 Coordenador Geral</option>
                       <option value="🔖 Coordenador">🔖 Coordenador</option>
-                      <option value="🚁 Inst. Chef Aéreo">🚁 Inst. Chef Aéreo</option>
+                      <option value="🧠 Coord. Saúde Mental">🧠 Coord. Saúde Mental</option>
+                      <option value="💪 Coord. Saúde Físico-Motora">💪 Coord. Saúde Físico-Motora</option>
+                      <option value="🎉 Coord. Integração">🎉 Coord. Integração</option>
+                      <option value="✒️ Coord. Ingressos">✒️ Coord. Ingressos</option>
+                      <option value="🧾 Coord. Cursos">🧾 Coord. Cursos</option>
+                      <option value="🔪 Coord. Cirúrgica">🔪 Coord. Cirúrgica</option>
+                      <option value="🚁 Coord. Aéreo">🚁 Coord. Aéreo</option>
+                      <option value="🚁 Inst. Chef Aéreo">🚁 Inst. Chef Aéreo</option>                      
                       <option value="🚁 Inst. Aereo">🚁 Inst. Aereo</option>
-                      <option value="🚁 Aux. Aéreo">🚁 Aux. Aéreo</option>
+                      <option value="📚 Pré-Instrutor">📚 Pré-Instrutor</option>
                       <option value="🧾 Inst. Curso">🧾 Inst. Curso</option>
-                      <option value="🧾 Aux. Curso">🧾 Aux. Curso</option>
+                      <option value="📚 Cursos Treinamento">📚 Cursos Treinamento</option>
                       <option value="🎉 Aux. Integração">🎉 Aux. Integração</option>
-                      <option value="✒️  Aux. Ingresso">✒️  Aux. Ingresso</option>
-                      <option value="👥 Aux. de Atendimento">👥 Aux. de Atendimento</option>
+                      <option value="📚 Integração Treinamento">📚 Integração Treinamento</option>
+                      <option value="✒️ Aux. Ingresso">✒️  Aux. Ingresso</option>
+                      <option value="📚 Ingresso Treinamento">📚 Ingresso Treinamento</option>
+                      <option value="🧠 Aux. Saúde Mental">🧠 Aux. Saúde Mental</option>
+                      <option value="💻 T.I. do CMA">💻 T.I. do CMA</option>
                     </select>
                   </div>
                   <FormInput

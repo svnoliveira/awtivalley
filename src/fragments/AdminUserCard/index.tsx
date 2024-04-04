@@ -16,15 +16,7 @@ export const AdminUserCard = ({ user }: { user: IUser }) => {
         <InfoCard>
           <li>
             <span>Status: </span>
-            <span>
-              {user.ativo
-                ? "✅ Ativo"
-                : user.status === 'ferias'
-                ? "🏖️ Férias"
-                : user.status === 'ausente'
-                ? "🔒 Ausente"
-                : "❎ Desligado"}
-            </span>
+            <span>{user.ativo ? "Ativo" : "Desligado"}</span>
           </li>
           <li>
             <span>Passaporte: </span>
