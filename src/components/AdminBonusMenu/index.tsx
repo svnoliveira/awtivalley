@@ -36,6 +36,32 @@ export const AdminBonusMenu = () => {
     setBonusStatus(initialBonusStatus);
   }, [userList]);
 
+  const calculateTotalBonus = () => {
+    let totalBonus = 0;
+  
+    filteredList().forEach((user) => {
+      const registros = user.registros_de_ponto.filter((ponto) => {
+        const testingData = new Date(ponto.entrada);
+        return (
+          testingData >= adminActivePeriod!.start &&
+          testingData <= adminActivePeriod!.end
+        );
+      });
+  
+      const horas = totalHoras(
+        registros,
+        adminActivePeriod!.start,
+        adminActivePeriod!.end
+      );
+  
+      const bonus = calculatePayment(horas, user.cargo, user.funcao);
+      totalBonus += bonus;
+    });
+  
+    return totalBonus;
+  };
+  
+
   const calculatePayment = (horas: number, cargo: string, funcao: string): number => {
     let rate = 0;
     if (horas >= 36000) {
@@ -94,7 +120,7 @@ export const AdminBonusMenu = () => {
           const bonus = 10000;
           rate += bonus;
       } else if (horas >= 26280 + 720) {
-          const bonus = 75000;
+          const bonus = 7500;
           rate += bonus;
       }
   } else if (
@@ -154,7 +180,9 @@ export const AdminBonusMenu = () => {
     <StyledSection>
       {!adminActivePeriod && (
         <p>Selecione Um Período para ver as listas de bonus</p>
+        
       )}
+      
       {adminActivePeriod && (
         <>
           <AdminNav>
@@ -183,7 +211,10 @@ export const AdminBonusMenu = () => {
               50%
             </AdminNavButton>
           </AdminNav>
-          <StyledTable>
+          <div>
+          <p><strong>Valor Total da Bonificação:💰💸 {formatCurrency(calculateTotalBonus())}⚕️💚</strong></p>
+          </div>
+          <StyledTable>            
             <thead>
               <tr>
                 <ThTitleRow>Seq</ThTitleRow>
