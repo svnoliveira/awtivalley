@@ -154,11 +154,11 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                       <option value="🚁 Coord. Aéreo">🚁 Coord. Aéreo</option>
                       <option value="🚁 Inst. Chef Aéreo">🚁 Inst. Chef Aéreo</option>                      
                       <option value="🚁 Inst. Aereo">🚁 Inst. Aereo</option>
-                      <option value="📚 Pré-Instrutor">📚 Pré-Instrutor</option>
+                      <option value="🚁 Aux. Aéreo">🚁 Aux. Aéreo</option>
                       <option value="🧾 Inst. Curso">🧾 Inst. Curso</option>
-                      <option value="📚 Cursos Treinamento">📚 Cursos Treinamento</option>
-                      <option value="🎉 Aux. Integração">🎉 Aux. Integração</option>
-                      <option value="📚 Integração Treinamento">📚 Integração Treinamento</option>
+                      <option value="🧾 Aux. Curso">🧾 Aux. Curso</option>
+                      <option value="✒️  Aux. Ingresso">✒️  Aux. Ingresso</option>
+                      <option value="👥 Aux. de Atendimento">👥 Aux. de Atendimento</option>
                       <option value="✒️ Aux. Ingresso">✒️  Aux. Ingresso</option>
                       <option value="📚 Ingresso Treinamento">📚 Ingresso Treinamento</option>
                       <option value="🧠 Aux. Saúde Mental">🧠 Aux. Saúde Mental</option>
