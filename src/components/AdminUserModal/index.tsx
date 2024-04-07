@@ -33,6 +33,7 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
 
   const parseRegisterData = async (userData: TEditUserValues) => {
     userData = removeEmptyStringKeys(userData);
+    userData.funcao = userData.funcao || ""; // Ensure funcao is set to empty string if not selected
     setLoading(true);
     const success = await editUser(token!, user.id, userData);
     setLoading(false);
@@ -66,8 +67,10 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                     </label>
                     <select id="status" {...register("ativo")} defaultValue={user.ativo.toString()}>
                       <option value="">...</option>
-                      <option value="true">Ativo</option>
-                      <option value="false">Desativado</option>
+                      <option value="true">✅ Ativo</option>
+                      <option value="false">❌ Desligado</option>
+                      <option value="ausente">✳️ Ausente</option>
+                      <option value="ferias">🏖️ Férias</option>
                     </select>
                   </div>
                   <FormInput

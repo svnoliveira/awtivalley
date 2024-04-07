@@ -54,11 +54,11 @@ export const DashboardCard = () => {
           <InfoCard>
             <li>
               <span>Nome: </span>
-              <span>{user?.nome}</span>
+              <span>👨‍⚕️{user?.nome}</span>
             </li>
             <li>
               <span>Passaporte: </span>
-              <span>{user?.passaporte}</span>
+              <span>🪪{user?.passaporte}</span>
             </li>
             <li>
               <span>Discord ID: </span>
@@ -90,7 +90,7 @@ export const DashboardCard = () => {
             </li>
             <li>
               <span>Observações: </span>
-              <span>{user?.observacoes}</span>
+              <span>📝{user?.observacoes}</span>
             </li>
           </InfoCard>
           </>
@@ -99,19 +99,19 @@ export const DashboardCard = () => {
           <InfoCard>
             <li>
               <span>Ciclo: </span>
-              <span>{user?.licenca_medica.ciclo}</span>
+              <span>♻️{user?.licenca_medica.ciclo}</span>
             </li>
             <li>
               <span>Data: </span>
-              <span>{user?.licenca_medica.data}</span>
+              <span>📆{user?.licenca_medica.data}</span>
             </li>
             <li>
               <span>Responsável: </span>
-              <span>{user?.licenca_medica.responsavel}</span>
+              <span>👨‍⚕️{user?.licenca_medica.responsavel}</span>
             </li>
             <li>
               <span>CRM: </span>
-              <span>{user?.licenca_medica.crm}</span>
+              <span>🪪{user?.licenca_medica.crm}</span>
             </li>
             <li></li>
           </InfoCard>

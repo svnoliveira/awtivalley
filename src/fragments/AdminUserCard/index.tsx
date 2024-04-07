@@ -16,7 +16,7 @@ export const AdminUserCard = ({ user }: { user: IUser }) => {
         <InfoCard>
           <li>
             <span>Status: </span>
-            <span>{user.ativo ? "Ativo" : "Desligado"}</span>
+            <span>{user.ativo ? "✅ Ativo" : "❌ Desligado"}</span>
           </li>
           <li>
             <span>Passaporte: </span>
@@ -59,19 +59,19 @@ export const AdminUserCard = ({ user }: { user: IUser }) => {
         <InfoCard>
           <li>
             <span>Ciclo: </span>
-            <span>{user.licenca_medica.ciclo}</span>
+            <span>♻️{user.licenca_medica.ciclo}</span>
           </li>
           <li>
             <span>Data: </span>
-            <span>{user.licenca_medica.data}</span>
+            <span>📆{user.licenca_medica.data}</span>
           </li>
           <li>
             <span>Responsável: </span>
-            <span>{user.licenca_medica.responsavel}</span>
+            <span>👨‍⚕️{user.licenca_medica.responsavel}</span>
           </li>
           <li>
             <span>CRM: </span>
-            <span>{user.licenca_medica.crm}</span>
+            <span>🪪{user.licenca_medica.crm}</span>
           </li>
           <li></li>
         </InfoCard>
