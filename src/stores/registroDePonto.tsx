@@ -46,8 +46,9 @@ export const registroStore = create<IRegistroDePontoState>()((set, get) => ({
       if (entrada > saida) {
         throw new Error("Entrada maior que a saida");
       }
+      const userPontos = get().pontoList.filter((ponto) => ponto.user === userId);
       if (
-        get().pontoList.some(
+        userPontos.some(
           (ponto) =>
             new Date(ponto.entrada).getTime() === entrada.getTime() ||
             new Date(ponto.saida).getTime() === saida.getTime()
