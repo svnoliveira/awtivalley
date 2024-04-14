@@ -1,6 +1,7 @@
 import { userStore } from "@/stores/userStore";
 import {
   InfoCard,
+  InfoCursoCard,
   StyledContainer,
   StyledSection,
   StyledUserBanner,
@@ -14,11 +15,22 @@ export const DashboardCard = () => {
   const user = userStore((state) => state.userData?.user);
   const [menu, setMenu] = useState<string>("");
 
+  const checkValidade = (dateString: string) => {
+    const currentDate = new Date();
+    const expirationDate = new Date(dateString);
+
+    if (currentDate < expirationDate) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <StyledSection>
       <StyledUserBanner>
         <h1>
-        Bem Vindo{"(a)"} {user?.nome} {"|"} {user?.passaporte}
+          Bem Vindo{"(a)"} {user?.nome} {"|"} {user?.passaporte}
         </h1>
       </StyledUserBanner>
       <MenuNav>
@@ -50,49 +62,49 @@ export const DashboardCard = () => {
       <StyledContainer>
         {menu == "pessoal" && (
           <>
-          <DashboardPasswordRecovery />
-          <InfoCard>
-            <li>
-              <span>Nome: </span>
-              <span>👨‍⚕️{user?.nome}</span>
-            </li>
-            <li>
-              <span>Passaporte: </span>
-              <span>🪪{user?.passaporte}</span>
-            </li>
-            <li>
-              <span>Discord ID: </span>
-              <span>{user?.discord_id}</span>
-            </li>
-            <li>
-              <span>Cargo: </span>
-              <span>{user?.cargo}</span>
-            </li>
-            <li>
-              <span>Setor: </span>
-              <span>{user?.setor}</span>
-            </li>
-            <li>
-              <span>Função: </span>
-              <span>{user?.funcao}</span>
-            </li>
-            <li>
-              <span>Funções Extra: </span>
-              <span>{user?.funcoes_extra}</span>
-            </li>
-            <li>
-              <span>Efetivação: </span>
-              <span>{user?.efetivacao}</span>
-            </li>
-            <li>
-              <span>Última Promoção: </span>
-              <span>{user?.ultima_promocao}</span>
-            </li>
-            <li>
-              <span>Observações: </span>
-              <span>📝{user?.observacoes}</span>
-            </li>
-          </InfoCard>
+            <DashboardPasswordRecovery />
+            <InfoCard>
+              <li>
+                <span>Nome: </span>
+                <span>👨‍⚕️{user?.nome}</span>
+              </li>
+              <li>
+                <span>Passaporte: </span>
+                <span>🪪{user?.passaporte}</span>
+              </li>
+              <li>
+                <span>Discord ID: </span>
+                <span>{user?.discord_id}</span>
+              </li>
+              <li>
+                <span>Cargo: </span>
+                <span>{user?.cargo}</span>
+              </li>
+              <li>
+                <span>Setor: </span>
+                <span>{user?.setor}</span>
+              </li>
+              <li>
+                <span>Função: </span>
+                <span>{user?.funcao}</span>
+              </li>
+              <li>
+                <span>Funções Extra: </span>
+                <span>{user?.funcoes_extra}</span>
+              </li>
+              <li>
+                <span>Efetivação: </span>
+                <span>{user?.efetivacao}</span>
+              </li>
+              <li>
+                <span>Última Promoção: </span>
+                <span>{user?.ultima_promocao}</span>
+              </li>
+              <li>
+                <span>Observações: </span>
+                <span>📝{user?.observacoes}</span>
+              </li>
+            </InfoCard>
           </>
         )}
         {menu == "licença" && (
@@ -128,15 +140,29 @@ export const DashboardCard = () => {
           </InfoCard>
         )}
         {menu == "curso" && (
-          <InfoCard>
+          <InfoCursoCard>
+            <li>
+              <span>Cursos</span>
+              <span>Validade</span>
+              <span>Certificado</span>
+            </li>
             {user?.cursos.map((curso) => (
-              <li key={curso.id}>
-                <span></span>
+              <li key={curso.nome}>
                 <span>{curso.nome}</span>
+                {curso.vencimento ? (
+                  <span>
+                    {checkValidade(curso.vencimento)
+                      ? new Date(curso.vencimento).toLocaleDateString("pt-br")
+                      : "EXPIRADO"}
+                  </span>
+                ) : (
+                  <span> - </span>
+                )}
+                <span>{curso.certificado}</span>
               </li>
             ))}
             <li></li>
-          </InfoCard>
+          </InfoCursoCard>
         )}
       </StyledContainer>
     </StyledSection>

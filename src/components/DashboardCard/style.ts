@@ -46,3 +46,38 @@ export const InfoCard = styled.ul`
     margin-bottom: 5px;
   }
 `;
+
+export const InfoCursoCard = styled.ul`
+  margin: 20px auto 0 auto;
+  width: min(90vw, 600px);
+  min-height: 400px;
+  padding: 20px;
+  box-shadow: 0px 3px 8px 3px rgba(0, 0, 0, 0.28);
+  > :first-child {
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
+    span {
+        padding: 5px 0 5px 5px;
+      }
+  }
+  li {
+    overflow-x: auto;
+    border-top: solid 1px var(--grey);
+    display: flex;
+    justify-content: space-between;
+    > :first-child,
+    > :last-child {
+      background-color: #f6f6f6;
+      width: 33%;
+      padding: 5px 0 5px 20px;
+    }
+  }
+  > :last-child {
+    :first-child {
+      background-color: white;
+      width: 100%;
+    }
+    padding-bottom: 5px;
+  }
+`;
