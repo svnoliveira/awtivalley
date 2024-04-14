@@ -15,12 +15,8 @@ export const IndicadoresSemanais = () => {
   const userPontoList = userStore((state) => state.userData?.user.registros_de_ponto);
   const data = new Date();
   const hoje = data.getDay();
-  const inicioDaSemana = new Date(
-    data.setDate(data.getDate() - hoje)
-  ).toLocaleDateString("pt-br");
-  const fimDaSemana = new Date(
-    data.setDate(data.getDate() + 6)
-  ).toLocaleDateString("pt-br");
+  const inicioDaSemana = new Date(data.setDate(data.getDate() - hoje)).toLocaleDateString("pt-br");
+  const fimDaSemana = new Date(data.setDate(data.getDate() + 7)).toLocaleDateString("pt-br");
   const [horasCumpridas, setHorasCumpridas] = useState(0);
 
   function gerarStatusSemanal(pontoList: IRegistroDePonto[]) {
@@ -88,8 +84,7 @@ export const IndicadoresSemanais = () => {
                 </span>
               </StyledInfo>
               <StyledInfo>
-                {horasCumpridas > 36000 ? (
-                  <span>Número de horas semanais alcançado.</span>
+                {horasCumpridas > 36000 ? (<span>Número de horas semanais alcançado.</span>
                 ) : (
                   <>
                     <span>Horas restantes para finalizar na semana:</span>
