@@ -2,13 +2,15 @@ import { create } from "zustand";
 import { ICurso, ICursoState } from "./@cursoTypes";
 import { api } from "@/app/api";
 import { adminStore } from "./adminStore";
+import { IUserCurso } from "./@userTypes";
 
 
 const setError = adminStore.getState().setError;
 const setMessage = adminStore.getState().setMessage;
 const setAdminActiveCurso = adminStore.getState().setAdminActiveCurso;
+const setActiveUser = adminStore.getState().setAdminActiveUser;
 
-export const cursoStore = create<ICursoState>()((set) => ({
+export const cursoStore = create<ICursoState>()((set, get) => ({
   cursoList: [],
   loading: false,
 
@@ -36,13 +38,29 @@ export const cursoStore = create<ICursoState>()((set) => ({
       }
     }
   },
-  addCurso: async (curso, user) => {
+  addCurso: async (curso, user, certificado) => {
     try {
       set({ loading: true });
-      const { data } = await api.patch<ICurso>(
-        `/cursos/vincular/${curso.id}/${user.id}/`
+      const { data } = await api.patch<IUserCurso>(
+        `/cursos/vincular/${curso.id}/${user.id}/`, {certificado: certificado}
       );
-      setAdminActiveCurso(data);
+      const activeCurso = get().cursoList.find((entry) => entry.nome === data.nome);
+      if (activeCurso) {
+        setAdminActiveCurso({...activeCurso, users: [
+          ...activeCurso.users, user.id
+        ]});
+        setActiveUser({...user, cursos: [...user.cursos, data]});
+        set((state) => ({cursoList: state.cursoList.map((entry) => {
+          if(entry.id === curso.id){
+            if (!entry.users.some((userID) => userID === user.id)){
+              return {...entry, users: [...entry.users, user.id]}
+            }
+          }
+          return entry;
+        })}));
+      } else {
+        throw new Error('Erro ao encontrar curso');
+      }
       setMessage("Curso Vinculada com sucesso");
     } catch (error) {
       setError("Falha ao vincular curso");
@@ -85,12 +103,12 @@ export const cursoStore = create<ICursoState>()((set) => ({
     }
   },
 
-  registerCurso: async (token, curso) => {
+  registerCurso: async (token, curso, validade) => {
     try {
       set({ loading: true });
       const { data } = await api.post<ICurso>(
         "/cursos/",
-        { nome: curso },
+        { nome: curso, validade },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -112,12 +130,23 @@ export const cursoStore = create<ICursoState>()((set) => ({
       }, 2000);
     }
   },
-  editCurso: async (token, curso, id) => {
+  editCurso: async (token, curso, id, validade) => {
     try {
       set({ loading: true });
+      let formData;
+      if (curso === '') {
+        formData = {
+          validade
+        }
+      } else {
+        formData = {
+          nome: curso,
+          validade
+        }
+      }
       const { data } = await api.patch<ICurso>(
         `/cursos/${id}/`,
-        { nome: curso },
+        formData,
         {
           headers: {
             Authorization: `Bearer ${token}`,

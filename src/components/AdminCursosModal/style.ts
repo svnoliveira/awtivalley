@@ -62,3 +62,16 @@ export const StyledButton = styled.button`
             background-color: var(--red);
         }
 `
+
+export const StyledDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+    > * {
+        flex-grow: 1;
+    }
+    p{
+        text-align: center;
+    }
+`

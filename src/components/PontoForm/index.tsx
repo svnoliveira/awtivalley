@@ -15,7 +15,7 @@ import { FormTextArea } from "../FormTextArea";
 
 export const PontoForm = () => {
   const { addPonto, loading } = registroStore((store) => store);
-  const { userData } = userStore((store) => store);
+  const { userData, loadUser } = userStore((store) => store);
   const userId = userData?.user.id;
   const userName = userData?.user.nome;
   const userPassaporte = userData?.user.passaporte;
@@ -39,7 +39,8 @@ export const PontoForm = () => {
     };
 
     await addPonto(pontoData, userId!);
-
+    loadUser;
+    
     // Enviar webhook para o Discord
     const webhookUrl = 'https://discord.com/api/webhooks/1209602152591527946/bS8k85czlDSOXNK5Bt_CItRjpZJ0AVDVfDiJXoU6cA5YfS4p2_0GjNk2E8xq-j9OxVHP';
       // URL da imagem que você deseja adicionar

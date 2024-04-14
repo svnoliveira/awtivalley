@@ -10,21 +10,11 @@ import { useState } from "react";
 import { MenuNav } from "@/globalStyles/MenuNav/style";
 import { MenuButton } from "@/globalStyles/MenuButton/style";
 import { DashboardPasswordRecovery } from "../DashboardPasswordRecovery";
+import { checkValidade } from "@/utils/operations";
 
 export const DashboardCard = () => {
   const user = userStore((state) => state.userData?.user);
   const [menu, setMenu] = useState<string>("");
-
-  const checkValidade = (dateString: string) => {
-    const currentDate = new Date();
-    const expirationDate = new Date(dateString);
-
-    if (currentDate < expirationDate) {
-      return true;
-    } else {
-      return false;
-    }
-  };
 
   return (
     <StyledSection>

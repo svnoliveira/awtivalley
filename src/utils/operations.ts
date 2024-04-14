@@ -117,3 +117,14 @@ export const isSameDay = (startDateString:string, endDateString:string) => {
 
   return start === end;
 }
+
+export const checkValidade = (dateString: string) => {
+  const currentDate = new Date();
+  const expirationDate = new Date(dateString);
+
+  if (currentDate < expirationDate) {
+    return true;
+  } else {
+    return false;
+  }
+};
