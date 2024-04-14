@@ -68,27 +68,14 @@ export const formatHorario = (texto: string) => {
     entrada: matchEntrada ? matchEntrada[1] : "",
     saida: matchSaida ? matchSaida[1] : "",
   };
-
   const dateParts = informacoes.data.split("/");
-  const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
-
-  if (informacoes.entrada && informacoes.saida) {
-    const entradaTime = new Date(`${formattedDate}T${informacoes.entrada}`);
-    const saidaTime = new Date(`${formattedDate}T${informacoes.saida}`);
-    
-    const diffInMilliseconds = saidaTime.getTime() - entradaTime.getTime();
-
-    // Verificar se a diferença é menor que 5 minutos (300.000 milissegundos)
-    if (diffInMilliseconds < 300000) {
-      return null; // Retornar null ou outra indicação se a diferença for menor que 5 minutos
-    } else {
-      return `${formattedDate} ${informacoes.entrada}-03:00`;
-    }
+  const formattedDate = dateParts[2] + "-" + dateParts[1] + "-" + dateParts[0];
+  if (informacoes.entrada) {
+    return `${formattedDate} ${informacoes.entrada}-03:00`;
+  } else if (informacoes.saida) {
+    return `${formattedDate} ${informacoes.saida}-03:00`;
   }
-
-  return null; // Se não houver entrada ou saída, retornar null
 };
-
 
 export const checkUserRole = ( user:IUser | undefined ) => {
   if(user){
