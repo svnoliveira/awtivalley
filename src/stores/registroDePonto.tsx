@@ -43,6 +43,15 @@ export const registroStore = create<IRegistroDePontoState>()((set, get) => ({
       set({ loading: true });
       const entrada = new Date(pontoData.entrada);
       const saida = new Date(pontoData.saida);
+    
+    const diffInMilliseconds = Math.abs(saida.getTime() - entrada.getTime());
+    
+    const diffInMinutes = diffInMilliseconds / (1000 * 60);
+    
+    if (diffInMinutes <= 5) {
+      throw new Error("Ponto Anulado: Menor ou igual a 5 minutos.");
+    }
+
       if (entrada > saida) {
         throw new Error("Entrada maior que a saida");
       }
