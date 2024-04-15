@@ -32,7 +32,7 @@ export interface IUser{
     funcoes_extra: string;
     ativo: boolean
     licenca_medica: ILicencaMedica;
-    cursos: ICurso[];
+    cursos: IUserCurso[];
     especialidades: IEspecialidade[];
     registros_de_ponto: IRegistroDePonto[];
 };
@@ -48,6 +48,13 @@ export interface IUserData{
     accessToken: string;
     user: IUser;
 };
+
+export interface IUserCurso{
+    nome: string,
+	inicio: string | null,
+	vencimento: string | null,
+	certificado: string
+}
 
 export interface IUserState {
     userData: IUserData | null;

@@ -4,6 +4,7 @@ export interface ICurso {
   id: number;
   nome: string;
   users: number[]; //user_id list
+  validade: number
 }
 
 export interface ICursoState {
@@ -13,13 +14,14 @@ export interface ICursoState {
   setCursoList: (list: ICurso[]) => void;
   setLoading: (boolean: boolean) => void;
   loadCursos: () => Promise<void>;
-  addCurso: (curso: ICurso, user: IUser) => Promise<void>;
+  addCurso: (curso: ICurso, user: IUser, certificado: string) => Promise<void>;
   removeCurso: (curso: ICurso, user: IUser) => Promise<void>;
-  registerCurso: (token: string, curso: string) => Promise<boolean | void>;
+  registerCurso: (token: string, curso: string, validade: number) => Promise<boolean | void>;
   editCurso: (
     token: string,
     curso: string,
-    id: number
+    id: number,
+    validade: number
   ) => Promise<boolean | void>;
   deleteCurso: (token: string, id: number) => Promise<boolean | void>;
 }
