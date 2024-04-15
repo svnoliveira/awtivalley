@@ -46,7 +46,7 @@ export const AdminCursosVincular = () => {
     e.stopPropagation();
     await addCurso(adminActiveCurso!, adminActiveUser!, input);
     await loadUser();
-    // await enviarWebhook(); // Chame a função para enviar o webhook após adicionar o curso
+    await enviarWebhook(); // Chame a função para enviar o webhook após adicionar o curso
   };
 
   return (
