@@ -81,3 +81,17 @@ export const InfoCursoCard = styled.ul`
     padding-bottom: 5px;
   }
 `;
+export const StyledButtonLink = styled.a`
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #ff0000;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #ff5353
+  }
+`;

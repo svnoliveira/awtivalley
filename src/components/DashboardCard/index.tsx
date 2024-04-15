@@ -5,6 +5,7 @@ import {
   StyledContainer,
   StyledSection,
   StyledUserBanner,
+  StyledButtonLink,
 } from "./style";
 import { useState } from "react";
 import { MenuNav } from "@/globalStyles/MenuNav/style";
@@ -129,30 +130,41 @@ export const DashboardCard = () => {
             <li></li>
           </InfoCard>
         )}
-        {menu == "curso" && (
-          <InfoCursoCard>
-            <li>
-              <span>Cursos</span>
-              <span>Validade</span>
-              <span>Certificado</span>
+      {menu === "curso" && (
+        <InfoCursoCard>
+          <li>
+            <span>Cursos</span>
+            <span>Validade</span>
+            <span>Certificado</span>
+          </li>
+          {user?.cursos.map((curso) => (
+            <li key={curso.nome}>
+              <span>{curso.nome}</span>
+              {curso.vencimento ? (
+                <span>
+                  {checkValidade(curso.vencimento)
+                    ? new Date(curso.vencimento).toLocaleDateString("pt-br")
+                    : "EXPIRADO"}
+                </span>
+              ) : (
+                <span> - </span>
+              )}
+              {curso.certificado ? (
+                <span>
+                  <StyledButtonLink
+                    href={curso.certificado}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Certificado
+                  </StyledButtonLink>
+                </span>
+              ) : (
+                <span> - </span>
+              )}
             </li>
-            {user?.cursos.map((curso) => (
-              <li key={curso.nome}>
-                <span>{curso.nome}</span>
-                {curso.vencimento ? (
-                  <span>
-                    {checkValidade(curso.vencimento)
-                      ? new Date(curso.vencimento).toLocaleDateString("pt-br")
-                      : "EXPIRADO"}
-                  </span>
-                ) : (
-                  <span> - </span>
-                )}
-                <span>{curso.certificado}</span>
-              </li>
-            ))}
-            <li></li>
-          </InfoCursoCard>
+          ))}
+        </InfoCursoCard>
         )}
       </StyledContainer>
     </StyledSection>

@@ -12,7 +12,7 @@ import {
   ThTitleRow,
 } from "@/globalStyles/StyledTable/style";
 import { StyledSubmitButton } from "@/globalStyles/SubmitButton";
-import { StyledSection, StyledTitle } from "./style";
+import { StyledSection, StyledTitle, StyledButtonLink } from "./style";
 import { AdminCursosModal } from "../AdminCursosModal";
 import { checkValidade } from "@/utils/operations";
 
@@ -74,7 +74,17 @@ export const AdminCursosMenu = () => {
                 <td>{user?.cargo}</td>
                 <td>{user?.setor}</td>
                 <td>
-                  {userCurso?.certificado ? userCurso?.certificado : " - "}
+                  {userCurso?.certificado ? (
+                    <StyledButtonLink
+                      href={userCurso?.certificado}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Certificado
+                    </StyledButtonLink>
+                  ) : (
+                    " - "
+                  )}
                 </td>
                 <td>
                   {userCurso?.inicio
