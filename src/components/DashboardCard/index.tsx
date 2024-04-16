@@ -1,115 +1,174 @@
-"use client";
-
-import { adminStore } from "@/stores/adminStore";
-import { cursoStore } from "@/stores/cursoStore";
 import { userStore } from "@/stores/userStore";
-import { AdminCursosVincular } from "../AdminCursosVincular";
-import { AdminNav } from "@/globalStyles/AdminNav/style";
-import { AdminNavButton } from "@/globalStyles/AdminNavButton/style";
 import {
-  StyledTable,
-  ThCellHeader,
-  ThTitleRow,
-} from "@/globalStyles/StyledTable/style";
-import { StyledSubmitButton } from "@/globalStyles/SubmitButton";
-import { StyledSection, StyledTitle, StyledButtonLink } from "./style";
-import { AdminCursosModal } from "../AdminCursosModal";
+  InfoCard,
+  InfoCursoCard,
+  StyledContainer,
+  StyledSection,
+  StyledUserBanner,
+  StyledButtonLink,
+} from "./style";
+import { useState } from "react";
+import { MenuNav } from "@/globalStyles/MenuNav/style";
+import { MenuButton } from "@/globalStyles/MenuButton/style";
+import { DashboardPasswordRecovery } from "../DashboardPasswordRecovery";
 import { checkValidade } from "@/utils/operations";
 
-export const AdminCursosMenu = () => {
-  const userList = userStore((state) => state.userList);
-  const { adminActiveCurso, setAdminActiveCurso, setAdminActiveUser } =
-    adminStore((state) => state);
-  const { cursoList, removeCurso } = cursoStore((state) => state);
+export const DashboardCard = () => {
+  const user = userStore((state) => state.userData?.user);
+  const [menu, setMenu] = useState<string>("");
+
   return (
     <StyledSection>
-      <AdminCursosModal />
-      <AdminNav>
-        {cursoList &&
-          cursoList.map((curso) => (
-            <AdminNavButton
-              $selected={adminActiveCurso === curso ? true : false}
-              onClick={() => setAdminActiveCurso(curso)}
-              key={curso.id}
-            >
-              {curso.nome}
-            </AdminNavButton>
-          ))}
-      </AdminNav>
-      {adminActiveCurso && (
-        <StyledTitle>
-          {adminActiveCurso.nome} -{" "}
-          {adminActiveCurso.validade > 0
-            ? `Curso válido por ${adminActiveCurso.validade} dias`
-            : "Permanente"}
-        </StyledTitle>
-      )}
-      <AdminCursosVincular />
-      <StyledTable>
-        <tr>
-          <ThCellHeader colSpan={8}>
-            {adminActiveCurso &&
-              `Funcionários no curso de ${adminActiveCurso?.nome}`}
-          </ThCellHeader>
-        </tr>
-        <tr>
-          <ThTitleRow>Nome</ThTitleRow>
-          <ThTitleRow>Passaporte</ThTitleRow>
-          <ThTitleRow>Cargo</ThTitleRow>
-          <ThTitleRow>Setor</ThTitleRow>
-          <ThTitleRow>Certificado</ThTitleRow>
-          <ThTitleRow>Início</ThTitleRow>
-          <ThTitleRow>Vencimento</ThTitleRow>
-        </tr>
-        {adminActiveCurso &&
-          adminActiveCurso.users.map((userID) => {
-            const user = userList.find((entry) => entry.id === userID);
-            const userCurso = user?.cursos.find(
-              (entry) => entry.nome === adminActiveCurso.nome
-            );
-            return (
-              <tr key={userID} onClick={() => setAdminActiveUser(user!)}>
-                <td>{user?.nome}</td>
-                <td>{user?.passaporte}</td>
-                <td>{user?.cargo}</td>
-                <td>{user?.setor}</td>
-                <td>
-                  {userCurso?.certificado ? (
-                   <StyledButtonLink onClick={() => setShowModalCurso(true)}>
+      <StyledUserBanner>
+        <h1>
+          Bem Vindo{"(a)"} {user?.nome} {"|"} {user?.passaporte}
+        </h1>
+      </StyledUserBanner>
+      <MenuNav>
+        <MenuButton
+          $selected={menu === "pessoal" ? true : false}
+          onClick={() => setMenu("pessoal")}
+        >
+          Informações pessoais
+        </MenuButton>
+        <MenuButton
+          $selected={menu === "licença" ? true : false}
+          onClick={() => setMenu("licença")}
+        >
+          Licença Médica
+        </MenuButton>
+        <MenuButton
+          $selected={menu === "especialidade" ? true : false}
+          onClick={() => setMenu("especialidade")}
+        >
+          Especialidades
+        </MenuButton>
+        <MenuButton
+          $selected={menu === "curso" ? true : false}
+          onClick={() => setMenu("curso")}
+        >
+          Cursos
+        </MenuButton>
+      </MenuNav>
+      <StyledContainer>
+        {menu == "pessoal" && (
+          <>
+            <DashboardPasswordRecovery />
+            <InfoCard>
+              <li>
+                <span>Nome: </span>
+                <span>👨‍⚕️{user?.nome}</span>
+              </li>
+              <li>
+                <span>Passaporte: </span>
+                <span>🪪{user?.passaporte}</span>
+              </li>
+              <li>
+                <span>Discord ID: </span>
+                <span>{user?.discord_id}</span>
+              </li>
+              <li>
+                <span>Cargo: </span>
+                <span>{user?.cargo}</span>
+              </li>
+              <li>
+                <span>Setor: </span>
+                <span>{user?.setor}</span>
+              </li>
+              <li>
+                <span>Função: </span>
+                <span>{user?.funcao}</span>
+              </li>
+              <li>
+                <span>Funções Extra: </span>
+                <span>{user?.funcoes_extra}</span>
+              </li>
+              <li>
+                <span>Efetivação: </span>
+                <span>{user?.efetivacao}</span>
+              </li>
+              <li>
+                <span>Última Promoção: </span>
+                <span>{user?.ultima_promocao}</span>
+              </li>
+              <li>
+                <span>Observações: </span>
+                <span>📝{user?.observacoes}</span>
+              </li>
+              <li></li>
+            </InfoCard>
+          </>
+        )}
+        {menu == "licença" && (
+          <InfoCard>
+            <li>
+              <span>Ciclo: </span>
+              <span>♻️{user?.licenca_medica.ciclo}</span>
+            </li>
+            <li>
+              <span>Data: </span>
+              <span>📆{user?.licenca_medica.data}</span>
+            </li>
+            <li>
+              <span>Responsável: </span>
+              <span>👨‍⚕️{user?.licenca_medica.responsavel}</span>
+            </li>
+            <li>
+              <span>CRM: </span>
+              <span>🪪{user?.licenca_medica.crm}</span>
+            </li>
+            <li></li>
+          </InfoCard>
+        )}
+        {menu == "especialidade" && (
+          <InfoCard>
+            {user?.especialidades.map((especialidade) => (
+              <li key={especialidade.id}>
+                <span></span>
+                <span>{especialidade.nome}</span>
+              </li>
+            ))}
+            <li></li>
+          </InfoCard>
+        )}
+      {menu === "curso" && (
+        <InfoCursoCard>
+          <li>
+            <span>Cursos</span>
+            <span>Validade</span>
+            <span>Certificado</span>
+          </li>
+          {user?.cursos.map((curso) => (
+            <li key={curso.nome}>
+              <span>{curso.nome}</span>
+              {curso.vencimento ? (
+                <span>
+                  {checkValidade(curso.vencimento)
+                    ? new Date(curso.vencimento).toLocaleDateString("pt-br")
+                    : "EXPIRADO"}
+                </span>
+              ) : (
+                <span> - </span>
+              )}
+              {curso.certificado ? (
+                <span>
+                  <StyledButtonLink
+                    href={curso.certificado}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Certificado
                   </StyledButtonLink>
-                  ) : (
-                    " - "
-                  )}
-                </td>
-                <td>
-                  {userCurso?.inicio
-                    ? new Date(userCurso.inicio).toLocaleDateString("pt-br")
-                    : " - "}
-                </td>
-                <td>
-                  {userCurso?.vencimento
-                    ? checkValidade(userCurso.vencimento)
-                      ? new Date(userCurso.vencimento).toLocaleDateString(
-                          "pt-br"
-                        )
-                      : `EXPIRADO em ${new Date(
-                          userCurso.vencimento
-                        ).toLocaleDateString("pt-br")}`
-                    : " - "}
-                </td>
-                <td>
-                  <StyledSubmitButton
-                    $error={false}
-                    onClick={() => removeCurso(adminActiveCurso, user!)}
-                  >
-                    Desvincular
-                  </StyledSubmitButton>
-                </td>
-              </tr>
-            );
-          })}
-      </StyledTable>
+                </span>
+              ) : (
+                <span> - </span>
+              )}
+            </li>            
+          ))}
+          <li></li>
+        </InfoCursoCard>
+        )}
+      </StyledContainer>
     </StyledSection>
   );
 };
