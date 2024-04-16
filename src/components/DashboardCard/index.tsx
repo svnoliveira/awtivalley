@@ -95,6 +95,7 @@ export const DashboardCard = () => {
                 <span>Observações: </span>
                 <span>📝{user?.observacoes}</span>
               </li>
+              <li></li>
             </InfoCard>
           </>
         )}
@@ -162,8 +163,9 @@ export const DashboardCard = () => {
               ) : (
                 <span> - </span>
               )}
-            </li>
+            </li>            
           ))}
+          <li></li>
         </InfoCursoCard>
         )}
       </StyledContainer>
