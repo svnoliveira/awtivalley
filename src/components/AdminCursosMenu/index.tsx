@@ -1,5 +1,4 @@
-"use client";
-
+import { useState } from "react";
 import { adminStore } from "@/stores/adminStore";
 import { cursoStore } from "@/stores/cursoStore";
 import { userStore } from "@/stores/userStore";
@@ -12,15 +11,34 @@ import {
   ThTitleRow,
 } from "@/globalStyles/StyledTable/style";
 import { StyledSubmitButton } from "@/globalStyles/SubmitButton";
-import { StyledSection, StyledTitle, StyledButtonLink } from "./style";
+import { StyledSection, StyledTitle, StyledButtonLink, ModalOverlay, ModalContent, InfoCursoCard } from "./style";
 import { AdminCursosModal } from "../AdminCursosModal";
 import { checkValidade } from "@/utils/operations";
 
 export const AdminCursosMenu = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [certificadoUrl, setCertificadoUrl] = useState("");
+
   const userList = userStore((state) => state.userList);
   const { adminActiveCurso, setAdminActiveCurso, setAdminActiveUser } =
     adminStore((state) => state);
   const { cursoList, removeCurso } = cursoStore((state) => state);
+
+  interface ModalProps {
+    url: string;
+    onClose: () => void;
+  }
+
+  const Modal: React.FC<ModalProps> = ({ url, onClose }) => {
+    return (
+      <ModalOverlay onClick={onClose}>
+        <ModalContent>          
+          <img src={url} alt="Imagem" style={{ maxWidth: "100%", maxHeight: "100%" }} />
+        </ModalContent>
+      </ModalOverlay>
+    );
+  }; 
+
   return (
     <StyledSection>
       <AdminCursosModal />
@@ -76,9 +94,10 @@ export const AdminCursosMenu = () => {
                 <td>
                   {userCurso?.certificado ? (
                     <StyledButtonLink
-                      href={userCurso?.certificado}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      onClick={() => {
+                        setCertificadoUrl(userCurso.certificado);
+                        setShowModal(true);
+                      }}
                     >
                       Certificado
                     </StyledButtonLink>
@@ -114,6 +133,10 @@ export const AdminCursosMenu = () => {
             );
           })}
       </StyledTable>
+
+      {showModal && (
+        <Modal url={certificadoUrl} onClose={() => setShowModal(false)} />
+      )}
     </StyledSection>
   );
 };

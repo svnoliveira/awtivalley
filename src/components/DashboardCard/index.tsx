@@ -2,10 +2,13 @@ import { userStore } from "@/stores/userStore";
 import {
   InfoCard,
   InfoCursoCard,
+  InfoHabCard,
   StyledContainer,
   StyledSection,
   StyledUserBanner,
   StyledButtonLink,
+  ModalOverlay,
+  ModalContent,
 } from "./style";
 import { useState } from "react";
 import { MenuNav } from "@/globalStyles/MenuNav/style";
@@ -14,9 +17,28 @@ import { DashboardPasswordRecovery } from "../DashboardPasswordRecovery";
 import { checkValidade } from "@/utils/operations";
 
 export const DashboardCard = () => {
+
+  const [showModalCurso, setShowModalCurso] = useState(false);
+  const [showModalHabilitacao, setShowModalHabilitacao] = useState(false);
+
   const user = userStore((state) => state.userData?.user);
   const [menu, setMenu] = useState<string>("");
 
+  interface ModalProps {
+    url: string;
+    onClose: () => void;
+  }
+
+  const Modal: React.FC<ModalProps> = ({ url, onClose }) => {
+    return (
+      <ModalOverlay onClick={onClose}>
+        <ModalContent>          
+          <img src={url} alt="Imagem" style={{ maxWidth: "100%", maxHeight: "100%" }} />
+        </ModalContent>
+      </ModalOverlay>
+    );
+  }; 
+  
   return (
     <StyledSection>
       <StyledUserBanner>
@@ -48,6 +70,12 @@ export const DashboardCard = () => {
           onClick={() => setMenu("curso")}
         >
           Cursos
+        </MenuButton>
+        <MenuButton
+          $selected={menu === "habilitacao" ? true : false}
+          onClick={() => setMenu("habilitacao")}
+        >
+          Habilitação
         </MenuButton>
       </MenuNav>
       <StyledContainer>
@@ -131,42 +159,91 @@ export const DashboardCard = () => {
             <li></li>
           </InfoCard>
         )}
-      {menu === "curso" && (
-        <InfoCursoCard>
-          <li>
-            <span>Cursos</span>
-            <span>Validade</span>
-            <span>Certificado</span>
-          </li>
-          {user?.cursos.map((curso) => (
-            <li key={curso.nome}>
-              <span>{curso.nome}</span>
-              {curso.vencimento ? (
-                <span>
-                  {checkValidade(curso.vencimento)
-                    ? new Date(curso.vencimento).toLocaleDateString("pt-br")
-                    : "EXPIRADO"}
-                </span>
-              ) : (
-                <span> - </span>
-              )}
-              {curso.certificado ? (
-                <span>
-                  <StyledButtonLink
-                    href={curso.certificado}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Certificado
-                  </StyledButtonLink>
-                </span>
-              ) : (
-                <span> - </span>
-              )}
-            </li>            
-          ))}
-          <li></li>
-        </InfoCursoCard>
+        {menu === "curso" && (
+          <InfoCursoCard>
+            <li>
+              <span>Cursos</span>
+              <span>Validade</span>
+              <span>Certificado</span>
+            </li>
+            {user?.cursos.map((curso) => {              
+              if (curso.nome !== "Habilitação Aérea") {
+                return (
+                  <li key={curso.nome}>
+                    <span>{curso.nome}</span>
+                    {curso.vencimento ? (
+                      <span>
+                        {checkValidade(curso.vencimento)
+                          ? new Date(curso.vencimento).toLocaleDateString("pt-br")
+                          : "EXPIRADO"}
+                      </span>
+                    ) : (
+                      <span> - </span>
+                    )}
+                    {curso.certificado ? (
+                      <span>
+                        <StyledButtonLink onClick={() => setShowModalCurso(true)}>
+                          Certificado
+                        </StyledButtonLink>
+                        {showModalCurso && (
+                          <Modal url={curso.certificado} onClose={() => setShowModalCurso(false)} />
+                        )}
+                    </span>
+                    ) : (
+                      <span> - </span>
+                    )}
+                  </li>
+                );
+              } else {                
+                return null;
+              }
+            })}
+            <li></li>
+          </InfoCursoCard>
+        )}
+        {menu === "habilitacao" && (
+          <InfoHabCard>
+            <li>
+              <span>Tipo</span>
+              <span>Data</span>
+              <span>Validade</span>
+              <span>Certificado</span>
+            </li>
+            {user?.cursos.map((curso) => {
+              if (curso.nome === "Habilitação Aérea") {
+                return (
+                  <li key={curso.nome}>
+                    <span>{curso.nome}</span>
+                    <span>{curso.inicio ? new Date(curso.inicio).toLocaleDateString("pt-br") : "-"}</span>
+                    {curso.vencimento ? (
+                      <span>
+                        {checkValidade(curso.vencimento)
+                          ? new Date(curso.vencimento).toLocaleDateString("pt-br")
+                          : "EXPIRADO"}
+                      </span>
+                    ) : (
+                      <span> - </span>
+                    )}
+                    {curso.certificado ? (
+                      <span>
+                        <StyledButtonLink onClick={() => setShowModalHabilitacao(true)}>
+                          Certificado
+                        </StyledButtonLink>
+                        {showModalHabilitacao && (
+                          <Modal url={curso.certificado} onClose={() => setShowModalHabilitacao(false)} />
+                        )}
+                      </span>
+                    ) : (
+                      <span> - </span>
+                    )}
+                  </li>
+                );
+              } else {
+                return null;
+              }
+            })}
+            <li></li>
+          </InfoHabCard>
         )}
       </StyledContainer>
     </StyledSection>
