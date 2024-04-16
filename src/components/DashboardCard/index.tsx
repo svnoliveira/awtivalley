@@ -135,12 +135,14 @@ export const DashboardCard = () => {
         <InfoCursoCard>
           <li>
             <span>Cursos</span>
+            <span>Data</span>
             <span>Validade</span>
             <span>Certificado</span>
           </li>
           {user?.cursos.map((curso) => (
             <li key={curso.nome}>
               <span>{curso.nome}</span>
+              <span>{curso.inicio}</span>
               {curso.vencimento ? (
                 <span>
                   {checkValidade(curso.vencimento)
