@@ -100,11 +100,11 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                     </label>
                     <select id="cargo" {...register("cargo")} defaultValue={user.cargo}>
                       <option value="">...</option>
-                      <option value="🔬 Residente">🔬 Residente</option>
-                      <option value="🩺 Médico">🩺 Médico</option>
+                      <option value="⚗️ Residente">⚗️ Residente</option>
+                      <option value="🔬 Médico">🔬 Médico</option>
                       <option value="💉 Enfermagem">💉 Enfermagem</option>
                       <option value="🧪 Interno">🧪 Interno</option>
-                      <option value="💊 Estagiário">💊 Estagiário</option>
+                      <option value="📚 Estagiário">📚 Estagiário</option>
                     </select>
                   </div>
                   <FormInput
