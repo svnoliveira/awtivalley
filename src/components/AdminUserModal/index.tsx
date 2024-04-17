@@ -104,7 +104,7 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                       <option value="🔬 Médico">🔬 Médico</option>
                       <option value="💉 Enfermagem">💉 Enfermagem</option>
                       <option value="🧪 Interno">🧪 Interno</option>
-                      <option value="💊 Estagiário">💊 Estagiário</option>
+                      <option value="📚 Estagiário">📚 Estagiário</option>
                     </select>
                   </div>
                   <FormInput
