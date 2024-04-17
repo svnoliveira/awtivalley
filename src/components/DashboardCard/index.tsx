@@ -18,22 +18,22 @@ import { checkValidade } from "@/utils/operations";
 
 export const DashboardCard = () => {
 
-  const [showModalCurso, setShowModalCurso] = useState(false);
-  const [showModalHabilitacao, setShowModalHabilitacao] = useState(false);
+  const [showModalCurso, setShowModalCurso] = useState<string | false>(false);
+  const [showModalHabilitacao, setShowModalHabilitacao] = useState<string | false>(false);
 
   const user = userStore((state) => state.userData?.user);
   const [menu, setMenu] = useState<string>("");
 
   interface ModalProps {
-    url: string;
     onClose: () => void;
   }
 
-  const Modal: React.FC<ModalProps> = ({ url, onClose }) => {
+
+  const Modal: React.FC<ModalProps> = ({ onClose }) => {
     return (
       <ModalOverlay onClick={onClose}>
         <ModalContent>          
-          <img src={url} alt="Imagem" style={{ maxWidth: "100%", maxHeight: "100%" }} />
+          <img src={showModalCurso || showModalHabilitacao || '' } alt="Imagem" style={{ maxWidth: "100%", maxHeight: "100%" }} />
         </ModalContent>
       </ModalOverlay>
     );
@@ -182,11 +182,11 @@ export const DashboardCard = () => {
                     )}
                     {curso.certificado ? (
                       <span>
-                        <StyledButtonLink onClick={() => setShowModalCurso(true)}>
+                        <StyledButtonLink onClick={() => setShowModalCurso(curso.certificado)}>
                           Certificado
                         </StyledButtonLink>
                         {showModalCurso && (
-                          <Modal url={curso.certificado} onClose={() => setShowModalCurso(false)} />
+                          <Modal  onClose={() => setShowModalCurso(false)} />
                         )}
                     </span>
                     ) : (
@@ -226,11 +226,11 @@ export const DashboardCard = () => {
                     )}
                     {curso.certificado ? (
                       <span>
-                        <StyledButtonLink onClick={() => setShowModalHabilitacao(true)}>
+                        <StyledButtonLink onClick={() => setShowModalHabilitacao(curso.certificado)}>
                           Certificado
                         </StyledButtonLink>
                         {showModalHabilitacao && (
-                          <Modal url={curso.certificado} onClose={() => setShowModalHabilitacao(false)} />
+                          <Modal  onClose={() => setShowModalHabilitacao(false)} />
                         )}
                       </span>
                     ) : (
