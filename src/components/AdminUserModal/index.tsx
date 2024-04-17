@@ -32,8 +32,8 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
   });
 
   const parseRegisterData = async (userData: TEditUserValues) => {
-    userData = removeEmptyStringKeys(userData);
     userData.funcao = userData.funcao || "";
+    userData = removeEmptyStringKeys(userData);
     setLoading(true);
     const success = await editUser(token!, user.id, userData);
     setLoading(false);
