@@ -13,6 +13,7 @@ import {
 import { StyledSection } from "./style";
 import { AdminNavButton } from "@/globalStyles/AdminNavButton/style";
 
+
 export const AdminBonusMenu = () => {
   const [bonusStatus, setBonusStatus] = useState<{ [userId: string]: boolean }>({});
   const userList = userStore((state) => state.userList);
@@ -175,6 +176,82 @@ export const AdminBonusMenu = () => {
       }
     });
   };
+  const discordIconUrl = 'https://w7.pngwing.com/pngs/705/535/png-transparent-computer-icons-discord-logo-discord-icon-rectangle-logo-smiley-thumbnail.png';
+
+
+  const sendWebhookToDiscord = async () => {
+    const filteredUsers = filteredList(); // Obtém a lista de usuários filtrada
+    const totalBonus = calculateTotalBonus();
+    const formattedBonus = formatCurrency(totalBonus);
+    const discordWebhookUrl1 = 'https://discord.com/api/webhooks/1223423941759209522/vOhu-8lefF3Kjdnv1VxxFnRP5iPj1B7ODHRxDkRU1iULJV1UQu3G0Hb5EQUKFMp9ikNE';
+    const discordWebhookUrl2 = 'https://discord.com/api/webhooks/1209602152591527946/bS8k85czlDSOXNK5Bt_CItRjpZJ0AVDVfDiJXoU6cA5YfS4p2_0GjNk2E8xq-j9OxVHP';
+    
+    const iniciosemana = adminActivePeriod!.start.toLocaleDateString('pt-BR');
+    const fimdasemana = adminActivePeriod!.end.toLocaleDateString('pt-BR');
+  
+    let content1 = `# <a:pigmoney:1223427482074746991> Bonificação da Semana (${iniciosemana} - ${fimdasemana})<a:pigmoney:1223427482074746991>\n`;
+    content1 += `## <:take_my_money91:1223427483601342635>Total: Total da Bonificação: ${formattedBonus}\n\n`;
+    
+    filteredUsers.forEach((user, index) => {
+      const horas = getTotalSeconds(
+        user.registros_de_ponto.filter((ponto) => {
+          const testingData = new Date(ponto.entrada);
+          return (
+            testingData >= adminActivePeriod!.start &&
+            testingData <= adminActivePeriod!.end
+          );
+        })
+      );
+      const payment = calculatePayment(horas, user.cargo, user.funcao);
+  
+      content1 += `${index + 1} Colaborador: ${user.nome}** | ${user.cargo}\n`;
+    });
+  
+    const payload1 = {
+      content: content1,
+    };
+  
+    let content2 = `# A bonificação foi lançada para a (${iniciosemana} - ${fimdasemana})\n`;
+    content2 += `Agora é só aguardar o Pix cair!\n\n`;
+    
+    filteredUsers.forEach((user, index) => {
+    });
+  
+    const payload2 = {
+      content: content2,
+    };
+  
+    try {
+      await sendPayloadToWebhook(discordWebhookUrl1, payload1);
+      await sendPayloadToWebhook(discordWebhookUrl2, payload2);  
+      console.log('Webhooks enviados com sucesso!');
+    } catch (error) {
+      console.error('Erro ao enviar webhooks:', error);
+    }
+  };
+  
+  const sendPayloadToWebhook = async (webhookUrl: string, payload: any) => {
+    try {
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Erro ao enviar webhook: ${response.statusText}`);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new Error(`Erro ao enviar webhook: ${error.message}`);
+      } else {
+        throw new Error(`Erro ao enviar webhook: ${String(error)}`);
+      }
+    }
+  };
+      
 
   return (
     <StyledSection>
@@ -212,7 +289,33 @@ export const AdminBonusMenu = () => {
             </AdminNavButton>
           </AdminNav>
           <div>
-          <p><strong>Valor Total da Bonificação:💰💸 {formatCurrency(calculateTotalBonus())}⚕️💚</strong></p>
+            <p>
+              <strong>
+                Valor Total da Bonificação: 💰💸 {formatCurrency(calculateTotalBonus())} ⚕️💚
+              </strong>
+            </p>
+            {/* Botão com o ícone do Discord */}
+            <button
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                padding: '10px',
+                borderRadius: '5px',
+                backgroundColor: '#7289DA',
+                color: 'white',
+                border: 'none',
+                cursor: 'pointer',
+                marginTop: '10px',
+              }}
+              onClick={sendWebhookToDiscord}
+            >
+              <img
+                src={discordIconUrl}
+                alt="Discord Icon"
+                style={{ width: '24px', marginRight: '10px' }}
+              />
+              Enviar Bonificação para Prefeitura
+            </button>
           </div>
           <StyledTable>            
             <thead>
@@ -223,8 +326,7 @@ export const AdminBonusMenu = () => {
                 <ThTitleRow>Função</ThTitleRow>
                 <ThTitleRow>Passaporte</ThTitleRow>
                 <ThTitleRow>Horas</ThTitleRow>
-                <ThTitleRow>$$ Pagamentos</ThTitleRow>
-               {/*<ThTitleRow>Ativar/Desativar Bonificação</ThTitleRow>*/}
+                <ThTitleRow>$$ Pagamentos</ThTitleRow>               
               </tr>
             </thead>
             <tbody>
@@ -271,11 +373,6 @@ export const AdminBonusMenu = () => {
                         )
                       )}
                     </td>
-                    {/*<td>
-                      <button onClick={() => toggleBonus(user.id.toString())}>
-                        {bonusStatus[user.id.toString()] ? "Desativar" : "Ativar"}
-                      </button>
-                    </td>*/}
                   </tr>
                 ))}
             </tbody>

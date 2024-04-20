@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { StyledSubmitButton } from "@/globalStyles/SubmitButton";
 import { Loading } from "@/fragments/Loading";
+import axios from 'axios';
 
 import { TEditUserValues, editUserSchema } from "./schema";
 import { IUser } from "@/stores/@userTypes";
@@ -14,14 +15,19 @@ import { StyledButton, StyledInputContainer, StyledEditModal, StyledSection, Sty
 import { removeEmptyStringKeys } from "@/utils/operations";
 
 interface IAdminUserModalProps {
-    user: IUser;
+  user: IUser;
 }
 
-export const AdminUserModal = ({user}:IAdminUserModalProps) => {
+export const AdminUserModal = ({ user }: IAdminUserModalProps) => {
   const [modalOpen, setModalOpen] = useState<IUser | false>(false);
   const [loading, setLoading] = useState(false);
   const { editUser } = userStore((state) => state);
   const token = userStore((state) => state.userData?.accessToken);
+  const { userData } = userStore((store) => store);
+  const userId = userData?.user.id;
+  const userName = userData?.user.nome;
+  const userPassaporte = userData?.user.passaporte;
+  const discordID = userData?.user.discord_id;
 
   const {
     register,
@@ -31,14 +37,47 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
     resolver: zodResolver(editUserSchema),
   });
 
+  const sendWebhook = async () => {
+    try {
+
+      const webhookUrl = 'https://discord.com/api/webhooks/1209602152591527946/bS8k85czlDSOXNK5Bt_CItRjpZJ0AVDVfDiJXoU6cA5YfS4p2_0GjNk2E8xq-j9OxVHP';
+
+      const imageUrl =
+        "https://media.discordapp.net/attachments/842486097368055868/1190037415813971988/alta_linhas_2.png?ex=65bc0735&is=65a99235&hm=8fbef0f34063389dcd7ea427d38ad4bd12501a5bddbc31381744cc18edd3acd1&format=webp&quality=lossless&";
+
+      const message =
+        `:mega: O Gestor :busts_in_silhouette: **${userName}** | :identification_card: **${userPassaporte}** ID de cadastro: **${userId}**\n\n` +
+        `Discord do Gestor: <@${discordID}>\n` +
+        `🔄️ Alterou os dados do colaborador: ${user.nome} | ${user.passaporte}\n` +
+        `Discord do colaborador: <@${user.discord_id}>\n` +
+        `( ${imageUrl} )`;
+
+      await axios.post(webhookUrl, {
+        content: message,
+      });
+
+      console.log('Webhook enviado com sucesso!');
+    } catch (error) {
+      console.error('Erro ao enviar webhook:', error);
+    }
+  };
+
+
   const parseRegisterData = async (userData: TEditUserValues) => {
     userData.funcao = userData.funcao || "";
     userData = removeEmptyStringKeys(userData);
     setLoading(true);
+
     const success = await editUser(token!, user.id, userData);
     setLoading(false);
-    success && setModalOpen(false);
+
+    if (success) {
+      setModalOpen(false);
+      sendWebhook(); // Chamada para enviar o webhook
+    }
   };
+
+
   return (
     <StyledSection>
       <StyledSubmitButton
@@ -152,7 +191,7 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                       <option value="🧾 Coord. Cursos">🧾 Coord. Cursos</option>
                       <option value="🔪 Coord. Cirúrgica">🔪 Coord. Cirúrgica</option>
                       <option value="🚁 Coord. Aéreo">🚁 Coord. Aéreo</option>
-                      <option value="🚁 Inst. Chef Aéreo">🚁 Inst. Chef Aéreo</option>                      
+                      <option value="🚁 Inst. Chef Aéreo">🚁 Inst. Chef Aéreo</option>
                       <option value="🚁 Inst. Aereo">🚁 Inst. Aereo</option>
                       <option value="🚁 Aux. Aéreo">🚁 Aux. Aéreo</option>
                       <option value="🧾 Inst. Curso">🧾 Inst. Curso</option>
@@ -211,7 +250,7 @@ export const AdminUserModal = ({user}:IAdminUserModalProps) => {
                     register={register("crm")}
                     error={errors.crm}
                   >
-                   {user.licenca_medica.crm}
+                    {user.licenca_medica.crm}
                   </FormInput>
                 </StyledInputContainer>
                 <StyledButton type="submit">

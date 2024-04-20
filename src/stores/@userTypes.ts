@@ -2,6 +2,7 @@ import { TEditUserValues } from "@/components/AdminUserModal/schema";
 import { ICurso } from "./@cursoTypes";
 import { IEspecialidade } from "./@especialidadeTypes";
 import { IRegistroDePonto } from "./@registroDePontoTypes";
+import { IExame } from "./@exameTypes";
 
 export type TToken = {
     refresh: string;
@@ -35,6 +36,7 @@ export interface IUser{
     cursos: IUserCurso[];
     especialidades: IEspecialidade[];
     registros_de_ponto: IRegistroDePonto[];
+    exames: IUserExame[];
 };
 
 export interface ILicencaMedica{
@@ -54,6 +56,13 @@ export interface IUserCurso{
 	inicio: string | null,
 	vencimento: string | null,
 	certificado: string
+}
+
+export interface IUserExame{
+    nome: string,
+	inicio: string | null,
+	vencimento: string | null,
+	docExame: string
 }
 
 export interface IUserState {

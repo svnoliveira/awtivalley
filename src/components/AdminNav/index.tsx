@@ -2,11 +2,12 @@
 import { AdminSelectedUserCard } from "@/fragments/AdminSelectedUserCard";
 import { AdminFuncionariosMenu } from "../AdminFuncionariosMenu";
 import { AdminEspecialidadesMenu } from "../AdminEspecialidadesMenu";
-import { adminStore } from "@/stores/adminStore";
 import { AdminCursosMenu } from "../AdminCursosMenu";
-import { AdminSelectedPeriodCard } from "@/fragments/AdminSelectedPeriodCard";
+import { adminStore } from "@/stores/adminStore";
 import { AdminPontosMenu } from "../AdminPontosMenu";
 import { AdminBonusMenu } from "../AdminBonusMenu";
+import { AdminExamesMenu } from "../AdminExamesMenu";
+import { AdminSelectedPeriodCard } from "@/fragments/AdminSelectedPeriodCard";
 import { InfoCard, StyledContainer, StyledSection } from "./style";
 import { MenuNav } from "@/globalStyles/MenuNav/style";
 import { MenuButton } from "@/globalStyles/MenuButton/style";
@@ -50,6 +51,12 @@ export const AdminNav = () => {
           >
             Especialidades
           </MenuButton>
+          <MenuButton
+            $selected={activeAdminScreen === "exames" ? true : false}
+            onClick={() => setActiveAdminScreen("exames")}
+          >
+            Exames
+          </MenuButton>
         </MenuNav>
         <InfoCard>
           <AdminSelectedUserCard />
@@ -63,6 +70,7 @@ export const AdminNav = () => {
             <AdminEspecialidadesMenu />
           )}
           {activeAdminScreen === "cursos" && <AdminCursosMenu />}
+          {activeAdminScreen === "exames" && <AdminExamesMenu />}
         </StyledContainer>
       </StyledSection>
     </>

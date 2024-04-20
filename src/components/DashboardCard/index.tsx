@@ -20,6 +20,8 @@ export const DashboardCard = () => {
 
   const [showModalCurso, setShowModalCurso] = useState<string | false>(false);
   const [showModalHabilitacao, setShowModalHabilitacao] = useState<string | false>(false);
+  const [showModalExames, setShowModalExames] = useState<string | false>(false);
+  const [showModalLaudos, setShowModalLaudos] = useState<string | false>(false);
 
   const user = userStore((state) => state.userData?.user);
   const [menu, setMenu] = useState<string>("");
@@ -28,17 +30,16 @@ export const DashboardCard = () => {
     onClose: () => void;
   }
 
-
   const Modal: React.FC<ModalProps> = ({ onClose }) => {
     return (
       <ModalOverlay onClick={onClose}>
-        <ModalContent>          
-          <img src={showModalCurso || showModalHabilitacao || '' } alt="Imagem" style={{ maxWidth: "100%", maxHeight: "100%" }} />
+        <ModalContent>
+          <img src={showModalCurso || showModalHabilitacao || showModalExames || showModalLaudos || ''} alt="Imagem" style={{ maxWidth: "100%", maxHeight: "100%" }} />
         </ModalContent>
       </ModalOverlay>
     );
-  }; 
-  
+  };
+
   return (
     <StyledSection>
       <StyledUserBanner>
@@ -76,6 +77,18 @@ export const DashboardCard = () => {
           onClick={() => setMenu("habilitacao")}
         >
           Habilitação
+        </MenuButton>
+        <MenuButton
+          $selected={menu === "exames" ? true : false}
+          onClick={() => setMenu("exames")}
+        >
+          Exames
+        </MenuButton>
+        <MenuButton
+          $selected={menu === "laudos" ? true : false}
+          onClick={() => setMenu("laudos")}
+        >
+          Laudos
         </MenuButton>
       </MenuNav>
       <StyledContainer>
@@ -166,8 +179,8 @@ export const DashboardCard = () => {
               <span>Validade</span>
               <span>Certificado</span>
             </li>
-            {user?.cursos.map((curso) => {              
-              if (curso.nome !== "Habilitação Aérea") {
+            {user?.cursos.map((curso) => {
+              if (curso.nome !== "Habilitação Aérea" && curso.nome !== "Habilitação Inst. Aéreo" && curso.nome !== "Habilitação Aérea - ADM") {
                 return (
                   <li key={curso.nome}>
                     <span>{curso.nome}</span>
@@ -186,15 +199,15 @@ export const DashboardCard = () => {
                           Certificado
                         </StyledButtonLink>
                         {showModalCurso && (
-                          <Modal  onClose={() => setShowModalCurso(false)} />
+                          <Modal onClose={() => setShowModalCurso(false)} />
                         )}
-                    </span>
+                      </span>
                     ) : (
                       <span> - </span>
                     )}
                   </li>
                 );
-              } else {                
+              } else {
                 return null;
               }
             })}
@@ -210,7 +223,7 @@ export const DashboardCard = () => {
               <span>Certificado</span>
             </li>
             {user?.cursos.map((curso) => {
-              if (curso.nome === "Habilitação Aérea") {
+              if (curso.nome === "Habilitação Aérea" || curso.nome === "Habilitação Inst. Aéreo" || curso.nome === "Habilitação Aérea - ADM") {
                 return (
                   <li key={curso.nome}>
                     <span>{curso.nome}</span>
@@ -230,7 +243,7 @@ export const DashboardCard = () => {
                           Certificado
                         </StyledButtonLink>
                         {showModalHabilitacao && (
-                          <Modal  onClose={() => setShowModalHabilitacao(false)} />
+                          <Modal onClose={() => setShowModalHabilitacao(false)} />
                         )}
                       </span>
                     ) : (
@@ -244,6 +257,13 @@ export const DashboardCard = () => {
             })}
             <li></li>
           </InfoHabCard>
+        )}
+        {menu === "exames" && (
+          <h2>Em breve exames serão postados aqui</h2>
+        )}
+
+        {menu === "laudos" && (
+          <h2>Em breve Laudos serão postados aqui</h2>
         )}
       </StyledContainer>
     </StyledSection>

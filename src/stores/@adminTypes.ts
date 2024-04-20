@@ -1,5 +1,6 @@
 import { ICurso } from "./@cursoTypes"
 import { IEspecialidade } from "./@especialidadeTypes"
+import { IExame } from "./@exameTypes"
 import { IUser } from "./@userTypes"
 
 export type IPeriod = {
@@ -17,10 +18,11 @@ export interface IAdminState {
     adminActiveEspecialidade: IEspecialidade| null
     adminActiveCurso: ICurso| null
     adminActivePeriod: IPeriod | null
+    adminActiveExame: IExame | null
     message: string
     error: any
 
-    setActiveAdminScreen: (clicked: ("bonus" | "funcionarios" | "pontos" | "cursos" | "especialidades")) => void;
+    setActiveAdminScreen: (clicked: ("bonus" | "funcionarios" | "pontos" | "cursos" | "exames" | "especialidades")) => void;
     setAdminAddModal: (boolean: boolean) => void
     setAdminEditModal: (boolean: boolean) => void
     setAdminDeleteModal: (boolean: boolean) => void
@@ -29,6 +31,7 @@ export interface IAdminState {
     setAdminActiveEspecialidade: (especialidade: IEspecialidade | null) => void
     setAdminActiveCurso: (curso: ICurso | null) => void
     setAdminActivePeriod: (period: IPeriod | null) => void
+    setAdminActiveExame: (exame: IExame | null) => void
     setError: (string: string) => void
     setMessage: (string: string) => void
 }
