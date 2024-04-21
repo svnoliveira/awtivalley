@@ -115,6 +115,7 @@ export const AdminBonusMenu = () => {
       funcao === "🧾 Inst. Curso" ||
       funcao === "🚁 Aux. Aéreo" ||
       funcao === "🚁 Inst. Aereo" ||
+      funcao === "💻 T.I. do CMA" ||
       funcao === "🚁 Inst. Chef Aéreo"
     ) {
       if (horas >= 36000) {
