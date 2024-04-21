@@ -125,11 +125,20 @@ export const AdminBonusMenu = () => {
         rate += bonus;
       }
     } else if (
+      funcao === "💼 Diretoria Geral" ||
+      funcao === "📋 Diretor Administrativo" ||
+      funcao === "💰 Diretor Financeiro" ||
+      funcao === "📝 Diretor Supervisor" ||
       funcao === "🥼 Supervisor" ||
       funcao === "📋 Coordenador Geral" ||
       funcao === "🔖 Coordenador" ||
-      funcao === "📋 Diretor Administrativo" ||
-      funcao === "💼 Diretoria Geral"
+      funcao === "🧠 Coord. Saúde Mental" ||
+      funcao === "💪 Coord. Saúde Físico-Motora" ||
+      funcao === "🎉 Coord. Integração" ||
+      funcao === "✒️ Coord. Ingressos" ||
+      funcao === "🧾 Coord. Cursos" ||
+      funcao === "🔪 Coord. Cirúrgica" ||
+      funcao === "🚁 Coord. Aéreo"
     ) {
       if (horas >= 36000) {
         const bonus = 15000;
