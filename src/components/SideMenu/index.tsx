@@ -11,7 +11,7 @@ import {
   StyledLi,
   StyledSideList,
 } from "./style";
-import { checkUserRole } from "@/utils/operations";
+import { checkUserCursosRole, checkUserIntegracaoRole, checkUserRole } from "@/utils/operations";
 import React from "react";
 import { useRouter } from "next/navigation";
 
@@ -118,23 +118,6 @@ export const SideMenu = () => {
                   />
                 </StyledLi>
               )}
-              {user && (
-                <StyledLi onClick={() => logout()}>
-                  <Image
-                    src="/icons/login.svg"
-                    alt="Logo"
-                    width={20}
-                    height={20}
-                  />
-                  <span>Logout</span>
-                  <Image
-                    src="/icons/arrow-right.svg"
-                    alt="Logo"
-                    width={15}
-                    height={15}
-                  />
-                </StyledLi>
-              )}
               {!user && (
                 <StyledLi onClick={() => push("/login")}>
                   <Image
@@ -169,6 +152,23 @@ export const SideMenu = () => {
                   />
                 </StyledLi>
               )}
+              {checkUserCursosRole(user) && (
+                <StyledLi onClick={() => push("/cursos")}>
+                  <Image
+                    src="/icons/register.svg"
+                    alt="Logo"
+                    width={20}
+                    height={20}
+                  />
+                  <span>Gestão de Cursos</span>
+                  <Image
+                    src="/icons/arrow-right.svg"
+                    alt="Logo"
+                    width={15}
+                    height={15}
+                  />
+                </StyledLi>
+              )}      
                 <StyledLi onClick={() => push("/registercurriculo")}>
                   <Image
                     src="/icons/register.svg"
@@ -198,7 +198,39 @@ export const SideMenu = () => {
                     width={15}
                     height={15}
                   />
-                </StyledLi>          
+                </StyledLi>       
+                <StyledLi onClick={() => push("/agendamento-psicotecnico")}>
+                  <Image
+                    src="/icons/register.svg"
+                    alt="Logo"
+                    width={20}
+                    height={20}
+                  />
+                  <span>Agendamento de Psicotécnico</span>
+                  <Image
+                    src="/icons/arrow-right.svg"
+                    alt="Logo"
+                    width={15}
+                    height={15}
+                  />
+                </StyledLi> 
+                {user && (
+                <StyledLi onClick={() => logout()}>
+                  <Image
+                    src="/icons/login.svg"
+                    alt="Logo"
+                    width={20}
+                    height={20}
+                  />
+                  <span>Logout</span>
+                  <Image
+                    src="/icons/arrow-right.svg"
+                    alt="Logo"
+                    width={15}
+                    height={15}
+                  />
+                </StyledLi>
+              )}
             </StyledSideList>
           </StyledAside>
         </StyledBlankDiv>

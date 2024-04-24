@@ -2,7 +2,7 @@ import { HomeMenuCard } from "@/fragments/HomeMenuCards";
 import { StyledContainer, StyledList, StyledSection } from "./style"
 import { userStore } from "@/stores/userStore";
 import Link from "next/link";
-import { checkUserRole } from "@/utils/operations";
+import { checkUserCursosRole, checkUserRole } from "@/utils/operations";
 
 
 export const HomeHero = () => {
@@ -30,6 +30,9 @@ export const HomeHero = () => {
           {checkUserRole(user) && <li><Link href={"/register"}>
             <HomeMenuCard iconUrl="/icons/register.svg">Cadastrar novos colaboradores</HomeMenuCard>
           </Link></li>}
+          {checkUserCursosRole(user) && <li><Link href={"/cursos"}>
+            <HomeMenuCard iconUrl="/icons/person.svg">Gestão de Cursos</HomeMenuCard>
+          </Link></li>}
           {user && <li><Link href={"/registercurriculo"}>
            <HomeMenuCard iconUrl="/icons/register.svg">Cadastro de Currículos</HomeMenuCard>
           </Link></li>}
@@ -41,6 +44,12 @@ export const HomeHero = () => {
           </Link></li>}
           {user && <li><Link href={"/agendamento-de-consultas"}>
            <HomeMenuCard iconUrl="/icons/register.svg">Agendamento de Consultas</HomeMenuCard>
+          </Link></li>}
+          {!user && <li><Link href={"/agendamento-psicotecnico"}>
+            <HomeMenuCard iconUrl="/icons/register.svg">Agendamento de Psicotécnico</HomeMenuCard>
+          </Link></li>}
+          {user && <li><Link href={"/agendamento-psicotecnico"}>
+           <HomeMenuCard iconUrl="/icons/register.svg">Agendamento de Psicotécnico</HomeMenuCard>
           </Link></li>}
         </StyledList>
       </StyledContainer>

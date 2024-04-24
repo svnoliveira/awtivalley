@@ -79,7 +79,8 @@ export const formatHorario = (texto: string) => {
 
 export const checkUserRole = ( user:IUser | undefined ) => {
   if(user){
-    if (user.is_superuser === true || user.setor === "✒️ Ingressos"){
+    if (
+    user.is_superuser === true || user.setor === "💻 Administrativo" ||  user.setor === "✒️ Ingressos"){
       return true;
     } else {
       return false;
@@ -88,6 +89,57 @@ export const checkUserRole = ( user:IUser | undefined ) => {
     return false;
   }
 }
+
+export const checkUserAereoRole = ( user:IUser | undefined ) => {
+  if(user){
+    if (user.is_superuser === true || user.setor === "💻 Administrativo" || user.setor === "🚁 Aéreo"){
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
+
+export const checkUserCursosRole = ( user:IUser | undefined ) => {
+  if(user){
+    if (user.is_superuser === true || user.setor === "💻 Administrativo" || user.setor === "👨‍🏫 Cursos"){
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
+
+export const checkUserIntegracaoRole = ( user:IUser | undefined ) => {
+  if(user){
+    if (user.is_superuser === true || user.setor === "💻 Administrativo" || user.setor === "🎉 Integração"){
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
+
+/*export const checkUserRole = ( user:IUser | undefined ) => {
+  if(user){
+    if (
+    user.is_superuser === true || user.setor === "✒️ Ingressos"|| 
+    user.setor === "💊 Enfermaria"|| user.setor === "💻 Administrativo" ||
+    user.setor === "🚒 Bombeiros" || user.setor === "🎉 Integração"){
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}*/
 
 export const removeEmptyStringKeys = (obj: Record<string, string>): Record<string, string> => {
   const result: Record<string, string> = {};

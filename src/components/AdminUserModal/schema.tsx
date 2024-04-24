@@ -13,6 +13,7 @@ export const editUserSchema = z.object({
     funcoes_extra: z.string().optional(),
     ultima_promocao: z.string().optional(),
     observacoes: z.string().optional(),
+    hab_aereo: z.string().optional(),
     ciclo: z.string().optional(),
     data: z.string().optional(),
     responsavel: z.string().optional(),

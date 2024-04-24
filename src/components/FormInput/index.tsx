@@ -51,6 +51,8 @@ export const FormInput = ({
         return "Última promoção";
       case "observacoes":
         return "Observações";
+      case "hab_aereo":
+        return "Habilitação Aéreo";
       case "ciclo":
         return "Licença médica: ciclo";
       case "data":

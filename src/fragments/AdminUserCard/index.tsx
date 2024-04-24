@@ -54,6 +54,10 @@ export const AdminUserCard = ({ user }: { user: IUser }) => {
             <span>Observações: </span>
             <span>{user.observacoes}</span>
           </li>
+          <li>
+            <span>Habilitação:</span>
+            <span>{user.hab_aereo}</span>
+          </li>
         </InfoCard>
         <h3>Licença Médica:</h3>
         <InfoCard>

@@ -159,9 +159,13 @@ export const AdminUserModal = ({ user }: IAdminUserModalProps) => {
                     </label>
                     <select id="setor" {...register("setor")} defaultValue={user.setor}>
                       <option value="">...</option>
-                      <option value="💊 Enfermaria">💊Enfermaria</option>
-                      <option value="✒️ Ingressos">✒️ Ingressos</option>
+                      <option value="💊 Enfermaria">💊Enfermaria</option>                      
                       <option value="💻 Administrativo">💻 Administrativo</option>
+                      <option value="✒️ Ingressos">✒️ Ingressos</option>
+                      <option value="🚁 Aéreo">🚁 Aéreo</option>
+                      <option value="👨‍🏫 Cursos">👨‍🏫 Cursos</option>
+                      <option value="🎉 Integração">🎉 Integração</option>
+                      <option value="🚒 Bombeiros">🚒 Bombeiros</option>
                     </select>
                   </div>
                   <FormInput
@@ -223,6 +227,13 @@ export const AdminUserModal = ({ user }: IAdminUserModalProps) => {
                     error={errors.observacoes}
                   >
                     {user.observacoes}
+                  </FormInput>
+                  <FormInput
+                    type="text"
+                    register={register("hab_aereo")}
+                    error={errors.hab_aereo}
+                    >
+                      {user.hab_aereo}
                   </FormInput>
                   <FormInput
                     type="text"

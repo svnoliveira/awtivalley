@@ -27,6 +27,7 @@ export const AdminFuncionariosMenu = () => {
             user.passaporte.toLowerCase().includes(searchValue) ||
             user.discord_id.toLowerCase().includes(searchValue) ||
             user.funcao.toLowerCase().includes(searchValue) ||
+            user.observacoes.toLowerCase().includes(searchValue) ||
             (user.licenca_medica && user.licenca_medica.crm && user.licenca_medica.crm.toLowerCase().includes(searchValue)) // Verificando se licenca_medica e crm não são undefined
         );
         setFilter({ list: filteredList, search: searchValue });

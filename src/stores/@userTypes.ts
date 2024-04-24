@@ -30,6 +30,7 @@ export interface IUser{
     setor: string;
     ultima_promocao: string;
     observacoes: string;
+    hab_aereo: string;
     funcoes_extra: string;
     ativo: boolean
     licenca_medica: ILicencaMedica;

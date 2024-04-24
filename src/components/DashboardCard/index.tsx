@@ -136,6 +136,10 @@ export const DashboardCard = () => {
                 <span>Observações: </span>
                 <span>📝{user?.observacoes}</span>
               </li>
+              <li>
+                <span>Habilitação:</span>
+                <span>{user?.hab_aereo}</span>
+              </li>
               <li></li>
             </InfoCard>
           </>
@@ -218,6 +222,7 @@ export const DashboardCard = () => {
           <InfoHabCard>
             <li>
               <span>Tipo</span>
+              <span>Nome Aéronave</span>
               <span>Data</span>
               <span>Validade</span>
               <span>Certificado</span>
@@ -227,6 +232,7 @@ export const DashboardCard = () => {
                 return (
                   <li key={curso.nome}>
                     <span>{curso.nome}</span>
+                    <span>{user?.hab_aereo || ' - '}</span>
                     <span>{curso.inicio ? new Date(curso.inicio).toLocaleDateString("pt-br") : "-"}</span>
                     {curso.vencimento ? (
                       <span>
