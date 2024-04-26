@@ -16,7 +16,8 @@ export const Footer = () => {
     }, []);
 
     const mensagens =
-        ["'Existem duas palavras que abrem muitas portas: Puxe e Empurre' - Cooper, Astrid.",
+        [   "'Nem todos os dias são faceis, nem todos os dias são um mar de rosas, mas desejo profundamente que você durma bem e que amanhã sempre é um novo dia para realizar seus sonhos!' - Belkin, Marina",
+            "'Existem duas palavras que abrem muitas portas: Puxe e Empurre' - Cooper, Astrid.",
             "'Irritantemente adorável, apaixonante complicado... Desculpe, eu sou de Gêmeos.' - Santos, Edson",
             "'Você pode saber o que disse, mas nunca o que o outro escutou.' - Cooper, Peichoto Moraes",
             "'Ser feliz sem motivo é a mais autêntica forma de felicidade' - Cooper, Dudu",
@@ -39,7 +40,7 @@ export const Footer = () => {
             } else {
                 setIndex(0);
             }
-        }, 7000); // Run the loop every 3 seconds
+        }, 4500); // Run the loop every 3 seconds
 
         return () => clearInterval(interval); // Clear the interval when the component unmounts
     }, [index, mensagens]);
