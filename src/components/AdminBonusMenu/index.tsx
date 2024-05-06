@@ -237,7 +237,7 @@ export const AdminBonusMenu = () => {
       );
       const payment = calculatePayment(horas, user.cargo, user.funcao);
   
-      content1 += `${index + 1} Colaborador: **${user.nome}** | Cargo: ${user.cargo} | **Pagamento: ${formatCurrency(payment)}**\n`;
+      content1 += `${index + 1}**${user.nome}** | Cargo: ${user.cargo} | **Pagamento: ${formatCurrency(payment)}**\n`;
     });
   
     const payload1 = {
