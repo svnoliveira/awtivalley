@@ -5,13 +5,20 @@ import { GlobalStyle } from "@/globalStyles/globalstyle";
 import { userStore } from "@/stores/userStore";
 import { checkUserRole } from "@/utils/operations";
 import { redirect } from "next/navigation";
+import { useEffect } from "react";
 
 export default function RegisterPage() {
-  const { loading, userData } = userStore((state) => state);
+  const { loading, userData, loadUser } = userStore((state) => state);
 
-  if (checkUserRole(userData?.user) === false) {
-    redirect("/dashboard");
-  }
+  useEffect(() => {
+    const loadData = async () => {
+      await loadUser();
+      if (!userData?.user.is_superuser === false) {
+        redirect("/dashboard");
+      }
+    };
+    loadData();
+  }, [loadUser, checkUserRole ]);
 
   return (
     <>

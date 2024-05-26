@@ -77,10 +77,57 @@ export const formatHorario = (texto: string) => {
   }
 };
 
+/*export const formatHorario = (texto: string) => {
+  const newTexto = texto.replace(/\s/g, " ");
+  const regexData = /Data: (\d{1,2}\/\d{1,2}\/\d{4})/;
+  const regexEntrada = /ENTRADA: (\d{1,2}:\d{1,2}:\d{1,2})/;
+  const regexSaida = /SA[ÍI]DA: (\d{1,2}:\d{1,2}:\d{1,2})/;
+
+  const matchData = newTexto.match(regexData);
+  const matchEntrada = newTexto.match(regexEntrada);
+  const matchSaida = newTexto.match(regexSaida);
+
+  const informacoes = {
+    data: matchData ? matchData[1] : "",
+    entrada: matchEntrada ? matchEntrada[1] : "",
+    saida: matchSaida ? matchSaida[1] : "",
+  };
+
+  if (!informacoes.data) {
+    return "Data não encontrada";
+  }
+
+  const dateParts = informacoes.data.split("/");
+  const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+
+  if (informacoes.entrada) {
+    return `${formattedDate} ${informacoes.entrada}-03:00`;
+  } else if (informacoes.saida) {
+    return `${formattedDate} ${informacoes.saida}-03:00`;
+  } else {
+    return "Informações de entrada ou saída não encontradas";
+  }
+};*/
+
+
+
 export const checkUserRole = ( user:IUser | undefined ) => {
   if(user){
     if (
     user.is_superuser === true || user.setor === "💻 Administrativo" ||  user.setor === "✒️ Ingressos"){
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
+
+export const checkUserAdminRole = ( user:IUser | undefined ) => {
+  if(user){
+    if (
+    user.is_superuser === true || user.setor === "💻 Administrativo"){
       return true;
     } else {
       return false;
@@ -140,6 +187,87 @@ export const checkUserIntegracaoRole = ( user:IUser | undefined ) => {
     return false;
   }
 }*/
+
+/* CHECK USER ROLE PARA PROVA DE CURSOS*/
+
+export const CheckFuncEstagiarioUserCursos = ( user:IUser | undefined ) => {
+  if(user){
+    if (
+    user.is_superuser === true || user.cargo === "💊 Estagiário"|| user.setor === "👨‍🏫 Cursos"){
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
+
+export const CheckFuncParamedicoUserCursos = ( user:IUser | undefined ) => {
+  if(user){
+    if (
+    user.is_superuser === true || user.cargo === "💉 Paramédico"|| user.setor === "👨‍🏫 Cursos"){
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
+
+export const CheckFuncInternoUserCursos = ( user:IUser | undefined ) => {
+  if(user){
+    if (
+    user.is_superuser === true || user.cargo === "🧪 Interno"|| user.setor === "👨‍🏫 Cursos"){
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
+
+export const CheckFuncResidenteUserCursos = ( user:IUser | undefined ) => {
+  if(user){
+    if (
+    user.is_superuser === true || user.cargo === "⚗️ Residente" || user.setor === "👨‍🏫 Cursos"){
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
+
+export const CheckFuncMedicoUserCursos = ( user:IUser | undefined ) => {
+  if(user){
+    if (
+    user.is_superuser === true || user.cargo === "🔬 Médico"|| user.setor === "👨‍🏫 Cursos"){
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
+
+/* CHECK USER ROLE PARA FORM INGRESSO*/
+export const CheckFuncIngressosUser = ( user:IUser | undefined ) => {
+  if(user){
+    if (
+    user.is_superuser === true || user.setor === "✒️ Ingressos"){
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
 
 export const removeEmptyStringKeys = (obj: Record<string, string>): Record<string, string> => {
   const result: Record<string, string> = {};

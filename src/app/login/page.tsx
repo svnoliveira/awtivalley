@@ -4,13 +4,20 @@ import { Loading } from "@/fragments/Loading";
 import { GlobalStyle } from "@/globalStyles/globalstyle";
 import { userStore } from "@/stores/userStore";
 import { redirect } from "next/navigation";
+import { useEffect } from "react";
 
 export default function LoginPage() {
-  const { loading, userData } = userStore((state) => state);
+  const { loading, userData, loadUser } = userStore((state) => state);
 
-  if (userData) {
-    redirect("/dashboard");
-  }
+  useEffect(() => {
+    const loadData = async () => {
+      await loadUser();
+      if (userData) {
+        redirect("/dashboard");
+      }
+    };
+    loadData();
+  }, [loadUser]);
 
   return (
     <>

@@ -1,3 +1,4 @@
+import React from 'react';
 import { UseFormRegisterReturn } from "react-hook-form";
 import { StyledDiv } from "./style";
 import Image from "next/image";
@@ -12,8 +13,8 @@ interface IFormInputProps {
 export const FormInput = ({
   children,
   type,
-  register,
   error,
+  register,
 }: IFormInputProps) => {
   const getLabelName = () => {
     switch (register.name) {
@@ -60,26 +61,26 @@ export const FormInput = ({
       case "responsavel":
         return "Licença médica: responsável";
       case "crm":
-        return "CRM (Registro Geral)"; 
+        return "CRM (Registro Geral)";
       case "telefone":
         return "Telefone (###-###)";
       case "experiencia":
-       return "Experiência";
+        return "Experiência";
       case "disponibilidadeEntrevista":
         return "Disponibilidade para entrevista";
       case "disponibilidadeTrabalho":
-       return "Disponibilidade para trabalho";
-       case "especialista":
+        return "Disponibilidade para trabalho";
+      case "especialista":
         return "Consulta para o Especialista";
-       case "motivoConsulta":
-         return "Motivo da Consulta";
-       case "disponibilidadeConsulta":
+      case "motivoConsulta":
+        return "Motivo da Consulta";
+      case "disponibilidadeConsulta":
         return "Disponibilidade para se consultar";
       default:
         return "to be determined";
-        
     }
   };
+
   const getIconUrl = () => {
     switch (register.name) {
       case "nome":
@@ -100,12 +101,12 @@ export const FormInput = ({
         return "/icons/ponto.svg";
     }
   };
-  
+
   return (
     <StyledDiv>
       <label htmlFor={register.name}>{getLabelName()}</label>
       <input placeholder={String(children)} type={type} {...register}></input>
-      {error && <p>{error.message}</p>} {/* Ajustando a verificação de erro aqui */}
+      {error && <p>{error.message}</p>}
       <Image
         src={getIconUrl()}
         alt="person icon"

@@ -11,8 +11,6 @@ import {
   totalHoras,
 } from "@/utils/operations";
 import { StyledSection } from "./style";
-import { AdminNavButton } from "@/globalStyles/AdminNavButton/style";
-
 
 export const AdminBonusMenu = () => {
   const [bonusStatus, setBonusStatus] = useState<{ [userId: string]: boolean }>({});
@@ -24,15 +22,14 @@ export const AdminBonusMenu = () => {
     console.log("Toggling bonus for user:", userId);
     setBonusStatus((prevStatus) => ({
       ...prevStatus,
-      [userId]: !prevStatus[userId], // Alternar o estado da bonificação
+      [userId]: !prevStatus[userId],
     }));
   };
 
-  useEffect(() => {
-    // Inicializar bonusStatus com uma entrada para cada usuário
+  useEffect(() => {    
     const initialBonusStatus: { [userId: string]: boolean } = {};
     userList.forEach((user) => {
-      initialBonusStatus[user.id.toString()] = false; // Inicialmente, bonificação desativada para todos
+      initialBonusStatus[user.id.toString()] = true;
     });
     setBonusStatus(initialBonusStatus);
   }, [userList]);
@@ -173,10 +170,10 @@ export const AdminBonusMenu = () => {
         adminActivePeriod!.end
       );
 
-      return horas > 0; // Somente incluir usuários com horas registradas
+      return horas > 0;
     });
 
-    // Ordenar a lista pelo número de horas trabalhadas (do maior para o menor)
+    
     filteredUsers.sort((a, b) => {
       const horasA = totalHoras(
         a.registros_de_ponto,
@@ -293,15 +290,13 @@ export const AdminBonusMenu = () => {
       {adminActivePeriod && (
         <>
           <AdminNav>
-            {/* Componentes de navegação mantidos igual à sua implementação original */}
           </AdminNav>
           <div>
             <p>
               <strong>
                 Valor Total da Bonificação: 💰💸 {formatCurrency(calculateTotalBonus())} ⚕️💚
               </strong>
-            </p>
-            {/* Botão com o ícone do Discord */}
+            </p>            
             <button
               style={{
                 display: 'flex',

@@ -19,15 +19,19 @@ export default function AdminPage() {
   const { loadCursos } = cursoStore((state) => state);
   const { loadExames } = exameStore((state) => state);
   const { loadPontos } = registroStore((state) => state);
-  if (!userData?.user.is_superuser) {
-    redirect("/login");
-  }
+  const loadUser = userStore((state) => state.loadUser);
+
   useEffect(() => {
     const loadData = async () => {
+
+      await loadUser();
+      if (!userData?.user.is_superuser) {
+        redirect("/login");
+      }
       await Promise.all([loadEspecialidades(), loadCursos(), loadExames(), loadPontos()]);
     };
     loadData();
-  }, []);
+  }, [loadUser, loadCursos, loadEspecialidades, loadExames, loadPontos]);
 
   return (
     <>

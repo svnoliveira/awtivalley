@@ -15,6 +15,7 @@ export const AgendaConsultaPscotecnicoForm = () => {
 
   const [image, setImage] = useState<File | null>(null); 
   const [successMessage, setSuccessMessage] = useState<string>(""); 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const {
@@ -60,7 +61,7 @@ export const AgendaConsultaPscotecnicoForm = () => {
       if (image) {
         const formData = new FormData();
         formData.append('file', image);
-
+        setIsLoading(false);
         await axios.post('https://discord.com/api/webhooks/1227754852466163713/MPBiLDhnCNvFTvFldnl0bcloPMJ5L8kxDswIDdIkcdKoiua7MuKEIZEv8ebbXLo4YMpd', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
@@ -139,9 +140,13 @@ export const AgendaConsultaPscotecnicoForm = () => {
        </StyledSelectWrapper>
        </div>
        <br></br>
+       {isLoading ? (
+          <p>Carregando...</p>
+        ) : (
         <StyledSubmitButton $error={checkError()} type="submit">
           AGENDAR
         </StyledSubmitButton>
+        )}
         
       </StyledForm>
     </StyledSection>

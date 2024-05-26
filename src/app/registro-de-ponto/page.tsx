@@ -8,20 +8,22 @@ import { redirect } from "next/navigation";
 import { useEffect } from "react";
 
 export default function PontoPage() {
-  const { loading, userData } = userStore((state) => state);
+  const { loading, userData, loadUser } = userStore((state) => state);
   const { loadPontos } = registroStore((state) => state)
-  if (!userData) {
-    redirect("/login");
-  }
+  
 
   useEffect(() => {
-    const loadList = () => {
+    const loadList = async () => {
+      await loadUser();
+
       if (userData) {
-        loadPontos();
+        await loadPontos();
+      } else {
+        redirect("/login");
       }
     };
     loadList();
-  }, []);
+  }, [loadUser, loadPontos]);
 
   return (
     <>

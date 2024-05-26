@@ -6,13 +6,20 @@ import { userStore } from "@/stores/userStore";
 import { checkUserCursosRole} from "@/utils/operations";
 import { redirect } from "next/navigation";
 import { Header } from "@/components/Header";
+import { useEffect } from "react";
 
 export default function GestaoCursosPage() {
-  const { loading, userData } = userStore((state) => state);
+  const { loading, userData, loadUser } = userStore((state) => state);
 
-  if (checkUserCursosRole(userData?.user) === false) {
-    redirect("/dashboard");
-  }
+  useEffect(() => {
+    const loadData = async () => {
+      await loadUser();
+      if (checkUserCursosRole(userData?.user) === false) {
+        redirect("/dashboard");
+      }
+    };
+    loadData();
+  }, [loadUser, checkUserCursosRole]);
 
 return (
   <>

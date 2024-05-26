@@ -41,6 +41,7 @@ export const AdminUserModal = ({ user }: IAdminUserModalProps) => {
     try {
 
       const webhookUrl = 'https://discord.com/api/webhooks/1209602152591527946/bS8k85czlDSOXNK5Bt_CItRjpZJ0AVDVfDiJXoU6cA5YfS4p2_0GjNk2E8xq-j9OxVHP';
+      "https://media.discordapp.net/attachments/842486097368055868/1190037415813971988/alta_linhas_2.png?ex=65bc0735&is=65a99235&hm=8fbef0f34063389dcd7ea427d38ad4bd12501a5bddbc31381744cc18edd3acd1&format=webp&quality=lossless&";
 
       const imageUrl =
         "https://media.discordapp.net/attachments/842486097368055868/1190037415813971988/alta_linhas_2.png?ex=65bc0735&is=65a99235&hm=8fbef0f34063389dcd7ea427d38ad4bd12501a5bddbc31381744cc18edd3acd1&format=webp&quality=lossless&";
@@ -73,7 +74,7 @@ export const AdminUserModal = ({ user }: IAdminUserModalProps) => {
 
     if (success) {
       setModalOpen(false);
-      sendWebhook(); // Chamada para enviar o webhook
+      sendWebhook();
     }
   };
 
@@ -101,62 +102,60 @@ export const AdminUserModal = ({ user }: IAdminUserModalProps) => {
                 </StyledX>
                 <StyledInputContainer>
                   <div>
-                    <label htmlFor="status">
-                      Status atual: {user.ativo ? "ativo" : "desativado"}
-                    </label>
-                    <select id="status" {...register("ativo")} defaultValue={user.ativo.toString()}>
-                      <option value="">...</option>
-                      <option value="true">✅ Ativo</option>
-                      <option value="false">❌ Desligado</option>
-                      <option value="ausente">✳️ Ausente</option>
-                      <option value="ferias">🏖️ Férias</option>
-                    </select>
+                    <div>
+                      <label htmlFor="status">
+                        Status atual: {user.ativo ? "ativo" : "desativado"}
+                      </label>
+                      <select id="status" {...register("ativo")} defaultValue={user.ativo.toString()}>
+                        <option value="">...</option>
+                        <option value="true">✅ Ativo</option>
+                        <option value="false">❌ Desligado</option>
+                      </select>
+                    </div>
+                    <FormInput
+                      type="text"
+                      register={register("nome")}
+                      error={errors.nome}
+                    >
+                      {user.nome}
+                    </FormInput>
                   </div>
-                  <FormInput
-                    type="text"
-                    register={register("nome")}
-                    error={errors.nome}
-                  >
-                    {user.nome}
-                  </FormInput>
-                  <FormInput
-                    type="text"
-                    register={register("passaporte")}
-                    error={errors.passaporte}
-                  >
-                    {user.passaporte}
-                  </FormInput>
-                  <FormInput
-                    type="password"
-                    register={register("senha")}
-                    error={errors.senha}
-                  >
-                    Digite a nova senha
-                  </FormInput>
                   <div>
-                    <label htmlFor="cargo">
-                      Cargo:
-                    </label>
+                    <FormInput
+                      type="text"
+                      register={register("passaporte")}
+                      error={errors.passaporte}
+                    >
+                      {user.passaporte}
+                    </FormInput>
+                    <FormInput
+                      type="password"
+                      register={register("senha")}
+                      error={errors.senha}
+                    >
+                      Digite a nova senha
+                    </FormInput>
+                  </div>
+                  <div>
+                    <label htmlFor="cargo">Cargo:</label>
                     <select id="cargo" {...register("cargo")} defaultValue={user.cargo}>
                       <option value="">...</option>
                       <option value="⚗️ Residente">⚗️ Residente</option>
                       <option value="🔬 Médico">🔬 Médico</option>
-                      <option value="💉 Enfermagem">💉 Enfermagem</option>
+                      <option value="💉 Paramédico">💉 Paramédico</option>
                       <option value="🧪 Interno">🧪 Interno</option>
-                      <option value="📚 Estagiário">📚 Estagiário</option>
+                      <option value="💊 Estagiário">💊 Estagiário</option>
                     </select>
+                    <FormInput
+                      type="text"
+                      register={register("discord_id")}
+                      error={errors.discord_id}
+                    >
+                      {user.discord_id ? user.discord_id : "Digite o usuário do discord"}
+                    </FormInput>
                   </div>
-                  <FormInput
-                    type="text"
-                    register={register("discord_id")}
-                    error={errors.discord_id}
-                  >
-                    {user.discord_id ? user.discord_id : "Digite o usuário do discord"}
-                  </FormInput>
                   <div>
-                    <label htmlFor="setor">
-                      Setor:
-                    </label>
+                    <label htmlFor="setor">Setor:</label>
                     <select id="setor" {...register("setor")} defaultValue={user.setor}>
                       <option value="">...</option>
                       <option value="💊 Enfermaria">💊Enfermaria</option>                      
@@ -167,18 +166,8 @@ export const AdminUserModal = ({ user }: IAdminUserModalProps) => {
                       <option value="🎉 Integração">🎉 Integração</option>
                       <option value="🚒 Bombeiros">🚒 Bombeiros</option>
                     </select>
-                  </div>
-                  <FormInput
-                    type="date"
-                    register={register("efetivacao")}
-                    error={errors.efetivacao}
-                  >
-                    {user.efetivacao}
-                  </FormInput>
-                  <div>
-                    <label htmlFor="funcao">
-                      Função:
-                    </label>
+
+                    <label htmlFor="funcao">Função:</label>
                     <select id="funcao" {...register("funcao")} defaultValue={user.funcao}>
                       <option value="">...</option>
                       <option value="💼 Diretoria Geral">💼 Diretoria Geral</option>
@@ -206,67 +195,78 @@ export const AdminUserModal = ({ user }: IAdminUserModalProps) => {
                       <option value="🧠 Aux. Saúde Mental">🧠 Aux. Saúde Mental</option>
                       <option value="💻 T.I. do CMA">💻 T.I. do CMA</option>
                     </select>
+                    <FormInput
+                      type="text"
+                      register={register("funcoes_extra")}
+                      error={errors.funcoes_extra}
+                    >
+                      {user.funcoes_extra}
+                    </FormInput>
                   </div>
-                  <FormInput
-                    type="text"
-                    register={register("funcoes_extra")}
-                    error={errors.funcoes_extra}
-                  >
-                    {user.funcoes_extra}
-                  </FormInput>
-                  <FormInput
-                    type="date"
-                    register={register("ultima_promocao")}
-                    error={errors.ultima_promocao}
-                  >
-                    {user.ultima_promocao}
-                  </FormInput>
-                  <FormInput
-                    type="text"
-                    register={register("observacoes")}
-                    error={errors.observacoes}
-                  >
-                    {user.observacoes}
-                  </FormInput>
-                  <FormInput
-                    type="text"
-                    register={register("hab_aereo")}
-                    error={errors.hab_aereo}
+                  <div>
+                    <FormInput
+                      type="date"
+                      register={register("efetivacao")}
+                      error={errors.efetivacao}
+                    >
+                      {user.efetivacao}
+                    </FormInput>
+                    <FormInput
+                      type="date"
+                      register={register("ultima_promocao")}
+                      error={errors.ultima_promocao}
+                    >
+                      {user.ultima_promocao}
+                    </FormInput>
+                    <FormInput
+                      type="text"
+                      register={register("observacoes")}
+                      error={errors.observacoes}
+                    >
+                      {user.observacoes}
+                    </FormInput>
+                    <FormInput
+                      type="text"
+                      register={register("hab_aereo")}
+                      error={errors.hab_aereo}
                     >
                       {user.hab_aereo}
-                  </FormInput>
-                  <FormInput
-                    type="text"
-                    register={register("ciclo")}
-                    error={errors.ciclo}
-                  >
-                    {user.licenca_medica.ciclo}
-                  </FormInput>
-                  <FormInput
-                    type="date"
-                    register={register("data")}
-                    error={errors.data}
-                  >
-                    {user.licenca_medica.data}
-                  </FormInput>
-                  <FormInput
-                    type="text"
-                    register={register("responsavel")}
-                    error={errors.responsavel}
-                  >
-                    {user.licenca_medica.responsavel}
-                  </FormInput>
-                  <FormInput
-                    type="text"
-                    register={register("crm")}
-                    error={errors.crm}
-                  >
-                    {user.licenca_medica.crm}
-                  </FormInput>
+                    </FormInput>
+                    <FormInput
+                      type="text"
+                      register={register("ciclo")}
+                      error={errors.ciclo}
+                    >
+                      {user.licenca_medica.ciclo}
+                    </FormInput>
+                    <FormInput
+                      type="date"
+                      register={register("data")}
+                      error={errors.data}
+                    >
+                      {user.licenca_medica.data}
+                    </FormInput>
+                    <FormInput
+                      type="text"
+                      register={register("responsavel")}
+                      error={errors.responsavel}
+                    >
+                      {user.licenca_medica.responsavel}
+                    </FormInput>
+                    <FormInput
+                      type="text"
+                      register={register("crm")}
+                      error={errors.crm}
+                    >
+                      {user.licenca_medica.crm}
+                    </FormInput>
+                  </div>
+                  <div>
+                    <StyledButton type="submit">
+                      Alterar Usuário
+                    </StyledButton>
+                  </div>
                 </StyledInputContainer>
-                <StyledButton type="submit">
-                  Alterar Usuário
-                </StyledButton>
               </>
             )}
           </form>

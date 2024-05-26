@@ -26,39 +26,77 @@ export const StyledEditModal = styled.div`
   form {
     position: relative;
     width: min(90rem, 95%);
-    height: 46rem;
+    max-width: 90%;
+    height: 80vh;
+    max-height: 90%;
     background-color: white;
     padding: 1rem;
     padding-top: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: 1.5rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      height: 100%;
+      padding: 0.5rem;
+    }
   }
 `;
 
 export const StyledButton = styled.button`
   position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
   background-color: red;
   color: white;
   padding: 10px;
   font-size: 15px;
   border-radius: 5px;
-
+  left: 50%;
+  
   &:hover {
     background-color: var(--dark-red);
   }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    padding: 8px;
+  }
 `;
 
+
+
 export const StyledInputContainer = styled.div`
-  flex-wrap: wrap;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
   row-gap: 0.8rem;
+
+  @media (max-width: 768px) {
+    row-gap: 0.5rem;
+  }
+
+  > div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+
+    & > div {
+      flex: 1;
+      min-width: 45%;
+      
+      @media (max-width: 768px) {
+        min-width: 100%;
+      }
+    }
+  }
 
   > :first-child {
     height: 69px;
@@ -87,10 +125,10 @@ export const StyledInputContainer = styled.div`
     border-radius: 5px;
     font-size: 18px;
     width: 100%;
-  }
-  
-  > div {
-    width: 35rem;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+      padding: 8px;
+    }
   }
 `;
-

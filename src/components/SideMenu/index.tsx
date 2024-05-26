@@ -11,7 +11,7 @@ import {
   StyledLi,
   StyledSideList,
 } from "./style";
-import { checkUserCursosRole, checkUserIntegracaoRole, checkUserRole } from "@/utils/operations";
+import { CheckFuncIngressosUser, checkUserCursosRole, checkUserIntegracaoRole, checkUserRole } from "@/utils/operations";
 import React from "react";
 import { useRouter } from "next/navigation";
 
@@ -135,7 +135,7 @@ export const SideMenu = () => {
                   />
                 </StyledLi>
               )}
-              {checkUserRole(user) && (
+              {user?.is_superuser || checkUserRole(user) && (
                 <StyledLi onClick={() => push("/register")}>
                   <Image
                     src="/icons/register.svg"
@@ -152,7 +152,22 @@ export const SideMenu = () => {
                   />
                 </StyledLi>
               )}
-              {checkUserCursosRole(user) && (
+              <StyledLi onClick={() => push("/DashboardCursos")}>
+                <Image
+                  src="/icons/book.svg"
+                  alt="Logo"
+                  width={20}
+                  height={20}
+                />
+                <span>Provas dos Cursos</span>
+                <Image
+                  src="/icons/arrow-right.svg"
+                  alt="Logo"
+                  width={15}
+                  height={15}
+                />
+              </StyledLi>
+              {user?.is_superuser || checkUserCursosRole(user) && (
                 <StyledLi onClick={() => push("/cursos")}>
                   <Image
                     src="/icons/register.svg"
@@ -168,53 +183,53 @@ export const SideMenu = () => {
                     height={15}
                   />
                 </StyledLi>
-              )}      
-                <StyledLi onClick={() => push("/registercurriculo")}>
-                  <Image
-                    src="/icons/register.svg"
-                    alt="Logo"
-                    width={20}
-                    height={20}
-                  />
-                  <span>Cadastrar currículos</span>
-                  <Image
-                    src="/icons/arrow-right.svg"
-                    alt="Logo"
-                    width={15}
-                    height={15}
-                  />
-                </StyledLi>     
-                <StyledLi onClick={() => push("/agendamento-de-consultas")}>
-                  <Image
-                    src="/icons/register.svg"
-                    alt="Logo"
-                    width={20}
-                    height={20}
-                  />
-                  <span>Agendamento de Consultas</span>
-                  <Image
-                    src="/icons/arrow-right.svg"
-                    alt="Logo"
-                    width={15}
-                    height={15}
-                  />
-                </StyledLi>       
-                <StyledLi onClick={() => push("/agendamento-psicotecnico")}>
-                  <Image
-                    src="/icons/register.svg"
-                    alt="Logo"
-                    width={20}
-                    height={20}
-                  />
-                  <span>Agendamento de Psicotécnico</span>
-                  <Image
-                    src="/icons/arrow-right.svg"
-                    alt="Logo"
-                    width={15}
-                    height={15}
-                  />
-                </StyledLi> 
-                {user && (
+              )}
+              <StyledLi onClick={() => push("/registercurriculo")}>
+                <Image
+                  src="/icons/register.svg"
+                  alt="Logo"
+                  width={20}
+                  height={20}
+                />
+                <span>Cadastrar currículos</span>
+                <Image
+                  src="/icons/arrow-right.svg"
+                  alt="Logo"
+                  width={15}
+                  height={15}
+                />
+              </StyledLi>
+              <StyledLi onClick={() => push("/agendamento-de-consultas")}>
+                <Image
+                  src="/icons/register.svg"
+                  alt="Logo"
+                  width={20}
+                  height={20}
+                />
+                <span>Agendamento de Consultas</span>
+                <Image
+                  src="/icons/arrow-right.svg"
+                  alt="Logo"
+                  width={15}
+                  height={15}
+                />
+              </StyledLi>
+              <StyledLi onClick={() => push("/agendamento-psicotecnico")}>
+                <Image
+                  src="/icons/register.svg"
+                  alt="Logo"
+                  width={20}
+                  height={20}
+                />
+                <span>Agendamento de Psicotécnico</span>
+                <Image
+                  src="/icons/arrow-right.svg"
+                  alt="Logo"
+                  width={15}
+                  height={15}
+                />
+              </StyledLi>
+              {user && (
                 <StyledLi onClick={() => logout()}>
                   <Image
                     src="/icons/login.svg"
