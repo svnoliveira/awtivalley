@@ -1,11 +1,11 @@
 "use client";
 import { Header } from "@/components/Header";
-import { ProvaDirecDefensiva } from "@/components/ProvaDirecDefensiva";
+import { ProvaComporCondEmedConflitos } from "@/components/ProvaComporCondEmedConflitos";
 import { Loading } from "@/fragments/Loading";
 import { GlobalStyle } from "@/globalStyles/globalstyle";
 import { userStore } from "@/stores/userStore";
 
-export default function HomeProvaDirecDefen() {
+export default function HomeProvaComporCondEmedConflitos() {
   const loading = userStore((state) => state.loading);
   return (
     <>
@@ -14,7 +14,7 @@ export default function HomeProvaDirecDefen() {
         <>
           <Header />
           <main>
-            <ProvaDirecDefensiva />
+            <ProvaComporCondEmedConflitos />
           </main>
         </>
       }

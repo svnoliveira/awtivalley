@@ -1,11 +1,11 @@
 "use client";
 import { Header } from "@/components/Header";
-import { ProvaModCondMedConflitos } from "@/components/ProvaModCondMedConflitos";
+import { ProvaComunicModulacao } from "@/components/ProvaComunicModulacao";
 import { Loading } from "@/fragments/Loading";
 import { GlobalStyle } from "@/globalStyles/globalstyle";
 import { userStore } from "@/stores/userStore";
 
-export default function HomeProvaModCondMedConflitos() {
+export default function HomeProvaComunicModulacaos() {
   const loading = userStore((state) => state.loading);
   return (
     <>
@@ -14,7 +14,7 @@ export default function HomeProvaModCondMedConflitos() {
         <>
           <Header />
           <main>
-            <ProvaModCondMedConflitos />
+            <ProvaComunicModulacao />
           </main>
         </>
       }
