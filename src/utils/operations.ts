@@ -193,7 +193,7 @@ export const checkUserIntegracaoRole = ( user:IUser | undefined ) => {
 export const CheckFuncEstagiarioUserCursos = ( user:IUser | undefined ) => {
   if(user){
     if (
-    user.is_superuser === true || user.cargo === "💊 Estagiário"|| user.setor === "👨‍🏫 Cursos"){
+    user.is_superuser === true || user.cargo === "📚 Estagiário"|| user.setor === "👨‍🏫 Cursos"){
       return true;
     } else {
       return false;
@@ -206,7 +206,7 @@ export const CheckFuncEstagiarioUserCursos = ( user:IUser | undefined ) => {
 export const CheckFuncParamedicoUserCursos = ( user:IUser | undefined ) => {
   if(user){
     if (
-    user.is_superuser === true || user.cargo === "💉 Paramédico"|| user.setor === "👨‍🏫 Cursos"){
+    user.is_superuser === true || user.cargo === "💉 Enfermagem"|| user.setor === "👨‍🏫 Cursos"){
       return true;
     } else {
       return false;
