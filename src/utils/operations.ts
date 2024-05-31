@@ -109,8 +109,6 @@ export const totalHoras = (
   }
 };*/
 
-
-
 export const checkUserRole = ( user:IUser | undefined ) => {
   if(user){
     if (
