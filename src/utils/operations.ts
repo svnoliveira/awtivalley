@@ -53,7 +53,7 @@ export const totalHoras = (
     }, 0);
 };
 
-export const formatHorario = (texto: string) => {
+/*export const formatHorario = (texto: string) => {
   const newTexto = texto.replace(/\s/g, " ");
   const regexData = /Data: (\d{1,2}\/\d{1,2}\/\d{4})/;
   const regexEntrada = /ENTRADA: (\d{1,2}:\d{1,2}:\d{1,2})/;
@@ -75,7 +75,7 @@ export const formatHorario = (texto: string) => {
   } else if (informacoes.saida) {
     return `${formattedDate} ${informacoes.saida}-03:00`;
   }
-};
+};*/
 
 /*export const formatHorario = (texto: string) => {
   const newTexto = texto.replace(/\s/g, " ");

@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { StyledForm, StyledSection } from "./style";
 import { StyledSubmitButton } from "@/globalStyles/SubmitButton";
 import Image from "next/image";
-import { formatHorario } from "@/utils/operations";
+//import { formatHorario } from "@/utils/operations";
 import { Loading } from "@/fragments/Loading";
 import Link from "next/link";
 import { FormTextArea } from "../FormTextArea";
@@ -30,6 +30,38 @@ export const PontoForm = () => {
   } = useForm<TPontoValues>({
     resolver: zodResolver(pontoSchema),
   });
+  
+  const formatHorario = (texto: string) => {
+    const newTexto = texto.replace(/\s/g, " ");
+    const regexData = /Data: (\d{1,2}\/\d{1,2}\/\d{4})/;
+    const regexEntrada = /ENTRADA: (\d{1,2}:\d{1,2}:\d{1,2})/;
+    const regexSaida = /SA[ÍI]DA: (\d{1,2}:\d{1,2}:\d{1,2})/;
+  
+    const matchData = newTexto.match(regexData);
+    const matchEntrada = newTexto.match(regexEntrada);
+    const matchSaida = newTexto.match(regexSaida);
+  
+    const informacoes = {
+      data: matchData ? matchData[1] : "",
+      entrada: matchEntrada ? matchEntrada[1] : "",
+      saida: matchSaida ? matchSaida[1] : "",
+    };
+  
+    if (!informacoes.data) {
+      return "Data não encontrada";
+    }
+  
+    const dateParts = informacoes.data.split("/");
+    const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+  
+    if (informacoes.entrada) {
+      return `${formattedDate} ${informacoes.entrada}-03:00`;
+    } else if (informacoes.saida) {
+      return `${formattedDate} ${informacoes.saida}-03:00`;
+    } else {
+      return "Informações de entrada ou saída não encontradas";
+    }
+  };
 
   const parsePontoData = async (formData: TPontoValues) => {
     const pontoData = {
