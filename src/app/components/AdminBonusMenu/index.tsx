@@ -68,19 +68,19 @@ export const AdminBonusMenu = () => {
     if (horas >= 36000) {
       switch (cargo) {
         case "📚 Estagiário":
-          rate = 30000;
+          rate = 35000;
           break;
         case "💉 Enfermagem":
-          rate = 40000;
+          rate = 45000;
           break;
         case "🧪 Interno":
-          rate = 50000;
+          rate = 55000;
           break;
         case "⚗️ Residente":
-          rate = 60000;
+          rate = 65000;
           break;
         case "🔬 Médico":
-          rate = 70000;
+          rate = 75000;
           break;
         default:
           break;
@@ -88,19 +88,19 @@ export const AdminBonusMenu = () => {
     } else if (horas >= 26280 + 720) {
       switch (cargo) {
         case "📚 Estagiário":
-          rate = 22500;
+          rate = 26250;
           break;
         case "💉 Enfermagem":
-          rate = 30000;
+          rate = 33750;
           break;
         case "🧪 Interno":
-          rate = 37500;
+          rate = 41250;
           break;
         case "⚗️ Residente":
-          rate = 45000;
+          rate = 48750;
           break;
         case "🔬 Médico":
-          rate = 52500;
+          rate = 56250;
           break;
         default:
           break;
@@ -119,10 +119,10 @@ export const AdminBonusMenu = () => {
       funcao === "🚁 Inst. Chef Aéreo"
     ) {
       if (horas >= 36000) {
-        const bonus = 10000;
+        const bonus = 15000;
         rate += bonus;
       } else if (horas >= 26280 + 720) {
-        const bonus = 7500;
+        const bonus = 11250;
         rate += bonus;
       }
     } else if (
@@ -142,10 +142,10 @@ export const AdminBonusMenu = () => {
       funcao === "🚁 Coord. Aéreo"
     ) {
       if (horas >= 36000) {
-        const bonus = 15000;
+        const bonus = 20000;
         rate += bonus;
       } else if (horas >= 26280 + 720) {
-        const bonus = 11250;
+        const bonus = 15000;
         rate += bonus;
       }
     }
