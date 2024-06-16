@@ -52,7 +52,7 @@ export const AgendaConsultaPscotecnicoForm = () => {
                     `:mag_right: **Agendamento para:** <@&1183451159357300838>\n` +
                     `:arrow_right: **Disponibilidade para se consultar:** ${data.disponibilidadeConsulta}\n`;
 
-      await axios.post('https://discord.com/api/webhooks/1227754852466163713/MPBiLDhnCNvFTvFldnl0bcloPMJ5L8kxDswIDdIkcdKoiua7MuKEIZEv8ebbXLo4YMpd', {
+      await axios.post('https://discord.com/api/webhooks/1223431294159945849/WlNUpUDfo8O3dqQVNHJKheOBJ0hoKHA16HzMfE-16zMAsARxgSs3MD6dhIv_QiODyraX', {
         content: message,
       });
 
@@ -62,7 +62,7 @@ export const AgendaConsultaPscotecnicoForm = () => {
         const formData = new FormData();
         formData.append('file', image);
         setIsLoading(false);
-        await axios.post('https://discord.com/api/webhooks/1227754852466163713/MPBiLDhnCNvFTvFldnl0bcloPMJ5L8kxDswIDdIkcdKoiua7MuKEIZEv8ebbXLo4YMpd', formData, {
+        await axios.post('https://discord.com/api/webhooks/1223431294159945849/WlNUpUDfo8O3dqQVNHJKheOBJ0hoKHA16HzMfE-16zMAsARxgSs3MD6dhIv_QiODyraX', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           },
