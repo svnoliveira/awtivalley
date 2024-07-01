@@ -130,7 +130,9 @@ export const AgendaConsultaForm = () => {
         message += `# <a:alerta:1223357938912067675> <@&1127323286989185090> <a:alerta:1223357938912067675>`;
       } else if (data.especialista === 'Psiquiatria') {
         message += `# <a:alerta:1223357938912067675> <@&1127323286896910411> <a:alerta:1223357938912067675>`;
-      } else if (data.especialista === 'Patologia') {
+      }  else if (data.especialista === 'Psicologia') {
+        message += `# <a:alerta:1223357938912067675> <@&1127323286896910412> <a:alerta:1223357938912067675>`;        
+      }else if (data.especialista === 'Patologia') {
         message += `# <a:alerta:1223357938912067675> <@&1127323286896910415> <a:alerta:1223357938912067675>`;
       } else if (data.especialista === 'Cardiologia') {
         message += `# <a:alerta:1223357938912067675> <@&1127323286989185093> <a:alerta:1223357938912067675>`;
@@ -263,6 +265,7 @@ export const AgendaConsultaForm = () => {
             <option value="Oftalmologia">Oftalmologia</option>
             <option value="Clínica Geral">Clínica Geral</option>
             <option value="Psiquiatria">Psiquiatria</option>
+            <option value="Psicologia">Psicologia</option>
             <option value="Patologia">Patologia</option>
             <option value="Cardiologia">Cardiologia</option>
             <option value="Cirurgia Geral">Cirurgia Geral</option>
