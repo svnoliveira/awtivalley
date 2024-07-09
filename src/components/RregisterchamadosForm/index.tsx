@@ -54,13 +54,13 @@ export const RregisterchamadosForm = () => {
       }
 
       const message = `:heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign:\n` +
-        `# <a:alerta:1224848733871800431> <@&842486096826073114>\n\n` +
+        `# <a:alerta:1223357938912067675> <@&1127323287094055059>\n\n` +
         `# :bookmark_tabs: **Chamado: ** :bookmark_tabs:\n\n` +
         `:busts_in_silhouette: **Local:**  ${data.Local}\n` +
         `:busts_in_silhouette: **Hora:**  ${data.Hora}\n` +
         `:identification_card: **Passaporte:** ${data.passaporte}\n`;
 
-      await axios.post('https://discord.com/api/webhooks/1259869937124511794/I2n0MsUfm-0fioLZreqeSL0uEJyMN8qa0RJd-jcEK9yME2yaYbiws2nzoky5lwOvaybI', {
+      await axios.post('https://discord.com/api/webhooks/1260199186306043954/oPLIxFZ3cdM10qbUvhvrWOaICKCuxRczBiRiiZxal2vT6l4TlZfWyB4_4E6ZAEA_vJgT', {
         content: message,
       });
 
@@ -69,7 +69,7 @@ export const RregisterchamadosForm = () => {
       const formData = new FormData();
       formData.append('file', image);
 
-      await axios.post('https://discord.com/api/webhooks/1259869937124511794/I2n0MsUfm-0fioLZreqeSL0uEJyMN8qa0RJd-jcEK9yME2yaYbiws2nzoky5lwOvaybI', formData, {
+      await axios.post('https://discord.com/api/webhooks/1260199186306043954/oPLIxFZ3cdM10qbUvhvrWOaICKCuxRczBiRiiZxal2vT6l4TlZfWyB4_4E6ZAEA_vJgT', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },

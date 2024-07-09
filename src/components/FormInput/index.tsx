@@ -8,6 +8,8 @@ interface IFormInputProps {
   type: string;
   error: any; // Alterando a tipagem do error para aceitar qualquer tipo
   register: UseFormRegisterReturn<string>;
+  defaultValue?: string; // Adicionando a propriedade defaultValue
+  disabled?: boolean; // Adicionando a propriedade disabled
 }
 
 export const FormInput = ({
@@ -15,6 +17,8 @@ export const FormInput = ({
   type,
   error,
   register,
+  defaultValue, // Adicionando a propriedade defaultValue
+  disabled, // Adicionando a propriedade disabled
 }: IFormInputProps) => {
   const getLabelName = () => {
     switch (register.name) {
@@ -76,6 +80,12 @@ export const FormInput = ({
         return "Motivo da Consulta";
       case "disponibilidadeConsulta":
         return "Disponibilidade para se consultar";
+      case "RegGeral":
+        return "Registro Geral";
+      case "Local":
+        return "Localização";
+      case "Hora":
+        return "Horário do Chamado";        
       default:
         return "to be determined";
     }
@@ -105,7 +115,13 @@ export const FormInput = ({
   return (
     <StyledDiv>
       <label htmlFor={register.name}>{getLabelName()}</label>
-      <input placeholder={String(children)} type={type} {...register}></input>
+      <input 
+        placeholder={String(children)} 
+        type={type} 
+        {...register} 
+        defaultValue={defaultValue} // Incluindo defaultValue no input
+        disabled={disabled} // Incluindo disabled no input
+      />
       {error && <p>{error.message}</p>}
       <Image
         src={getIconUrl()}
