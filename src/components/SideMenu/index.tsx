@@ -184,6 +184,21 @@ export const SideMenu = () => {
                   />
                 </StyledLi>
               )}
+              <StyledLi onClick={() => push("/registerchamados")}>
+                <Image
+                  src="/icons/register.svg"
+                  alt="Logo"
+                  width={20}
+                  height={20}
+                />
+                <span>Formulário de Chamados</span>
+                <Image
+                  src="/icons/arrow-right.svg"
+                  alt="Logo"
+                  width={15}
+                  height={15}
+                />
+              </StyledLi>
               <StyledLi onClick={() => push("/registercurriculo")}>
                 <Image
                   src="/icons/register.svg"

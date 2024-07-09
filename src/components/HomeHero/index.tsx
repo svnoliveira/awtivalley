@@ -69,6 +69,13 @@ export const HomeHero = () => {
           )}
           {user && (
             <li>
+              <Link href="/registerchamados">
+                <HomeMenuCard iconUrl="/icons/register.svg">Formulário de Chamados</HomeMenuCard>
+              </Link>
+            </li>
+          )}         
+          {user && (
+            <li>
               <Link href="/registercurriculo">
                 <HomeMenuCard iconUrl="/icons/register.svg">Cadastro de Currículos</HomeMenuCard>
               </Link>
