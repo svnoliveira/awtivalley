@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { AdminNav } from "@/globalStyles/AdminNav/style";
 import { StyledTable, ThTitleRow } from "@/globalStyles/StyledTable/style";
 import { adminStore } from "@/stores/adminStore";
+import { IUser } from "@/stores/@userTypes";
 import { userStore } from "@/stores/userStore";
 import {
   getTimeFromSeconds,
@@ -170,7 +171,7 @@ export const AdminBonusMenu = () => {
         adminActivePeriod!.end
       );
 
-      return horas > 0;
+      return horas > 0 && user.ativo;
     });
 
     

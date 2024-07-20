@@ -61,6 +61,8 @@ const ClickableImage: React.FC<ClickableImageProps> = ({ src, onClick }) => {
       return 'Sandy Shores';
     } else if (x >= 350 && x <= 415 && y >= 274 && y <= 290) {
         return 'Aeroporto';
+    } else if (x >= 287 && x <= 354 && y >= 309 && y <= 328) {
+        return 'Hospital';
     } else {
       return `Este local não precisa relatar`; // Retorna as coordenadas se não estiver em nenhuma área definida
     }
