@@ -58,7 +58,8 @@ export const RregisterchamadosForm = () => {
         `# :bookmark_tabs: **Chamado: ** :bookmark_tabs:\n\n` +
         `:busts_in_silhouette: **Local:**  ${data.Local}\n` +
         `:busts_in_silhouette: **Hora:**  ${data.Hora}\n` +
-        `:identification_card: **Passaporte:** ${data.passaporte}\n`;
+        `:identification_card: **Passaporte:** ${data.passaporte}\n` +
+        `:busts_in_silhouette: **Observação:**  ${data.observacoes}\n`;;
 
       await axios.post('https://discord.com/api/webhooks/1260199186306043954/oPLIxFZ3cdM10qbUvhvrWOaICKCuxRczBiRiiZxal2vT6l4TlZfWyB4_4E6ZAEA_vJgT', {
         content: message,
@@ -93,7 +94,8 @@ export const RregisterchamadosForm = () => {
     return (
       !!errors.Local ||
       !!errors.passaporte ||
-      !!errors.Hora
+      !!errors.Hora ||
+      !!errors.observacoes
     );
   };
 
@@ -141,6 +143,13 @@ export const RregisterchamadosForm = () => {
             error={errors.passaporte}
           >
             Passaporte
+          </FormInput>
+          <FormInput
+            type="text"
+            register={register("observacoes")}
+            error={errors.observacoes}
+          >
+            Observação
           </FormInput>
           <StyledSelectWrapper>
             <input type="file" onChange={handleImageChange} accept="image/*" />
