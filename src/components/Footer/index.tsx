@@ -43,7 +43,7 @@ export const Footer = () => {
             <GlobalStyle />
             <StyledFooter>
                 <div>
-                    Todos os Direitos Reservados ao <b>Tiago SUCCI</b> e <b>Centro Médico Awti</b> ©2024
+                    Todos os Direitos Reservados ao <b>Tiago SUCCI</b> e <b>Centro Médico Alta</b> ©2024
                 </div>
                 <div id="extra-messages-container">
                     <p>{mensagens[index]}</p>

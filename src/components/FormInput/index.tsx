@@ -84,8 +84,10 @@ export const FormInput = ({
         return "Registro Geral";
       case "Local":
         return "Localização";
-      case "Hora":
-        return "Horário do Chamado";        
+      case "Hora":  
+        return "Horário do Chamado";  
+      case "licenca_medica.crm":
+        return "Registro Geral";        
       default:
         return "to be determined";
     }

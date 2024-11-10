@@ -57,30 +57,6 @@ export const totalHoras = (
   const newTexto = texto.replace(/\s/g, " ");
   const regexData = /Data: (\d{1,2}\/\d{1,2}\/\d{4})/;
   const regexEntrada = /ENTRADA: (\d{1,2}:\d{1,2}:\d{1,2})/;
-  const regexSaida = /SAÍDA: (\d{1,2}:\d{1,2}:\d{1,2})/;
-
-  const matchData = newTexto.match(regexData);
-  const matchEntrada = newTexto.match(regexEntrada);
-  const matchSaida = newTexto.match(regexSaida);
-
-  const informacoes = {
-    data: matchData ? matchData[1] : "",
-    entrada: matchEntrada ? matchEntrada[1] : "",
-    saida: matchSaida ? matchSaida[1] : "",
-  };
-  const dateParts = informacoes.data.split("/");
-  const formattedDate = dateParts[2] + "-" + dateParts[1] + "-" + dateParts[0];
-  if (informacoes.entrada) {
-    return `${formattedDate} ${informacoes.entrada}-03:00`;
-  } else if (informacoes.saida) {
-    return `${formattedDate} ${informacoes.saida}-03:00`;
-  }
-};*/
-
-/*export const formatHorario = (texto: string) => {
-  const newTexto = texto.replace(/\s/g, " ");
-  const regexData = /Data: (\d{1,2}\/\d{1,2}\/\d{4})/;
-  const regexEntrada = /ENTRADA: (\d{1,2}:\d{1,2}:\d{1,2})/;
   const regexSaida = /SA[ÍI]DA: (\d{1,2}:\d{1,2}:\d{1,2})/;
 
   const matchData = newTexto.match(regexData);
@@ -113,6 +89,20 @@ export const checkUserRole = ( user:IUser | undefined ) => {
   if(user){
     if (
     user.is_superuser === true || user.setor === "💻 Administrativo" ||  user.setor === "✒️ Ingressos"){
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
+
+
+export const checkIngressoRole = ( user:IUser | undefined ) => {
+  if(user){
+    if (
+    user.is_superuser === true || user.setor === "💻 Administrativo" ||  user.funcao === "✒️ Aux. Ingresso"){
       return true;
     } else {
       return false;
@@ -191,7 +181,7 @@ export const checkUserIntegracaoRole = ( user:IUser | undefined ) => {
 export const CheckFuncEstagiarioUserCursos = ( user:IUser | undefined ) => {
   if(user){
     if (
-    user.is_superuser === true || user.cargo === "📚 Estagiário"|| user.setor === "👨‍🏫 Cursos"){
+    user.is_superuser === true || user.cargo === "💊 Estagiário"|| user.setor === "👨‍🏫 Cursos"){
       return true;
     } else {
       return false;
@@ -204,7 +194,7 @@ export const CheckFuncEstagiarioUserCursos = ( user:IUser | undefined ) => {
 export const CheckFuncParamedicoUserCursos = ( user:IUser | undefined ) => {
   if(user){
     if (
-    user.is_superuser === true || user.cargo === "💉 Enfermagem"|| user.setor === "👨‍🏫 Cursos"){
+    user.is_superuser === true || user.cargo === "💉 Paramédico"|| user.setor === "👨‍🏫 Cursos"){
       return true;
     } else {
       return false;
@@ -230,7 +220,7 @@ export const CheckFuncInternoUserCursos = ( user:IUser | undefined ) => {
 export const CheckFuncResidenteUserCursos = ( user:IUser | undefined ) => {
   if(user){
     if (
-    user.is_superuser === true || user.cargo === "⚗️ Residente" || user.setor === "👨‍🏫 Cursos"){
+    user.is_superuser === true || user.cargo === "⚗️ Residente I" || user.cargo === "⚗️ Residente II" || user.setor === "👨‍🏫 Cursos"){
       return true;
     } else {
       return false;
@@ -253,11 +243,11 @@ export const CheckFuncMedicoUserCursos = ( user:IUser | undefined ) => {
   }
 }
 
-/* CHECK USER ROLE PARA FORM INGRESSO*/
-export const CheckFuncIngressosUser = ( user:IUser | undefined ) => {
+
+export const CheckAcompanhamento = ( user:IUser | undefined ) => {
   if(user){
     if (
-    user.is_superuser === true || user.setor === "✒️ Ingressos"){
+    user.is_superuser === true || user.cargo === "🔬 Médico" || user.cargo === "⚗️ Residente I" || user.cargo === "⚗️ Residente II" || user.cargo === "🧪 Interno" || user.cargo === "💉 Paramédico" ||  user.setor === "✒️ Ingressos" ){
       return true;
     } else {
       return false;

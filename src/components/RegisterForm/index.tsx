@@ -22,16 +22,24 @@ export const RegisterForm = () => {
   const { push } = useRouter();
 
   const parseRegisterData = async (userData: TRegisterValues) => {
-    const success = await registerUser({ ...userData, licenca_medica: {} });
+    const success = await registerUser({
+      ...userData,
+      licenca_medica: {
+        ...userData.licenca_medica,
+        crm: userData.licenca_medica.crm, // Inclui o CRM dentro de licenca_medica
+      },
+    });
     success && push("/login");
   };
+
   const checkError = () => {
     if (
       errors.confirmPassword ||
       errors.discord_id ||
       errors.nome ||
       errors.passaporte ||
-      errors.senha
+      errors.senha ||
+      errors.licenca_medica?.crm
     ) {
       return true;
     }
@@ -43,7 +51,7 @@ export const RegisterForm = () => {
       <StyledForm
         onSubmit={handleSubmit((formData) => parseRegisterData(formData))}
       >
-        <Link href={"/"}>{"<"} Home</Link>
+        <Link href={"/DashboardIngresso"}>{"<"} Menu Ingressos</Link>
         <Image
           src="/cma-logo-black.png"
           alt="Logo awti valley"
@@ -65,6 +73,13 @@ export const RegisterForm = () => {
             error={errors.passaporte}
           >
             Digite o Passaporte do Colaborador
+          </FormInput>
+          <FormInput
+            type="text"
+            register={register("licenca_medica.crm")}
+            error={errors.licenca_medica?.crm}
+          >
+            Digite o Registro Geral
           </FormInput>
           <FormInput
             type="text"

@@ -140,11 +140,13 @@ export const AdminUserModal = ({ user }: IAdminUserModalProps) => {
                     <label htmlFor="cargo">Cargo:</label>
                     <select id="cargo" {...register("cargo")} defaultValue={user.cargo}>
                       <option value="">...</option>
-                      <option value="⚗️ Residente">⚗️ Residente</option>
+                      <option value="⚗️ Residente II">⚗️ Residente II</option>
+                      <option value="⚗️ Residente I">⚗️ Residente I</option>
                       <option value="🔬 Médico">🔬 Médico</option>
-                      <option value="💉 Enfermagem">💉 Enfermagem</option>
                       <option value="🧪 Interno">🧪 Interno</option>
-                      <option value="📚 Estagiário">📚 Estagiário</option>
+                      <option value="💉 Paramédico">💉 Paramédico</option>
+                      <option value="💊 Estagiário">💊 Estagiário</option>
+                      <option value="🌟 Voluntário">🌟 Voluntário</option>
                     </select>
                     <FormInput
                       type="text"

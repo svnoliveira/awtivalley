@@ -15,19 +15,19 @@ export const DashboardCursos = () => {
         <hr></hr>
         <hr></hr>
         <StyledList>
-          {CheckFuncEstagiarioUserCursos(user) && <li><Link href={"/ProvaComporCondEmedConflitos"}>
-            <DashboardCursosCard iconUrl="/icons/hambulance.svg">Comportamento, Conduta & Mediação de Conflitos</DashboardCursosCard>
+        <center><h1>SEM CURSOS DISPONÍVEIS NO MOMENTO. Atenciosamente, Ranzinza e Fofinho</h1></center>
+          {/* {CheckFuncEstagiarioUserCursos(user) && <li><Link href={"/ProvaDirecDefen"}>
+            <DashboardCursosCard iconUrl="/icons/hambulance.svg">Direção Defensiva</DashboardCursosCard>
           </Link></li>}
-          {CheckFuncEstagiarioUserCursos(user) && <li><Link href={"/ProvaComunicModulacao"}>
-            <DashboardCursosCard iconUrl="/icons/personspeaking.svg">Comunicação e Modulação</DashboardCursosCard>
+          {CheckFuncEstagiarioUserCursos(user) && <li><Link href={"/ProvaModCondMedConflitos"}>
+            <DashboardCursosCard iconUrl="/icons/personspeaking.svg">Modulação</DashboardCursosCard>
           </Link></li>}
-          {/* {CheckFuncEstagiarioUserCursos(user) && <li><Link href={"/ProvaNocoesMedicamentos"}>
+          {CheckFuncEstagiarioUserCursos(user) && <li><Link href={"/ProvaNocoesMedicamentos"}>
             <DashboardCursosCard iconUrl="/icons/pill.svg">Noções sobre Medicamentos</DashboardCursosCard>
           </Link></li>}
           {CheckFuncEstagiarioUserCursos(user) && <li><Link href={"/ProvaAnatomiaBasica"}>
             <DashboardCursosCard iconUrl="/icons/anatomiabasica.svg">Anatomia Básica</DashboardCursosCard>
           </Link></li>}
-
           {CheckFuncParamedicoUserCursos(user) && <li><Link href={"/ProvaAnamneseeDiagnosticos"}>
             <DashboardCursosCard iconUrl="/icons/anamnese.svg">Anamnese e Diagnósticos</DashboardCursosCard>
           </Link></li>}
@@ -37,7 +37,6 @@ export const DashboardCursos = () => {
           {CheckFuncParamedicoUserCursos(user) && <li><Link href={"/ProvaResgateAereoeAquatico"}>
             <DashboardCursosCard iconUrl="/icons/helicopter.svg">Resgate Aéreo e Aquático</DashboardCursosCard>
           </Link></li>}
-
           {CheckFuncInternoUserCursos(user) && <li><Link href={"/ProvaAnatomiaAvancada"}>
             <DashboardCursosCard iconUrl="/icons/lung.svg">Anatomia Avançada</DashboardCursosCard>
           </Link></li>}
@@ -46,8 +45,7 @@ export const DashboardCursos = () => {
           </Link></li>}
           {CheckFuncInternoUserCursos(user) && <li><Link href={"/ProvaExamesLabETecdeColetas"}>
             <DashboardCursosCard iconUrl="/icons/microscope.svg">Exames Laboratoriais e Técnicas de Coletas</DashboardCursosCard>
-          </Link></li>}*/}
-
+          </Link></li>} */}
         </StyledList>
       </StyledContainer>
     </StyledSection>

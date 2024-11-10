@@ -2,7 +2,7 @@ import { HomeMenuCard } from "@/fragments/HomeMenuCards";
 import { StyledContainer, StyledList, StyledSection } from "./style";
 import { userStore } from "@/stores/userStore";
 import Link from "next/link";
-import { checkUserCursosRole, checkUserRole} from "@/utils/operations";
+import { checkUserCursosRole, checkUserRole, checkIngressoRole} from "@/utils/operations";
 
 export const HomeHero = () => {
   const user = userStore((state) => state.userData?.user);
@@ -39,6 +39,27 @@ export const HomeHero = () => {
               </Link>
             </li>
           )}
+          {user && (
+            <li>
+              <Link href="/registercurriculo">
+                <HomeMenuCard iconUrl="/icons/register.svg">Cadastro de Currículos</HomeMenuCard>
+              </Link>
+            </li>
+          )}
+          {!user && (
+            <li>
+              <Link href="/registercurriculo">
+                <HomeMenuCard iconUrl="/icons/register.svg">Cadastro de Currículos</HomeMenuCard>
+              </Link>
+            </li>
+          )} 
+          {/* {user && (
+            <li>
+              <Link href="/DashboardMiniGame">
+                <HomeMenuCard iconUrl="/icons/icon_minigame.gif">MiniGameCDA</HomeMenuCard>
+              </Link>
+            </li>
+          )} */}
           {!user && (
             <li>
               <Link href="/login">
@@ -46,10 +67,10 @@ export const HomeHero = () => {
               </Link>
             </li>
           )}
-          {(user?.is_superuser || checkUserRole(user)) && (
+          {(user?.is_superuser || checkUserRole(user) || checkIngressoRole(user)) && (
             <li>
-              <Link href="/register">
-                <HomeMenuCard iconUrl="/icons/register.svg">Cadastrar novos colaboradores</HomeMenuCard>
+              <Link href="/DashboardIngresso">
+                <HomeMenuCard iconUrl="/icons/register.svg">Gestão Ingressos</HomeMenuCard>
               </Link>
             </li>
           )}
@@ -67,28 +88,14 @@ export const HomeHero = () => {
               </Link>
             </li>
           )}
-          {user && (
+          {/* {user && (
             <li>
               <Link href="/registerchamados">
                 <HomeMenuCard iconUrl="/icons/register.svg">Formulário de Chamados</HomeMenuCard>
               </Link>
             </li>
-          )}         
-          {user && (
-            <li>
-              <Link href="/registercurriculo">
-                <HomeMenuCard iconUrl="/icons/register.svg">Cadastro de Currículos</HomeMenuCard>
-              </Link>
-            </li>
-          )}
-          {!user && (
-            <li>
-              <Link href="/registercurriculo">
-                <HomeMenuCard iconUrl="/icons/register.svg">Cadastro de Currículos</HomeMenuCard>
-              </Link>
-            </li>
-          )}
-          {!user && (
+          )} */}        
+          {/* {!user && (
             <li>
               <Link href="/agendamento-de-consultas">
                 <HomeMenuCard iconUrl="/icons/register.svg">Agendamento de Consultas</HomeMenuCard>
@@ -115,7 +122,7 @@ export const HomeHero = () => {
                 <HomeMenuCard iconUrl="/icons/register.svg">Agendamento de Psicotécnico</HomeMenuCard>
               </Link>
             </li>
-          )}
+          )} */}
         </StyledList>
       </StyledContainer>
     </StyledSection>

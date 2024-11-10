@@ -73,10 +73,10 @@ export const IndicadoresSemanais = () => {
         <section>
           <StyledBonusCard $bonus={getBonusStyle()}>
             <div>
-              <StyledTitle>
+              {/* <StyledTitle>
                 <p>{getBonusStyle()}</p>
                 <h3>{getBonusStatus()}</h3>
-              </StyledTitle>
+              </StyledTitle> */}
               <StyledInfo>
                 <span>Semana Atual:</span>
                 <span>
