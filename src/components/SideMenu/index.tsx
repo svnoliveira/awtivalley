@@ -11,7 +11,7 @@ import {
   StyledLi,
   StyledSideList,
 } from "./style";
-import { CheckFuncIngressosUser, checkUserCursosRole, checkUserIntegracaoRole, checkUserRole } from "@/utils/operations";
+import { checkUserCursosRole, checkIngressoRole, checkUserRole } from "@/utils/operations";
 import React from "react";
 import { useRouter } from "next/navigation";
 
@@ -118,6 +118,23 @@ export const SideMenu = () => {
                   />
                 </StyledLi>
               )}
+              {user && (
+                <StyledLi onClick={() => push("/MiniGameCDA")}>
+                  <Image
+                    src="/icons/icon_minigame.gif"
+                    alt="Logo"
+                    width={20}
+                    height={20}
+                  />
+                  <span>MiniGameCDA</span>
+                  <Image
+                    src="/icons/arrow-right.svg"
+                    alt="Logo"
+                    width={15}
+                    height={15}
+                  />
+                </StyledLi>
+              )}
               {!user && (
                 <StyledLi onClick={() => push("/login")}>
                   <Image
@@ -135,7 +152,7 @@ export const SideMenu = () => {
                   />
                 </StyledLi>
               )}
-              {user?.is_superuser || checkUserRole(user) && (
+              {user?.is_superuser || checkUserRole(user) || checkIngressoRole(user)&& (
                 <StyledLi onClick={() => push("/register")}>
                   <Image
                     src="/icons/register.svg"
@@ -143,7 +160,7 @@ export const SideMenu = () => {
                     width={20}
                     height={20}
                   />
-                  <span>Cadastrar novos Colaboradores</span>
+                  <span>Gestão Ingressos</span>
                   <Image
                     src="/icons/arrow-right.svg"
                     alt="Logo"
@@ -184,7 +201,7 @@ export const SideMenu = () => {
                   />
                 </StyledLi>
               )}
-              <StyledLi onClick={() => push("/registerchamados")}>
+              {/* <StyledLi onClick={() => push("/registerchamados")}>
                 <Image
                   src="/icons/register.svg"
                   alt="Logo"
@@ -198,7 +215,7 @@ export const SideMenu = () => {
                   width={15}
                   height={15}
                 />
-              </StyledLi>
+              </StyledLi> */}
               <StyledLi onClick={() => push("/registercurriculo")}>
                 <Image
                   src="/icons/register.svg"
