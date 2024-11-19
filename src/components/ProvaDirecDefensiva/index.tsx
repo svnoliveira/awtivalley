@@ -19,7 +19,7 @@ export const ProvaDirecDefensiva = () => {
             <center><h2>🚑 Direção Defensiva</h2></center>
             <p>
               <strong>Aula Teórico:</strong>
-              <li>➜ Acesse a Sala de aula clicando <b><a href="https://classroom.google.com/c/NzI5Njc3NTAyNzUz?cjc=oiycvv4">AQUI</a></b>, participe da turma e asiste a aula e faça a prova.</li>
+              <li>➜ Acesse a Sala de aula clicando <b><a href="https://classroom.google.com/c/Njg2ODMwNzcyMzAz?cjc=oewf6km">AQUI</a></b>, participe da turma e asiste a aula e faça a prova.</li>
               <li>➜ Após finalizar a prova, volte para a classe vai clicar em Ver instuções e marcar como Concluída.</li>
               <li>➜ Após isto, sinalize ao Líder de cursos a conclusão da parte teórica, para prosseguir com a parte prática.</li>
             </p>

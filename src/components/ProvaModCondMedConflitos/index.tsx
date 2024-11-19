@@ -20,7 +20,7 @@ export const ProvaModCondMedConflitos = () => {
             <center><h2>🗣️ Modulação</h2></center>
             <p>
               <strong>Aula Teórico:</strong>
-              <li>➜ Acesse a Sala de aula clicando <b><a href="https://classroom.google.com/c/NzI5MDE0NTE4MjU0?cjc=nfvld6v">AQUI</a></b>, participe da turma e asiste a aula e faça a prova.</li>
+              <li>➜ Acesse a Sala de aula clicando <b><a href="https://classroom.google.com/c/Njg2ODMwNzY5NDIx?cjc=5gcuuq2">AQUI</a></b>, participe da turma e asiste a aula e faça a prova.</li>
               <li>➜ Após finalizar a prova, volte para a classe vai clicar em Ver instuções e marcar como Concluída.</li>
             </p>
             <p>

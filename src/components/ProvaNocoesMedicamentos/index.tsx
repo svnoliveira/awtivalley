@@ -1,15 +1,8 @@
-import { StyledContainer, StyledList, StyledSection } from "./style";
+import {   StyledSection,
+  StyledContainer,
+  StyledList,
+  StyledListItem } from "./style";
 import { userStore } from "@/stores/userStore";
-import { useEffect } from "react";
-import Link from "next/link";
-import {
-  CheckFuncEstagiarioUserCursos,
-  CheckFuncInternoUserCursos,
-  CheckFuncParamedicoUserCursos,
-  CheckFuncResidenteUserCursos,
-  checkUserCursosRole,
-  checkUserRole,
-} from "@/utils/operations";
 
 export const ProvaNocoesMedicamentos = () => {
   const user = userStore((state) => state.userData?.user);
@@ -18,20 +11,26 @@ export const ProvaNocoesMedicamentos = () => {
     <StyledSection>
       <StyledContainer>
         <center>
-          <h1>Prova Noções sobre Medicamentos</h1>
+          <h1>Curso de Noçoes sobre Medicamentos</h1>
         </center>
         <hr />
         <hr />
-        <StyledList>
-          <iframe
-            src="https://docs.google.com/forms/d/e/1FAIpQLScs5BjLBc4Q2n7PAxprK1HZUDuRX3eUwtxzzM96BYk1M6K_9g/viewform?embedded=true"
-            width="640"
-            height="2667"
-            style={{ border: "none", margin: "0" }} // Utilize CSS inline para estilos
-            title="Google Form"
-          >
-            Carregando…
-          </iframe>
+        <StyledList>          
+          <StyledListItem>
+            <center><h2>💊 Noçoes sobre Medicamentos</h2></center>
+            <p>
+              <strong>Aula Teórico:</strong>
+              <li>➜ Acesse a Sala de aula clicando <b><a href="https://classroom.google.com/c/Njg2ODMwOTYxNDUz?cjc=fqkrf4q">AQUI</a></b>, participe da turma e asiste a aula e faça a prova.</li>
+              <li>➜ Após finalizar a prova, volte para a classe vai clicar em Ver instuções e marcar como Concluída.</li>
+            </p>
+            <p>
+              <strong>Observações:</strong>
+            </p>
+            <ul>
+              <li>➜ Qualquer problema encontrado, sinalizar para a equipe de Cursos.</li>
+              <li>➜ Os Resultados serão informados na aba de ✅┃𝗥𝗲𝘀𝘂𝗹𝘁𝗮𝗱𝗼𝘀 do Discord.</li>
+            </ul>
+          </StyledListItem>
         </StyledList>
       </StyledContainer>
     </StyledSection>

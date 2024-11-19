@@ -14,9 +14,8 @@ export const DashboardCursos = () => {
         <center><h1>Provas</h1></center>
         <hr></hr>
         <hr></hr>
-        <StyledList>
-        <center><h1>SEM CURSOS DISPONÍVEIS NO MOMENTO. Atenciosamente, Ranzinza e Fofinho</h1></center>
-          {/* {CheckFuncEstagiarioUserCursos(user) && <li><Link href={"/ProvaDirecDefen"}>
+        <StyledList>        
+          {CheckFuncEstagiarioUserCursos(user) && <li><Link href={"/ProvaDirecDefen"}>
             <DashboardCursosCard iconUrl="/icons/hambulance.svg">Direção Defensiva</DashboardCursosCard>
           </Link></li>}
           {CheckFuncEstagiarioUserCursos(user) && <li><Link href={"/ProvaModCondMedConflitos"}>
@@ -28,7 +27,7 @@ export const DashboardCursos = () => {
           {CheckFuncEstagiarioUserCursos(user) && <li><Link href={"/ProvaAnatomiaBasica"}>
             <DashboardCursosCard iconUrl="/icons/anatomiabasica.svg">Anatomia Básica</DashboardCursosCard>
           </Link></li>}
-          {CheckFuncParamedicoUserCursos(user) && <li><Link href={"/ProvaAnamneseeDiagnosticos"}>
+          {/* {CheckFuncParamedicoUserCursos(user) && <li><Link href={"/ProvaAnamneseeDiagnosticos"}>
             <DashboardCursosCard iconUrl="/icons/anamnese.svg">Anamnese e Diagnósticos</DashboardCursosCard>
           </Link></li>}
           {CheckFuncParamedicoUserCursos(user) && <li><Link href={"/ProvaElaboracaodeLaudos"}>
