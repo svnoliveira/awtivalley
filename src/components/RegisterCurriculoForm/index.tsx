@@ -57,7 +57,7 @@ export const RegisterCurriculoForm = () => {
       `:arrow_right: **Disponibilidade Entrevista:** ${data.disponibilidadeEntrevista}\n` +
       `:arrow_right: **Disponibilidade Trabalho:** ${data.disponibilidadeTrabalho}\n`;
 
-      await axios.post('https://discord.com/api/webhooks/1223430514342367443/KzoSeJ-iMWeo1Cj0Vip8DLbDjbZ35_L73vB-gQdYWYFIKziZofYwNgftr4bdbs2ECytK', {
+      await axios.post('https://discord.com/api/webhooks/1335734096747565056/OaSPkyQAPXFcuuqscsiKddbmEuE1AiJQGqaUvKI3ybQiTdsIhrd9hz7tedpfQ5QL3_p7', {
         content: message,
       });
 
@@ -66,7 +66,7 @@ export const RegisterCurriculoForm = () => {
       const formData = new FormData();
       formData.append('file', image);
 
-        await axios.post('https://discord.com/api/webhooks/1223430514342367443/KzoSeJ-iMWeo1Cj0Vip8DLbDjbZ35_L73vB-gQdYWYFIKziZofYwNgftr4bdbs2ECytK', formData, {
+        await axios.post('https://discord.com/api/webhooks/1335734096747565056/OaSPkyQAPXFcuuqscsiKddbmEuE1AiJQGqaUvKI3ybQiTdsIhrd9hz7tedpfQ5QL3_p7', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           },
