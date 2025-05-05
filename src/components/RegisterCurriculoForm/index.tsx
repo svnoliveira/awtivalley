@@ -45,7 +45,7 @@ export const RegisterCurriculoForm = () => {
     try {
       if (!image) {
         console.error('Por favor, selecione um arquivo.');
-        return; // Não envia o formulário se o arquivo não foi selecionado
+        return; //Não envia o formulário se o arquivo não foi selecionado
       }
       let message = `:heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign::heavy_minus_sign:\n` +
       `# <a:alerta:1223357938912067675> <@&1192311823211442207> | <@&1127323287060496408> <a:alerta:1223357938912067675>\n\n` +
@@ -57,7 +57,7 @@ export const RegisterCurriculoForm = () => {
       `:arrow_right: **Disponibilidade Entrevista:** ${data.disponibilidadeEntrevista}\n` +
       `:arrow_right: **Disponibilidade Trabalho:** ${data.disponibilidadeTrabalho}\n`;
 
-      await axios.post('https://discord.com/api/webhooks/1335734096747565056/OaSPkyQAPXFcuuqscsiKddbmEuE1AiJQGqaUvKI3ybQiTdsIhrd9hz7tedpfQ5QL3_p7', {
+      await axios.post('https://discord.com/api/webhooks/1368991238866468954/eClepfOuSk47IPuIKYnha71rszXk4RchJl3BwG85WNTp7M8i9fcrNLrIxKdLUKuiotta', {
         content: message,
       });
 
@@ -66,7 +66,7 @@ export const RegisterCurriculoForm = () => {
       const formData = new FormData();
       formData.append('file', image);
 
-        await axios.post('https://discord.com/api/webhooks/1335734096747565056/OaSPkyQAPXFcuuqscsiKddbmEuE1AiJQGqaUvKI3ybQiTdsIhrd9hz7tedpfQ5QL3_p7', formData, {
+        await axios.post('https://discord.com/api/webhooks/1368991238866468954/eClepfOuSk47IPuIKYnha71rszXk4RchJl3BwG85WNTp7M8i9fcrNLrIxKdLUKuiotta', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           },
